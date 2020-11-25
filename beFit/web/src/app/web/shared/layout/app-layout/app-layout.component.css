@@ -1,0 +1,16 @@
+.spacer {
+    flex: 1 1 auto;
+}
+.nav{
+    width: 100%;
+    background-color: #ffc12e;
+}
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffc12e;
+    color: black;
+    text-align: center;
+}
