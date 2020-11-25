@@ -1,9 +1,32 @@
 <section class="cardSection">
-    <mat-card>
+    <mat-card class="card">
         <h3>Date utilizator</h3>
         <p>Nume: </p>
         <p>Prenume: </p>
         <p>Email: </p>
-        <button>Actualizare profil</button>
+        <button class="buttonPH">Actualizare profil</button>
+        <p>Abonamentele tale:</p>
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> Nr. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+            <!-- Valability Column -->
+            <ng-container matColumnDef="valability">
+                <mat-header-cell *matHeaderCellDef> Valabilitate </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.valability}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </mat-card>
 </section>
