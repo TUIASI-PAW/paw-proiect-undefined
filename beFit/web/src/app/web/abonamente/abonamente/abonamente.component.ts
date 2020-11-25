@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-abonamente',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AbonamenteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly router:Router) { 
+  }
+
+  goTo(id: string) {
+    this.router.navigate([`/detalii/${id}`]);
+  }
 
   ngOnInit(): void {
   }

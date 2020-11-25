@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.card {
+    background-color: gold;
+    margin: 15px;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cardSection {
+    margin: 20px;
+    padding: 40px;
+}
+
+button {
+    border-radius: 5px;
+    background-color: black;
+    color: gold;
+    justify-content: center;
+}
