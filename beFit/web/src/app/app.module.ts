@@ -3,18 +3,31 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopbarComponent } from './web/shared/topbar/topbar.component';
-import { FooterComponent } from './web/shared/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { AppLayoutComponent } from './web/shared/layout/app-layout/app-layout.component';
+import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopbarComponent,
-    FooterComponent
+    AppLayoutComponent,
+    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
