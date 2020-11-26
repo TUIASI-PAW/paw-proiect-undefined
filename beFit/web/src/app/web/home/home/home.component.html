@@ -1,6 +1,26 @@
-<br><br>
-<a href="http://localhost:4200/abonamente/detalii_abonament/1">Abonamente / Detalii abonament</a> <br><br>
-
-<a href="http://localhost:4200/admin">Admin</a> <br><br>
-<a href="http://localhost:4200/admin/creare_abonament">Admin / Creare Abonament</a> <br><br>
-<a href="http://localhost:4200/admin/modificare_abonament/1">Admin / Modificare Abonament</a> <br><br><br>
+<div class="homeContainer">
+    <div class="homeHelloContainer">
+        <div class="homeTextWrapper">
+            <h1 class="homeHeading">Bine ai venit!</h1>
+            <p class="homeParagraph">
+                Suntem foarte încântaţi că ai ales să ne vizitezi.
+            </p>
+            <p class="homeParagraph">
+                Mergi în continuare pentru a vedea mai multe imagini despre ceea ce noi îţi putem oferi.
+            </p>
+            <p class="homeParagraph">
+                Sau poţi merge direct să vezi <a [routerLink]="'/abonamente'">ofertele</a> noastre! ☺
+            </p>
+        </div>
+    </div>
+    <div class="homeDetailsContainer">
+        <mat-grid-list cols="3" rowHeight="2:2">
+            <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
+                [style.background]="tile.color">
+                <img *ngIf="tile.imagesrc != ''" src={{tile.imagesrc}} class="gridImage">
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="homeend">
+    </div>
+</div>

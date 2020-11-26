@@ -1,6 +1,8 @@
 <header>
     <mat-toolbar class="nav">
-        <span>beFit</span>
+        <span>
+            <img src="assets/logo.png" class="logo" [routerLink]="'/home'">
+        </span>
         <button mat-button [routerLink]="'/home'">
             <span>Acasă</span>
         </button>
@@ -39,5 +41,5 @@
 </header>
 <router-outlet></router-outlet>
 <footer class="footer">
-    <p>beFit&copy;</p>
+    <h1>beFit&copy;</h1>
 </footer>
