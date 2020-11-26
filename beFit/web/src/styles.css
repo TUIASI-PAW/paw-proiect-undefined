@@ -18,7 +18,10 @@ body{
 button:focus{
     outline: none;
 }
-
+.buttonBF{
+    border-color:#ffc12e !important;
+    color: #ffc12e;
+}
 .contentContainer {
     margin-left: 10%;
     margin-right: 10%;

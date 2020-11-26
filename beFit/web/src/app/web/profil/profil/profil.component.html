@@ -1,32 +1,40 @@
-<section class="cardSection">
-    <mat-card class="card">
-        <h3>Date utilizator</h3>
-        <p>Nume: </p>
-        <p>Prenume: </p>
-        <p>Email: </p>
-        <button class="buttonPH">Actualizare profil</button>
-        <p>Abonamentele tale:</p>
+<section class="contentContainer">
+    <div class="containerProfil">
 
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <article>
+            <h3 class="headingDetalii">Date utilizator</h3>
+            <div class="containerUtilizator">
+                <p>Nume: </p>
+                <p>Prenume: </p>
+                <p>Număr de telefon: </p>
+                <p>Email: </p>
+                <button mat-stroked-button class="buttonBF">Actualizare profil</button>
+            </div>
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-                <mat-header-cell *matHeaderCellDef> Nr. </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-            </ng-container>
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
-            <!-- Valability Column -->
-            <ng-container matColumnDef="valability">
-                <mat-header-cell *matHeaderCellDef> Valabilitate </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.valability}} </mat-cell>
-            </ng-container>
+        </article>
+        <article>
+            <h3 class="headingDetalii">Abonamentele tale:</h3>
+            <div class="containerAbonamente">
+                <mat-table [dataSource]="dataSource">
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-    </mat-card>
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="valability">
+                        <mat-header-cell *matHeaderCellDef>
+                            <span class="tabletext">Valabilitate</span>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="tabletext">{{element.valability}}</span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </article>
+    </div>
 </section>
