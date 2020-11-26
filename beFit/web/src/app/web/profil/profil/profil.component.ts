@@ -3,14 +3,13 @@ import { Component, OnInit } from '@angular/core';
 export interface TableData {
   name: string;
   valability: string;
-  position: number;
 }
 
 const ELEMENT_DATA: TableData[] = [
-  {position: 1, name: 'Abonament 1', valability: 'dd/mm/yyyy'},
-  {position: 2, name: 'Abonament 2', valability: 'dd/mm/yyyy'},
-  {position: 3, name: 'Abonament 3', valability: 'dd/mm/yyyy'},
-  {position: 4, name: 'Abonament 4', valability: 'dd/mm/yyyy'},
+  {name: 'Abonament 1', valability: 'dd/mm/yyyy'},
+  {name: 'Abonament 2', valability: 'dd/mm/yyyy'},
+  {name: 'Abonament 3', valability: 'dd/mm/yyyy'},
+  {name: 'Abonament 4', valability: 'dd/mm/yyyy'},
 ];
 
 @Component({
@@ -20,7 +19,8 @@ const ELEMENT_DATA: TableData[] = [
 })
 export class ProfilComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'valability'];
+  displayedColumns: string[] = ['name', 'valability'];
+  
   dataSource = ELEMENT_DATA;
 
   constructor() { }

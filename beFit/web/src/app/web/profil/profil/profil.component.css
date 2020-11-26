@@ -1,0 +1,37 @@
+.containerProfil{
+    margin: 50px;
+}
+.containerProfil> *{
+    margin: 40px;
+}
+
+.mat-table
+{
+  background-color: transparent !important;  
+}
+
+.containerAbonamente{
+    width: 75%;
+}
+
+.tabletext{
+    width: 100%;
+    text-align: center;
+}
+
+.headingDetalii{
+    font-weight: lighter;
+    font-size: 30px;
+}
+
+@media only screen and (max-width: 830px) {
+    .containerAbonamente{
+        width: 100%;
+    }
+    .containerProfil> *{
+        margin: 10px;
+    }
+    .containerProfil{
+        margin: 0px;
+    }
+}

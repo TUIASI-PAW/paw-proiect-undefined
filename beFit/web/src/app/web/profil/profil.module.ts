@@ -7,6 +7,8 @@ import { ActualizareComponent } from './actualizare/actualizare.component';
 import { AlimentareComponent } from './alimentare/alimentare.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [ProfilComponent, ActualizareComponent, AlimentareComponent],
@@ -14,7 +16,8 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     ProfilRoutingModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ]
 })
 export class ProfilModule {}
