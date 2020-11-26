@@ -35,6 +35,6 @@
     }
 }
 
-.paginareContainer {
-    display: flex;
+.mat-paginator {
+    background-color: transparent !important;
 }
