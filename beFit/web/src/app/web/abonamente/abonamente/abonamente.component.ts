@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
 interface Categorie {
@@ -13,10 +13,10 @@ interface Categorie {
 })
 export class AbonamenteComponent implements OnInit {
   categorii: Categorie[] = [
-    {value: 'steak-0', viewValue: 'Sală de forță'},
-    {value: 'pizza-1', viewValue: 'Inot'},
-    {value: 'tacos-2', viewValue: 'Cardio'},
-    {value: 'tacos-2', viewValue: 'Tenis'},
+    {value: '0', viewValue: 'Sală de forță'},
+    {value: '1', viewValue: 'Inot'},
+    {value: '2', viewValue: 'Cardio'},
+    {value: '3', viewValue: 'Tenis'},
   ];
 
   constructor(private readonly router:Router) { 
