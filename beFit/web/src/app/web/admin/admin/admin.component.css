@@ -1,0 +1,13 @@
+.adminbtn{
+    margin: 1px;
+}
+
+.containerabonamente{
+    width: 75%;
+}
+@media only screen and (max-width:600px)
+{
+    .containerabonamente{
+        width: 100%;
+    }
+}

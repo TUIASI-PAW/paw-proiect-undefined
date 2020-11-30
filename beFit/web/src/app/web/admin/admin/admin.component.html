@@ -1,0 +1,31 @@
+<section class="contentContainer">
+
+    <form class="searchform">
+        <mat-form-field class="searchbox">
+            <input matInput placeholder="Caută">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </form>
+
+    <div class="containerabonamente">
+        <mat-accordion multi>
+            <mat-expansion-panel *ngFor="let abonament of abonamente">
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{abonament.title}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <button class="adminbtn" mat-raised-button color="primary"
+                    [routerLink]="'/abonamente/detalii_abonament/'+abonament.id">
+                    Vezi detalii</button>
+                <button class="adminbtn" mat-raised-button color="accent"
+                    [routerLink]="'/admin/modificare_abonament/'+abonament.id">
+                    Modifică</button>
+                <button class="adminbtn" mat-raised-button color="warn">Şterge</button>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</section>

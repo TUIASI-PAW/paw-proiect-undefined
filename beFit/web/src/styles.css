@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body{
+     margin: 0; 
+     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.buttonPH {
+    border-radius: 5px;
+    border-color: #ffc12e;
+    background-color: white !important;
+    color: #ffc12e;
+}
+
+button:focus{
+    outline: none;
+}
+.buttonBF{
+    border-color:#ffc12e !important;
+    color: #ffc12e;
+}
+.contentContainer {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: whitesmoke;
+    width: 80%;
+    border-radius: 10px;
+    min-height: 87%;
+}

@@ -1,0 +1,49 @@
+<section class="auth-form-container">
+    <form class="formular">
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Nume</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>ex: Băsescu</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Prenume</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>ex: Traian</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Email</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-hint>ex: magic_traian_băsi@yahoo.com</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Număr de telefon</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint>ex: 0792929292</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Parola</mat-label>
+                <input matInput type="password">
+                <mat-icon matSuffix>lock</mat-icon>
+                <mat-hint>ex: parLAmentaRICINstiti</mat-hint>
+            </mat-form-field>
+        </p>
+        <button mat-stroked-button  class="buttonBF">Înregistrare</button>
+    </form>
+    <a [routerLink]="'/autentificare'">Sau autentifică-te</a>
+    <br/>
+    <a [routerLink]="'/home'">Acasă</a>
+
+</section>

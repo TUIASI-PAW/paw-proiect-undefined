@@ -1,0 +1,21 @@
+<header>
+    <mat-toolbar class="nav">
+        <span>
+            <img src="assets/logo.png" class="logo" [routerLink]="'/admin'">
+        </span>
+
+        <div class="addBtn" [routerLink]="'/admin/creare_abonament'">
+            <mat-icon class="plus-icon">
+                add
+            </mat-icon>
+        </div>
+        
+        <span class="spacer"></span>
+        <span>
+            <button mat-button>
+                <span>Deconectare</span>
+            </button>
+        </span>
+    </mat-toolbar>
+</header>
+<router-outlet></router-outlet>

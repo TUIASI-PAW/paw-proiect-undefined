@@ -1,0 +1,42 @@
+<section class="contentContainer">
+    <div class="containerProfil">
+
+        <article>
+            <h3 class="headingDetalii">Date utilizator</h3>
+            <div class="containerUtilizator">
+                <p>Nume: </p>
+                <p>Prenume: </p>
+                <p>Număr de telefon: </p>
+                <p>Email: </p>
+                <button mat-stroked-button class="buttonBF" [routerLink]="'/profil/actualizare'">
+                    Actualizare profil
+                </button>
+            </div>
+
+        </article>
+        <article>
+            <h3 class="headingDetalii">Abonamentele tale:</h3>
+            <div class="containerAbonamente">
+                <mat-table [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="valability">
+                        <mat-header-cell *matHeaderCellDef>
+                            <span class="tabletext">Valabilitate</span>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="tabletext">{{element.valability}}</span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </article>
+    </div>
+</section>
