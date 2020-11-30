@@ -13,7 +13,6 @@ import { AppLayoutComponent } from './web/shared/layout/app-layout/app-layout.co
 import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './web/shared/layout/admin-layout/admin-layout.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
