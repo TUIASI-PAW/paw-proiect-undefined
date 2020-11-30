@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppLayoutComponent } from './web/shared/layout/app-layout/app-layout.component';
 import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './web/shared/layout/admin-layout/admin-layout.component';
 
 // localhost:4200/
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AppLayoutComponent,
+    component: AdminLayoutComponent,
     loadChildren: () => import('./web/admin/admin.module').then((m) => m.AdminModule)
   },
 ];

@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AppLayoutComponent } from './web/shared/layout/app-layout/app-layout.component';
 import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './web/shared/layout/admin-layout/admin-layout.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout
     AppComponent,
     AppLayoutComponent,
     AuthLayoutComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
