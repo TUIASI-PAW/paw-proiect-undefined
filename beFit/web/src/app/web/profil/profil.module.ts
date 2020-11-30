@@ -11,9 +11,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { UpdateProfileDialogComponent } from '../shared/components/dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog'
+import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
 
 @NgModule({
-  declarations: [ProfilComponent, ActualizareComponent, AlimentareComponent],
+  declarations: [
+    ProfilComponent,
+    ActualizareComponent,
+    AlimentareComponent,
+    UpdateProfileDialogComponent,
+  ],
   imports: [
     CommonModule,
     ProfilRoutingModule,
@@ -23,6 +31,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule
+  ],
+  providers:[
+    ConfirmationDialogService,
   ]
 })
-export class ProfilModule {}
+export class ProfilModule { }

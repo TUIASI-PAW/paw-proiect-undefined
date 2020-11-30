@@ -1,0 +1,13 @@
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+    text-align: center !important;
+}
+.button{
+    margin-right: 5px;
+    background-color:#ffc12e;
+}
+
