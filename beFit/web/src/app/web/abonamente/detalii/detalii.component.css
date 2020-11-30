@@ -25,7 +25,12 @@
 }
 
 .btnStyle {
-    margin-left: 80%;
     width: 120px;
     height: 45px;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
