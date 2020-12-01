@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    height: 90%;
     box-shadow:
             0 2.8px 2.2px rgba(0, 0, 0, 0.034),
             0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -27,6 +28,22 @@
 .abonamenteContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+.valabilityStyle {
+    position: absolute;
+    left: 8%;
+}
+
+.priceStyle {
+    position: absolute;
+    right: 8%;
+}
+
+.abInfoStyle {
+    width: 100%;
+    height: 20px;
+    margin-top: 5%;
 }
 
 @media only screen and (max-width: 900px) {

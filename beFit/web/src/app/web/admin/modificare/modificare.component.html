@@ -1,1 +1,68 @@
-<p>modificare works!</p>
+<section class="auth-form-container">
+    <form class="formular">
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Titlu nou</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>title</mat-icon>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="categContainer">
+                <mat-label>Categorie nouă</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.value">
+                        {{categorie.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="datePickerContainer">
+                <mat-label>Dată nouă de expirare</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Valabilitate nouă(zile)</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>calendar_view_day</mat-icon>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="textareaStyle">
+                <mat-label>Descriere nouă</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="10"></textarea>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="standard" class="input-formular">
+                <mat-label>Preț nou(lei)</mat-label>
+                <input matInput>
+                <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
+        </p>
+
+        <div class="imgInputContainer">
+            <p>Alege o nouă imagine</p>
+            <button mat-fab type="button" (click)="fileInput.click()" class="photoBtn">
+                <mat-icon matSuffix>add_a_photo</mat-icon>
+                <input #fileInput type="file" (change)="onSelectFile($event)" style="display:none;" />
+            </button> <br><br>
+            <img [src]="url" width=100%> <br />
+        </div>
+
+        <div class="btnContainer">
+            <button type="button" mat-stroked-button class="buttonBF">Modifică abonament</button>
+        </div> <br>
+    </form>
+</section>
