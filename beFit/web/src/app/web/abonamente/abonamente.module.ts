@@ -9,6 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 
+import {MatDialogModule} from '@angular/material/dialog'
+import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
+
 @NgModule({
   declarations: [AbonamenteComponent, DetaliiComponent],
   imports: [
@@ -18,6 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatDialogModule,
   ],
+  providers:[ConfirmationDialogService],
 })
 export class AbonamenteModule { }

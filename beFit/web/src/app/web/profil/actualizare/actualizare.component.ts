@@ -6,7 +6,6 @@ import {ConfirmationDialogService} from '../../shared/components/dialog/dialog.s
   styleUrls: ['./actualizare.component.css']
 })
 export class ActualizareComponent implements OnInit {
-  isSaving:boolean=false;
   constructor(private confirmationDialogService: ConfirmationDialogService) { }
 
   public openDialog() {

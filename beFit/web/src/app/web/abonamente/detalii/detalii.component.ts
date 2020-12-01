@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 
 @Component({
   selector: 'app-detalii',
@@ -7,11 +7,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./detalii.component.css']
 })
 export class DetaliiComponent implements OnInit {
+  constructor(private confirmationDialogService: ConfirmationDialogService) { }
 
-  constructor(private router:Router) { }
-
+  public openDialog() {
+    this.confirmationDialogService.confirm('', 'Activezi acest abonament?')
+    .then((confirmed) => {
+      console.log('Button:', confirmed);
+    })
+    .catch(() => {
+      console.log('Dismiss');
+    });
+  }
   ngOnInit(): void {
-    
   }
 
 }

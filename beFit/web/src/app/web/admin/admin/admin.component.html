@@ -23,7 +23,7 @@
                 <button class="adminbtn" mat-raised-button color="accent"
                     [routerLink]="'/admin/modificare_abonament/'+abonament.id">
                     Modifică</button>
-                <button class="adminbtn" mat-raised-button color="warn">Şterge</button>
+                <button class="adminbtn" mat-raised-button color="warn" (click)="openDialog(abonament.title)">Şterge</button>
 
             </mat-expansion-panel>
         </mat-accordion>
