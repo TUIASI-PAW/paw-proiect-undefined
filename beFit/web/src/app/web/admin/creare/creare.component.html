@@ -37,10 +37,10 @@
         </p>
 
         <p>
-            <mat-form-field appearance="standard" class="input-formular">
+            <mat-form-field class="textareaStyle">
                 <mat-label>Descriere</mat-label>
-                <input matInput>
-                <mat-icon matSuffix>description</mat-icon>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="10"></textarea>
             </mat-form-field>
         </p>
 
@@ -53,6 +53,7 @@
         </p>
 
         <div class="imgInputContainer">
+            <p>Adaugă o imagine</p>
             <button mat-fab type="button" (click)="fileInput.click()" class="photoBtn">
                 <mat-icon matSuffix>add_a_photo</mat-icon>
                 <input #fileInput type="file" (change)="onSelectFile($event)" style="display:none;" />
@@ -61,7 +62,7 @@
         </div>
 
         <div class="btnContainer">
-            <button mat-stroked-button class="buttonBF">Creează abonament</button>
+            <button type="button" mat-stroked-button class="buttonBF">Creează abonament</button>
         </div> <br>
     </form>
 </section>
