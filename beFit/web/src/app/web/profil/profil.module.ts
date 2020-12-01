@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { UpdateProfileDialogComponent } from '../shared/components/dialog/dialog.component';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog'
 import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
 
@@ -20,7 +20,7 @@ import { ConfirmationDialogService } from '../shared/components/dialog/dialog.se
     ProfilComponent,
     ActualizareComponent,
     AlimentareComponent,
-    UpdateProfileDialogComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
