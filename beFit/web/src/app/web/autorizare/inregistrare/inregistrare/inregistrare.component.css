@@ -30,7 +30,10 @@
 .auth-form-container>a{
     color: #ffa000;
 }
-
+.validInput{
+    color: #ffc12e;
+    font-size: 16px !important;
+}
 @media only screen and (max-width: 1200px) {
     .auth-form-container{
         width: 60%;
