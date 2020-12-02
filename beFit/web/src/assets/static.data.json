@@ -1,0 +1,162 @@
+{
+    "detalii_abonament" : {
+        "id": 1,
+        "title": "Abonament de test",
+        "category": "Categorie de test",
+        "expirationDate": "11/10/2020",
+        "addedDate":"11/5/2020",
+        "valability": 30,
+        "description": "Descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test",
+        "price": 5,
+        "image": "/assets/fitness.jpg"
+    },
+    "lista_abonamente":[
+        {
+            "id": 1,
+            "title": "Abonament cu titlu frumos 1",
+            "valability": 2,
+            "price": 3,
+            "image": "/assets/fitness.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Abonament cu titlu frumos 2",
+            "valability": 5,
+            "price": 35,
+            "image": "/assets/spa.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Abonament cu titlu frumos 3",
+            "valability": 13,
+            "price": 25.34,
+            "image": "/assets/spa2.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Abonament cu titlu frumos 4",
+            "valability": 30,
+            "price": 12,
+            "image": "/assets/running.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Abonament cu titlu frumos 5",
+            "valability": 23,
+            "price": 39,
+            "image": "/assets/fitness.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Abonament cu titlu frumos 6",
+            "valability": 32,
+            "price": 312,
+            "image": "/assets/cardio.jpg"
+        },
+        {
+            "id": 7,
+            "title": "Abonament cu titlu frumos 7",
+            "valability": 60,
+            "price": 320,
+            "image": "/assets/tennis.jpg"
+        },
+        {
+            "id": 8,
+            "title": "Abonament cu titlu frumos 8",
+            "valability": 1,
+            "price": 600,
+            "image": "/assets/golf.jpg"
+        },
+        {
+            "id": 9,
+            "title": "Abonament cu titlu frumos 9",
+            "valability": 1,
+            "price": 43,
+            "image": "/assets/pool.jpg"
+        },
+        {
+            "id": 10,
+            "title": "Abonament cu titlu frumos 10",
+            "valability": 23,
+            "price": 56,
+            "image": "/assets/sala_fitness_1.png"
+        },
+        {
+            "id": 11,
+            "title": "Abonament cu titlu frumos 11",
+            "valability": 2,
+            "price": 3,
+            "image": "/assets/fitness.jpg"
+        },
+        {
+            "id": 12,
+            "title": "Abonament cu titlu frumos 12",
+            "valability": 5,
+            "price": 35,
+            "image": "/assets/spa.jpg"
+        },
+        {
+            "id": 13,
+            "title": "Abonament cu titlu frumos 13",
+            "valability": 13,
+            "price": 25.34,
+            "image": "/assets/spa2.jpg"
+        },
+        {
+            "id": 14,
+            "title": "Abonament cu titlu frumos 14",
+            "valability": 30,
+            "price": 12,
+            "image": "/assets/running.jpg"
+        },
+        {
+            "id": 15,
+            "title": "Abonament cu titlu frumos 15",
+            "valability": 23,
+            "price": 39,
+            "image": "/assets/fitness.jpg"
+        },
+        {
+            "id": 16,
+            "title": "Abonament cu titlu frumos 16",
+            "valability": 32,
+            "price": 312,
+            "image": "/assets/cardio.jpg"
+        },
+        {
+            "id": 17,
+            "title": "Abonament cu titlu frumos 17",
+            "valability": 60,
+            "price": 320,
+            "image": "/assets/tennis.jpg"
+        },
+        {
+            "id": 18,
+            "title": "Abonament cu titlu frumos 18",
+            "valability": 1,
+            "price": 600,
+            "image": "/assets/golf.jpg"
+        },
+        {
+            "id": 19,
+            "title": "Abonament cu titlu frumos 19",
+            "valability": 1,
+            "price": 43,
+            "image": "/assets/pool.jpg"
+        },
+        {
+            "id": 20,
+            "title": "Abonament cu titlu frumos 20",
+            "valability": 23,
+            "price": 56,
+            "image": "/assets/sala_fitness_1.png"
+        }
+    ],
+    "categorii":[
+        { "id": 0, "text": "Sală de forță" },
+        { "id": 1, "text": "Inot" },
+        { "id": 2, "text": "Cardio" },
+        { "id": 3, "text": "Tenis" }
+    ]
+
+}

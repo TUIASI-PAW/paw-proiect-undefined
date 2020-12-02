@@ -1,11 +1,11 @@
 export interface AbonamentModel{
     id: number,
-    title: String,
-    category: String,
-    expirationDate: Date,
-    addedDate:Date,
+    title: string,
+    category: string,
+    expirationDate: string,
+    addedDate:string,
     valability: number,
-    desription: String,
+    description: string,
     price: number,
-    image: String,
+    image: string,
 }

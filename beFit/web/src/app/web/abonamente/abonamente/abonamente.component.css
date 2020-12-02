@@ -3,6 +3,12 @@
     padding-left: 20px;
 }
 
+.mat-card:hover{
+    opacity: 0.75;
+}
+.mat-card:focus{
+    outline: none !important;
+}
 .abonament {
     background-color: white;
     border-radius: 10px;
@@ -11,7 +17,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 90%;
+    height: 400px;
     box-shadow:
             0 2.8px 2.2px rgba(0, 0, 0, 0.034),
             0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -23,6 +29,8 @@
 
 .imgBF {
     width: 100%;
+    height: 80%;
+    border-radius: 5px;
 }
 
 .abonamenteContainer {
@@ -54,4 +62,17 @@
 
 .mat-paginator {
     background-color: transparent !important;
+}
+
+.bottomTextSize {
+    font-size: 150%;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+.bottomIcon{
+    vertical-align: middle;
+}
+.valabilityStyle>.bottomIcon{
+    margin-bottom: 1px;
 }
