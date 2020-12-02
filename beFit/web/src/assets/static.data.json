@@ -157,6 +157,34 @@
         { "id": 1, "text": "Inot" },
         { "id": 2, "text": "Cardio" },
         { "id": 3, "text": "Tenis" }
-    ]
-
+    ],
+    "abonamente_admin": [
+        {
+          "title": "Abonament_1",
+          "id": 1
+        },
+        {
+          "title": "Abonament_2",
+          "id": 2
+        },
+        {
+          "title": "Abonament_3",
+          "id": 3
+        },
+        {
+          "title": "Abonament_4",
+          "id": 4
+        },
+        {
+          "title": "Abonament_5",
+          "id": 5
+        }
+      ],
+    "user_dummy": {
+            "lastname" : "Romeo",
+            "firstname": "Fantastik",
+            "email": "carolina@jambala.com",
+            "phone": "0753637383",
+            "password": "balaurul69"
+        }
 }

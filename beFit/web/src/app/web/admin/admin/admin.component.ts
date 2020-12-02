@@ -1,34 +1,12 @@
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
+import * as data from '../../../../assets/static.data.json';
 
 export interface Abonament {
   id: number;
   title: string;
 }
-
-let abonamente = [
-  {
-    title: "Abonament_1",
-    id: 1
-  },
-  {
-    title: "Abonament_2",
-    id: 2
-  },
-  {
-    title: "Abonament_3",
-    id: 3
-  },
-  {
-    title: "Abonament_4",
-    id: 4
-  },
-  {
-    title: "Abonament_5",
-    id: 5
-  },
-];
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +23,7 @@ export class AdminComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       searchInput: new FormControl('')
     });
-    this.abonamente = abonamente;
+    this.abonamente = data.abonamente_admin;
   }
 
   public updateAbonamente(event: Event) {
@@ -54,16 +32,15 @@ export class AdminComponent implements OnInit {
     if (searchInput != '') {
       this.abonamente = [];
 
-      for (let i = 0; i < abonamente.length; i++) {
-        if (abonamente[i].title == searchInput) {
-          this.abonamente.push(abonamente[i]);
+      for (let i = 0; i < data.abonamente_admin.length; i++) {
+        if (data.abonamente_admin[i].title == searchInput) {
+          this.abonamente.push(data.abonamente_admin[i]);
         }
       }
     }
     else {
-      this.abonamente = abonamente;
+      this.abonamente = data.abonamente_admin;
     }
-
   }
 
   public openDialog(title: string, id: number) {
