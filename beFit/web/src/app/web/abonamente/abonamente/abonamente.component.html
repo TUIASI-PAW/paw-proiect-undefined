@@ -5,8 +5,8 @@
         <mat-form-field>
             <mat-label>Alege categoria</mat-label>
             <mat-select>
-                <mat-option *ngFor="let categorie of categorii" [value]="categorie.value">
-                    {{categorie.viewValue}}
+                <mat-option *ngFor="let categorie of categorii" [value]="categorie.id">
+                    {{categorie.text}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -15,75 +15,33 @@
 
     <div class="abonamenteContainer">
 
-        <mat-card class="abonament" [routerLink]="'/abonamente/detalii_abonament/1'">
-            <h3>Abonament 1</h3>
-            <img src="assets/sala_fitness_1.png" class="imgBF">
-            <div class="abInfoStyle">
-                <span class="valabilityStyle">
-                    <mat-icon>calendar_today</mat-icon>
-                </span>
-                <span class="priceStyle">
-                    <mat-icon>attach_money</mat-icon>
-                </span>
-            </div>
-        </mat-card>
+        <div *ngFor="let item of list">
 
-        <mat-card class="abonament" [routerLink]="'/abonamente/detalii_abonament/2'">
-            <h3>Abonament 2</h3>
-            <img src="assets/sala_fitness_1.png" class="imgBF">
-            <div class="abInfoStyle">
-                <span class="valabilityStyle">
-                    <mat-icon>calendar_today</mat-icon>
-                </span>
-                <span class="priceStyle">
-                    <mat-icon>attach_money</mat-icon>
-                </span>
-            </div>
-        </mat-card>
-
-        <mat-card class="abonament" [routerLink]="'/abonamente/detalii_abonament/3'">
-            <h3>Abonament 3</h3>
-            <img src="assets/sala_fitness_1.png" class="imgBF">
-            <div class="abInfoStyle">
-                <span class="valabilityStyle">
-                    <mat-icon>calendar_today</mat-icon>
-                </span>
-                <span class="priceStyle">
-                    <mat-icon>attach_money</mat-icon>
-                </span>
-            </div>
-        </mat-card>
-
-        <mat-card class="abonament" [routerLink]="'/abonamente/detalii_abonament/4'">
-            <h3>Abonament 4</h3>
-            <img src="assets/sala_fitness_1.png" class="imgBF">
-            <div class="abInfoStyle">
-                <span class="valabilityStyle">
-                    <mat-icon>calendar_today</mat-icon>
-                </span>
-                <span class="priceStyle">
-                    <mat-icon>attach_money</mat-icon>
-                </span>
-            </div>
-        </mat-card>
-
-        <mat-card class="abonament" [routerLink]="'/abonamente/detalii_abonament/5'">
-            <h3>Abonament 5</h3>
-            <img src="assets/sala_fitness_1.png" class="imgBF">
-            <div class="abInfoStyle">
-                <span class="valabilityStyle">
-                    <mat-icon>calendar_today</mat-icon>
-                </span>
-                <span class="priceStyle">
-                    <mat-icon>attach_money</mat-icon>
-                </span>
-            </div>
-        </mat-card>
+            <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]">
+                <h3>{{item.title}}</h3>
+                <img [src]="item.image" class="imgBF">
+                <div class="abInfoStyle">
+                    <span class="valabilityStyle">
+                        <span class="bottomTextSize">{{item.valability}}</span>
+                        <mat-icon class="bottomIcon">calendar_today</mat-icon>
+                    </span>
+                    <span class="priceStyle">
+                        <span class="bottomTextSize">{{item.price}}</span>
+                        <mat-icon class="bottomIcon">attach_money</mat-icon>
+                    </span>
+                </div>
+            </mat-card>
+        </div>
 
     </div>
 
     <div>
-        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="pageIndex"
+            (page)="pageEvent = update($event)">
         </mat-paginator>
     </div>
 

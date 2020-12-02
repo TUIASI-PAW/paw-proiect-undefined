@@ -1,23 +1,18 @@
 <section class="contentContainer">
     <div class="containerDetalii">
         <article>
-            <h1 class="hParagraph">Abonament id</h1> <br>
+            <h1 class="hParagraph">{{details.title}}</h1> <br>
             <div class="fontContainer">
-                <p>Categorie: categorie</p>
-                <p>Data adăugării: dd/mm/yyyy</p>
-                <p>Valabil până la: dd/mm/yyyy</p>
-                <p>Disponibil încă d zile.</p> <br>
+                <p>Categorie: {{details.category}}</p>
+                <p>Data adăugării: {{details.addedDate}}</p>
+                <p>Ofertă valabilă până la: {{details.expirationDate}}</p>
+                <p>Valabil {{details.valability}} zile de la activare</p> <br>
             </div>
 
-            <img src="assets/sala_fitness_1.png" width=80% class="imgStyle"> <br><br>
+            <img [src]="details.image" width=80% class="imgStyle"> <br><br>
 
             <p class="descriptionStyle">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.
+                {{details.description}}
             </p> <br>
 
             <div class="btnContainer">
