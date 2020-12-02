@@ -1,8 +1,8 @@
 <section class="contentContainer">
 
-    <form class="searchform">
+    <form class="searchform" [formGroup]="formGroup">
         <mat-form-field class="searchbox">
-            <input matInput placeholder="Caută">
+            <input matInput placeholder="Caută" formControlName="searchInput" (input)="updateAbonamente($event)">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </form>
@@ -23,7 +23,8 @@
                 <button class="adminbtn" mat-raised-button color="accent"
                     [routerLink]="'/admin/modificare_abonament/'+abonament.id">
                     Modifică</button>
-                <button class="adminbtn" mat-raised-button color="warn" (click)="openDialog(abonament.title)">Şterge</button>
+                <button class="adminbtn" mat-raised-button color="warn"
+                    (click)="openDialog(abonament.title, abonament.id)">Şterge</button>
 
             </mat-expansion-panel>
         </mat-accordion>

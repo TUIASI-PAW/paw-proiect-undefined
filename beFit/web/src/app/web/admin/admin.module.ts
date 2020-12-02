@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import {MatDialogModule} from '@angular/material/dialog'
 import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AdminComponent, CreareComponent, ModificareComponent],
@@ -28,7 +29,8 @@ import { ConfirmationDialogService } from '../shared/components/dialog/dialog.se
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers:[
     ConfirmationDialogService
