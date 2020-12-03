@@ -68,3 +68,11 @@
         width: 80%;
     }
 }
+.validInput{
+    color: #ffc12e;
+    font-size: 16px !important;
+}
+.formErr{
+    text-align: center;
+    margin-bottom: 5px;
+}

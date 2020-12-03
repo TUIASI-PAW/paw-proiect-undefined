@@ -5,6 +5,5 @@ export interface UserDetailsModel{
     lastname:string,
     email:string,
     phone:string,
-    password:string,
     abonamente: AbonamentListModel[]
 }

@@ -1,17 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface TableData {
-  name: string;
-  valability: string;
-}
+import {AbonamentListModel} from '../../../services/models/abonament/abonament.user.list.model';
+import {UserDetailsModel} from '../../../services/models/user/user.details.model';
 
-const ELEMENT_DATA: TableData[] = [
-  {name: 'Abonament 1', valability: 'dd/mm/yyyy'},
-  {name: 'Abonament 2', valability: 'dd/mm/yyyy'},
-  {name: 'Abonament 3', valability: 'dd/mm/yyyy'},
-  {name: 'Abonament 4', valability: 'dd/mm/yyyy'},
-];
 
+import * as data from '../../../../assets/static.data.json';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -19,11 +12,13 @@ const ELEMENT_DATA: TableData[] = [
 })
 export class ProfilComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'valability'];
-  
-  dataSource = ELEMENT_DATA;
-
-  constructor() { }
+  public displayedColumns: string[] = ['title', 'valability'];
+  public dataSource: AbonamentListModel[];
+  public userDetails: UserDetailsModel;
+  constructor() { 
+    this.dataSource = data.user_dummy.abonamente;
+    this.userDetails = data.user_dummy;
+  }
 
   ngOnInit(): void {
   }
