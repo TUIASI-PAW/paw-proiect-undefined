@@ -2,12 +2,12 @@
     <div class="containerProfil">
 
         <article>
-            <h3 class="headingDetalii">Date utilizator</h3>
+            <h3 class="headingDetalii">Datele tale de utilizator</h3>
             <div class="containerUtilizator">
-                <p>Nume: </p>
-                <p>Prenume: </p>
-                <p>Număr de telefon: </p>
-                <p>Email: </p>
+                <p>Nume: {{userDetails.firstname}}</p>
+                <p>Prenume: {{userDetails.lastname}}</p>
+                <p>Număr de telefon: {{userDetails.phone}}</p>
+                <p>Email: {{userDetails.email}}</p>
                 <button mat-stroked-button class="buttonBF" [routerLink]="'/profil/actualizare'">
                     Actualizare profil
                 </button>
@@ -21,7 +21,8 @@
 
                     <ng-container matColumnDef="title">
                         <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
-                        <mat-cell class="cellTitle" *matCellDef="let item" [routerLink]="['/abonamente/detalii_abonament',item.id]"> {{item.title}} </mat-cell>
+                        <mat-cell class="cellTitle" *matCellDef="let item"
+                            [routerLink]="['/abonamente/detalii_abonament',item.id]"> {{item.title}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="valability">

@@ -30,16 +30,15 @@ export class ActualizareComponent implements OnInit {
     this.formGroup.controls.firstname.setValue(data.user_dummy.firstname);
     this.formGroup.controls.email.setValue(data.user_dummy.email);
     this.formGroup.controls.phone.setValue(data.user_dummy.phone);
-    this.formGroup.controls.password.setValue(data.user_dummy.password);
   }
 
   public updateProfil() {
     if (this.formGroup.valid) {
-      this.isValid=true;
+      this.isValid = true;
       const data: UserUpdateModel = this.formGroup.getRawValue();
       console.log(data);
     }
-    else this.isValid=false;
+    else this.isValid = false;
   }
 
   getErrorMessage(formElement: String): String {
@@ -88,7 +87,7 @@ export class ActualizareComponent implements OnInit {
           return 'Câmpul este obligatoriu.';
         return '';
       }
-      case 'form':{
+      case 'form': {
         return 'Câmpurile sunt completate necorespunzător';
       }
       default: {
@@ -101,11 +100,8 @@ export class ActualizareComponent implements OnInit {
     this.confirmationDialogService.confirm('', 'Eşti sigur că vrei să salvezi modificările făcute?')
       .then((confirmed) => {
         console.log('Button:', confirmed);
-        if (confirmed) {
-          if(!this.formGroup.valid) {
-            this.isValid = false;
-          }
-        }
+        if (confirmed)
+          this.updateProfil()
       })
       .catch(() => {
         console.log('Dismiss');

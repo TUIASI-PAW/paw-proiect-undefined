@@ -154,33 +154,54 @@
     ],
     "abonamente_admin": [
         {
-          "title": "Abonament_1",
-          "id": 1
+            "title": "Abonament_1",
+            "id": 1
         },
         {
-          "title": "Abonament_2",
-          "id": 2
+            "title": "Abonament_2",
+            "id": 2
         },
         {
-          "title": "Abonament_3",
-          "id": 3
+            "title": "Abonament_3",
+            "id": 3
         },
         {
-          "title": "Abonament_4",
-          "id": 4
+            "title": "Abonament_4",
+            "id": 4
         },
         {
-          "title": "Abonament_5",
-          "id": 5
+            "title": "Abonament_5",
+            "id": 5
         }
-      ],
+    ],
     "user_dummy": {
-            "lastname" : "Romeo",
-            "firstname": "Fantastik",
-            "email": "carolina@jambala.com",
-            "phone": "0753637383",
-            "password": "balaurul69"
-        },
+        "lastname": "Romeo",
+        "firstname": "Fantastik",
+        "email": "carolina@jambala.com",
+        "phone": "0753637383",
+        "abonamente": [
+            {
+                "id": 1,
+                "title": "Abonament cu titlu frumos 1",
+                "valability": 2
+            },
+            {
+                "id": 2,
+                "title": "Abonament cu titlu frumos 2",
+                "valability": 5
+            },
+            {
+                "id": 3,
+                "title": "Abonament cu titlu frumos 3",
+                "valability": 13
+            },
+            {
+                "id": 4,
+                "title": "Abonament cu titlu frumos 4",
+                "valability": 30
+            }
+        ]
+    },
     "categorii": [
         {
             "id": 0,
@@ -221,28 +242,6 @@
         {
             "id": 9,
             "text": "Fotbal"
-        }
-    ],
-    "abonamente_user": [
-        {
-            "id": 1,
-            "title": "Abonament cu titlu frumos 1",
-            "valability": 2
-        },
-        {
-            "id": 2,
-            "title": "Abonament cu titlu frumos 2",
-            "valability": 5
-        },
-        {
-            "id": 3,
-            "title": "Abonament cu titlu frumos 3",
-            "valability": 13
-        },
-        {
-            "id": 4,
-            "title": "Abonament cu titlu frumos 4",
-            "valability": 30
         }
     ]
 }

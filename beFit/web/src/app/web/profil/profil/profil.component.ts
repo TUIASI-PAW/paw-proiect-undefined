@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {AbonamentListModel} from '../../../services/models/abonament/abonament.user.list.model';
+import {UserDetailsModel} from '../../../services/models/user/user.details.model';
+
 
 import * as data from '../../../../assets/static.data.json';
 @Component({
@@ -10,12 +12,12 @@ import * as data from '../../../../assets/static.data.json';
 })
 export class ProfilComponent implements OnInit {
 
-  displayedColumns: string[] = ['title', 'valability'];
-  
-  dataSource: AbonamentListModel[];
-
+  public displayedColumns: string[] = ['title', 'valability'];
+  public dataSource: AbonamentListModel[];
+  public userDetails: UserDetailsModel;
   constructor() { 
-    this.dataSource = data.abonamente_user;
+    this.dataSource = data.user_dummy.abonamente;
+    this.userDetails = data.user_dummy;
   }
 
   ngOnInit(): void {
