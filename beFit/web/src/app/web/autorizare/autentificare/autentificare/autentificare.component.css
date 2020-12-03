@@ -77,3 +77,7 @@
         overflow-y: scroll;
     }
 }
+.validInput{
+    color: #ffc12e;
+    font-size: 16px !important;
+}

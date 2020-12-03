@@ -1,20 +1,36 @@
 <section class="auth-form-container">
-    <form class="formular">
+    <form class="formular" [formGroup]="formGroup">
         
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                
+                <mat-label *ngIf="!formGroup.controls.email.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Email</mat-label>
-                <input matInput>
+
+                <input formControlName="email" matInput>
                 <mat-icon matSuffix>alternate_email</mat-icon>
-                <mat-hint>ex: mircea_the_only_one@yahoo.com</mat-hint>
+
+                <mat-hint>ex: magic_traian_băsi@yahoo.com</mat-hint>
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
+             
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                
+                <mat-label *ngIf="!formGroup.controls.password.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Parola</mat-label>
-                <input matInput type="password">
+                
+                <input formControlName="password" matInput type="password">
                 <mat-icon matSuffix>lock</mat-icon>
-                <mat-hint>ex: AmPoRtoFelUGroS</mat-hint>
+
+                <mat-hint>ex: parLAmentaRICINstiti</mat-hint>
+                <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessage("password")}}</mat-error>
+
             </mat-form-field>
         </p>
         <button mat-stroked-button class="buttonBF">Autentificare</button>

@@ -1,54 +1,103 @@
 <section class="auth-form-container">
-    <form class="formular">
+    <form class="formular" [formGroup]="formGroup">
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+
+                <mat-label *ngIf="!formGroup.controls.title.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Titlu</mat-label>
-                <input matInput>
-                <mat-icon matSuffix>title</mat-icon>
+
+                <input formControlName="title" matInput>
+                <mat-icon matSuffix>person</mat-icon>
+
+                <mat-hint>ex: Băsescu</mat-hint>
+                <mat-error *ngIf="formGroup.controls.title.invalid">{{getErrorMessage("title")}}</mat-error>
+
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field class="categContainer">
+
+                <mat-label *ngIf="!formGroup.controls.category.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Categorie</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.value">
-                        {{categorie.viewValue}}
+
+                <mat-select formControlName="category">
+                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.id">
+                        {{categorie.text}}
                     </mat-option>
                 </mat-select>
+
+                <mat-error *ngIf="formGroup.controls.category.invalid">{{getErrorMessage("category")}}</mat-error>
+
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field class="datePickerContainer">
+
+                <mat-label *ngIf="!formGroup.controls.expirationDate.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Data de expirare</mat-label>
-                <input matInput [matDatepicker]="picker">
+
+                <input matInput [matDatepicker]="picker" formControlName="expirationDate">
+
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+
+                <mat-error *ngIf="formGroup.controls.expirationDate.invalid">{{getErrorMessage("expirationDate")}}</mat-error>
+
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+
+                <mat-label *ngIf="!formGroup.controls.valability.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Valabilitate(zile)</mat-label>
-                <input matInput>
+
+                <input matInput formControlName="valability">
                 <mat-icon matSuffix>calendar_view_day</mat-icon>
+
+                <mat-error *ngIf="formGroup.controls.valability.invalid">{{getErrorMessage("valability")}}</mat-error>
+
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field class="textareaStyle">
+
+                <mat-label *ngIf="!formGroup.controls.description.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Descriere</mat-label>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                    cdkAutosizeMaxRows="10"></textarea>
+
+                <textarea formControlName="description" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"></textarea>
+
+                <mat-error *ngIf="formGroup.controls.description.invalid">{{getErrorMessage("description")}}</mat-error>
+
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.price.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Preț(lei)</mat-label>
-                <input matInput>
+
+                <input matInput formControlName="price">
                 <mat-icon matSuffix>attach_money</mat-icon>
+
+                <mat-error *ngIf="formGroup.controls.price.invalid">{{getErrorMessage("price")}}</mat-error>
+
             </mat-form-field>
         </p>
 
@@ -61,8 +110,11 @@
             <img [src]="url" width=100%> <br />
         </div>
 
+        <mat-error class="formErr" *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
+        
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF">Creează abonament</button>
+            <button type="button" mat-stroked-button class="buttonBF" (click)="add()">Creează abonament</button>
         </div> <br>
+    
     </form>
 </section>

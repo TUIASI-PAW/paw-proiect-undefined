@@ -1,0 +1,36 @@
+.containerDetalii {
+    margin: 15px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontContainer {
+    font-size: medium;
+}
+
+.descriptionStyle {
+    font-size: medium;
+}
+
+.hParagraph{
+    line-height: 40px;
+    font-weight: lighter;
+    font-size: 200%;
+}
+
+.imgStyle {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.btnStyle {
+    width: 120px;
+    height: 45px;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

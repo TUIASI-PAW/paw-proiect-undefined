@@ -35,3 +35,9 @@
         margin: 0px;
     }
 }
+.cellTitle:hover{
+    opacity: 0.73;
+}
+.cellTitle:focus{
+    outline: none;
+}
