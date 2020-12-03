@@ -3,6 +3,7 @@ import { CreareComponent } from './creare/creare.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DetaliiComponent } from './detalii/detalii.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'modificare_abonament/:id',
     pathMatch: 'full',
     component: ModificareComponent
+  },
+  {
+    path: 'detalii_abonament/:id',
+    pathMatch: 'full',
+    component: DetaliiComponent
   },
 ];
 

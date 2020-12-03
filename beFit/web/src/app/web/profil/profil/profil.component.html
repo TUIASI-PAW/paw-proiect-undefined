@@ -19,17 +19,17 @@
             <div class="containerAbonamente">
                 <mat-table [dataSource]="dataSource">
 
-                    <ng-container matColumnDef="name">
+                    <ng-container matColumnDef="title">
                         <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                        <mat-cell class="cellTitle" *matCellDef="let item" [routerLink]="['/abonamente/detalii_abonament',item.id]"> {{item.title}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="valability">
                         <mat-header-cell *matHeaderCellDef>
                             <span class="tabletext">Valabilitate</span>
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            <span class="tabletext">{{element.valability}}</span>
+                        <mat-cell *matCellDef="let item">
+                            <span class="tabletext">{{item.valability}}</span>
                         </mat-cell>
                     </ng-container>
 

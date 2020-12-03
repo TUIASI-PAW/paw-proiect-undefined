@@ -1,16 +1,16 @@
 {
-    "detalii_abonament" : {
+    "detalii_abonament": {
         "id": 1,
         "title": "Abonament de test",
         "category": "Categorie de test",
         "expirationDate": "11/10/2020",
-        "addedDate":"11/5/2020",
+        "addedDate": "11/5/2020",
         "valability": 30,
         "description": "Descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test descriere de test",
         "price": 5,
         "image": "/assets/fitness.jpg"
     },
-    "lista_abonamente":[
+    "lista_abonamente": [
         {
             "id": 1,
             "title": "Abonament cu titlu frumos 1",
@@ -152,12 +152,6 @@
             "image": "/assets/sala_fitness_1.png"
         }
     ],
-    "categorii":[
-        { "id": 0, "text": "Sală de forță" },
-        { "id": 1, "text": "Inot" },
-        { "id": 2, "text": "Cardio" },
-        { "id": 3, "text": "Tenis" }
-    ],
     "abonamente_admin": [
         {
           "title": "Abonament_1",
@@ -186,5 +180,69 @@
             "email": "carolina@jambala.com",
             "phone": "0753637383",
             "password": "balaurul69"
+        },
+    "categorii": [
+        {
+            "id": 0,
+            "text": "Sală de forță"
+        },
+        {
+            "id": 1,
+            "text": "Inot"
+        },
+        {
+            "id": 2,
+            "text": "Cardio"
+        },
+        {
+            "id": 3,
+            "text": "Tenis"
+        },
+        {
+            "id": 4,
+            "text": "Golf"
+        },
+        {
+            "id": 5,
+            "text": "Aerobic"
+        },
+        {
+            "id": 6,
+            "text": "Baschet"
+        },
+        {
+            "id": 7,
+            "text": "Biliard"
+        },
+        {
+            "id": 8,
+            "text": "Volei"
+        },
+        {
+            "id": 9,
+            "text": "Fotbal"
         }
+    ],
+    "abonamente_user": [
+        {
+            "id": 1,
+            "title": "Abonament cu titlu frumos 1",
+            "valability": 2
+        },
+        {
+            "id": 2,
+            "title": "Abonament cu titlu frumos 2",
+            "valability": 5
+        },
+        {
+            "id": 3,
+            "title": "Abonament cu titlu frumos 3",
+            "valability": 13
+        },
+        {
+            "id": 4,
+            "title": "Abonament cu titlu frumos 4",
+            "valability": 30
+        }
+    ]
 }
