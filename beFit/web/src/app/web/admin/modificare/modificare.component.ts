@@ -132,4 +132,7 @@ export class ModificareComponent {
         console.log('Dismiss');
       });
   }
+  removeImage():void{
+    this.url = undefined;
+  }
 }

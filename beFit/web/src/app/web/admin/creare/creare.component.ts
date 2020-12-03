@@ -108,5 +108,7 @@ export class CreareComponent implements OnInit {
       }
     }
   }
-
+  removeImage():void{
+    this.url = undefined;
+  }
 }
