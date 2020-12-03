@@ -7,7 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class UpdateProfileDialogComponent {
+export class DialogComponent {
   @Input() title: string ='';
   @Input() message: string='';
   @Input() btnOkText: string='';

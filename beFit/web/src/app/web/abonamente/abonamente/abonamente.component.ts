@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
-interface Categorie {
-  value: string;
-  viewValue: string;
-}
+import {PageEvent} from '@angular/material/paginator';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
+import { AbonamentListModel } from '../../../services/models/abonament/abonament.list.model';
+import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model';
+
+import * as data from '../../../../assets/static.data.json';
+
+
 
 @Component({
   selector: 'app-abonamente',
@@ -12,18 +18,41 @@ interface Categorie {
   styleUrls: ['./abonamente.component.css']
 })
 export class AbonamenteComponent implements OnInit {
-  categorii: Categorie[] = [
-    {value: '0', viewValue: 'Sală de forță'},
-    {value: '1', viewValue: 'Inot'},
-    {value: '2', viewValue: 'Cardio'},
-    {value: '3', viewValue: 'Tenis'},
-  ];
 
-  constructor(private readonly router:Router) { 
+  public list: AbonamentListModel[] = [];
+  public categorii: CategorieModel[];
+
+  public pageEvent!: PageEvent;
+  public length:number = data.lista_abonamente.length;
+  public pageSize:number = 10;
+  public pageIndex:number =0;
+  public pageSizeOptions: number[] = [5, 10, 15, 25];
+
+
+  constructor(private readonly router: Router) {
+    
+    for(let i = this.pageSize*(this.pageIndex); i<this.pageSize;i++)
+    {
+      if(i==data.lista_abonamente.length-1)
+        break;
+      this.list.push(data.lista_abonamente[i]);
+    }
+
+    this.categorii = data.categorii;
   }
+  public update(event:PageEvent):PageEvent
+  {
+    this.list = [];
+    let start =event.pageSize*(event.pageIndex);
 
-  goTo(id: string) {
-    this.router.navigate([`/detalii/${id}`]);
+    for(let i = start; i<event.pageSize+start;i++)
+    {
+      if(i==data.lista_abonamente.length)
+        break;
+      this.list.push(data.lista_abonamente[i]);
+    }
+
+    return event;
   }
 
   ngOnInit(): void {

@@ -11,16 +11,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { UpdateProfileDialogComponent } from '../shared/components/dialog/dialog.component';
-import {MatDialogModule} from '@angular/material/dialog'
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog'
 import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     ProfilComponent,
     ActualizareComponent,
     AlimentareComponent,
-    UpdateProfileDialogComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +32,8 @@ import { ConfirmationDialogService } from '../shared/components/dialog/dialog.se
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers:[
     ConfirmationDialogService,

@@ -34,6 +34,21 @@
     align-self: center;
 }
 
+.btnStyle {
+    margin-bottom: 5%;
+}
+
+.finalErrorMessageStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.validInput{
+    color: #ffc12e;
+    font-size: 16px !important;
+}
+
 @media only screen and (max-width: 1000px) {
     .auth-form-container{
         margin-left: 20%;

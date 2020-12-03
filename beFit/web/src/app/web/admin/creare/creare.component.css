@@ -50,6 +50,10 @@
     background-color: #ffc12e;
 }
 
+.textareaStyle {
+    width: 100%;
+}
+
 @media only screen and (max-width: 1000px) {
     .auth-form-container{
         margin-left: 20%;
@@ -63,4 +67,13 @@
         margin-right: 10%;
         width: 80%;
     }
+}
+
+.validInput{
+    color: #ffc12e;
+    font-size: 16px !important;
+}
+.formErr{
+    text-align: center;
+    margin-bottom: 5px;
 }

@@ -1,49 +1,78 @@
 <section class="auth-form-container">
-    <form class="formular">
+    <form class="formular" [formGroup]="formGroup">
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.lastname.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Nume nou</mat-label>
-                <input matInput>
+                <input formControlName="lastname" matInput>
                 <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="formGroup.controls.lastname.invalid">{{getErrorMessage("lastname")}}</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.firstname.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Prenume nou</mat-label>
-                <input matInput>
+                <input formControlName="firstname" matInput>
                 <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="formGroup.controls.firstname.invalid">{{getErrorMessage("firstname")}}</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.email.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Email nou</mat-label>
-                <input matInput>
+                <input formControlName="email" matInput>
                 <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-error *ngIf="formGroup.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
-                <mat-label>Număr de telefon nou</mat-label>
-                <input matInput>
+                <mat-label *ngIf="!formGroup.controls.phone.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
+                <mat-label>Număr nou de telefon</mat-label>
+                <input formControlName="phone" matInput>
                 <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="formGroup.controls.phone.invalid">{{getErrorMessage("phone")}}</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.password.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Parola actuală</mat-label>
-                <input matInput type="password">
+                <input formControlName="password" matInput type="password">
                 <mat-icon matSuffix>lock</mat-icon>
+                <mat-error *ngIf="formGroup.controls.password.invalid">{{getErrorMessage("password")}}</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
+                <mat-label *ngIf="!formGroup.controls.new_password.invalid">
+                    <mat-icon class="validInput">done</mat-icon>
+                </mat-label>
                 <mat-label>Parola nouă</mat-label>
-                <input matInput type="password">
+                <input formControlName="new_password" matInput type="password">
                 <mat-icon matSuffix>lock</mat-icon>
+                <mat-error *ngIf="formGroup.controls.new_password.invalid">{{getErrorMessage("new_password")}}
+                </mat-error>
             </mat-form-field>
+        </p>
+        <p class="finalErrorMessageStyle">
+            <mat-error *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
         </p>
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF" (click) = "openDialog()">Actualizare date</button>
+            <button type="button" mat-stroked-button class="buttonBF btnStyle" (click)="openDialog()">Actualizare
+                date</button>
         </div>
     </form>
 </section>

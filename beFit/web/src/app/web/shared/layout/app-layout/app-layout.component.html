@@ -1,17 +1,14 @@
 <header>
     <mat-toolbar class="nav">
         <span>
-            <img src="assets/logo.png" class="logo" [routerLink]="'/home'">
+            <img src="assets/logo.png" class="logo" [routerLink]="'/home'" title="beFit-Acasă">
         </span>
-        <button mat-button [routerLink]="'/home'">
-            <span>Acasă</span>
-        </button>
         <button mat-button [routerLink]="'/abonamente'">
             <span>Abonamente</span>
         </button>
         <span class="spacer"></span>
         <span>
-            <button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">

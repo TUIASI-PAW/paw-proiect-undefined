@@ -13,9 +13,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 
+import {MatDialogModule} from '@angular/material/dialog'
+import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DetaliiComponent } from './detalii/detalii.component';
 
 @NgModule({
-  declarations: [AdminComponent, CreareComponent, ModificareComponent],
+  declarations: [AdminComponent, CreareComponent, ModificareComponent, DetaliiComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -26,6 +30,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+  ],
+  providers:[
+    ConfirmationDialogService
   ]
 })
 export class AdminModule { }

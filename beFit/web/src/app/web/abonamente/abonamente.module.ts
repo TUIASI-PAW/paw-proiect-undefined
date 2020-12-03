@@ -8,6 +8,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog'
+
+import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
 
 @NgModule({
   declarations: [AbonamenteComponent, DetaliiComponent],
@@ -18,6 +22,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
   ],
+  providers:[ConfirmationDialogService],
 })
 export class AbonamenteModule { }
