@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>presentation</module>
-        <module>business</module>
-		<module>persistence</module>
+        <module>1.presentation</module>
+        <module>2.business</module>
+		<module>3.persistence</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -49,6 +49,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

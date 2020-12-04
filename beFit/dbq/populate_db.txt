@@ -1,0 +1,8 @@
+INSERT INTO beFit.USERS
+(firstname, lastname, email, phone, password, `role`)
+VALUES('admin', 'admin', 'a@a.a', '0000000000', 'admin', 'admin');
+
+INSERT INTO beFit.USERS
+(firstname, lastname, email, phone, password, `role`)
+VALUES('client', 'client', 'c@c.c', '1111111111', 'client', 'client');
+

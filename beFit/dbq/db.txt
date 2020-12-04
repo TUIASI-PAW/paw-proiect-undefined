@@ -1,0 +1,27 @@
+/* CREATE DATABASE */
+CREATE DATABASE beFit;
+
+/* CREATE CRUD USER FOR DB */
+CREATE USER 'befRW'@'localhost' IDENTIFIED BY 'befRW';
+GRANT SELECT ON beFit.* TO 'befRW'@'localhost';
+GRANT INSERT ON beFit.* TO 'befRW'@'localhost';
+GRANT UPDATE ON beFit.* TO 'befRW'@'localhost';
+GRANT DELETE ON beFit.* TO 'befRW'@'localhost';
+
+/* CREATE ADMIN USER FOR DB */
+CREATE USER 'befadmin'@'localhost' IDENTIFIED BY 'befadmin';
+GRANT ALL PRIVILEGES ON beFit.* TO 'befadmin'@'localhost';
+
+/* CREATE HIBERNATE_SEQ_TABLE */
+create table hibernate_sequence (next_val bigint) engine=InnoDB
+
+/* CREATE DB USERS TABLE */
+CREATE TABLE USERS(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	firstname VARCHAR(15) NOT NULL,
+    lastname VARCHAR(25) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    phone VARCHAR(10) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    role VARCHAR(30) NOT NULL	
+);
