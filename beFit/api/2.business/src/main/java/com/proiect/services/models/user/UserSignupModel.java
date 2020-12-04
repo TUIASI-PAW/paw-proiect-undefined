@@ -1,38 +1,20 @@
-package com.proiect.entities;
+package com.proiect.services.models.user;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.proiect.entities.Role;
 
 import java.util.List;
 
-
-@Entity
-@Table(name="USERS")
-public class User{
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
-
-    @Column(nullable = false)
+public class UserSignupModel {
     private String firstname;
-
-    @Column(nullable = false)
     private String lastname;
-
-    @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String phone;
-
-    @Column(nullable = false)
     private String password;
-
-    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Role> roles;
 
-    public User() {
-        super();
+    public UserSignupModel() {
     }
 
     public String getFirstname() {
@@ -73,14 +55,6 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<Role> getRoles() {
