@@ -7,9 +7,12 @@ import com.proiect.services.models.user.UserAuthModel;
 import com.proiect.services.models.user.UserSignupModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -27,12 +30,12 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestBody UserAuthModel model) {
+    public String login(@Validated @RequestBody UserAuthModel model) {
         return authenticationService.signin(model.getEmail(),model.getPassword());
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody UserSignupModel model) {
+    public String signup(@Validated @RequestBody UserSignupModel model) {
         model.setRoles(Arrays.asList(Role.ROLE_CLIENT));
         return authenticationService.signup(modelMapper.map(model, User.class));
     }

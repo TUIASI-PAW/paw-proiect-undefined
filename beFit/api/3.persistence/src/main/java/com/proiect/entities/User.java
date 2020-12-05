@@ -1,6 +1,9 @@
 package com.proiect.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.List;
 
@@ -13,27 +16,34 @@ public class User{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false)
+    @Size(min = 3, max = 30, message
+            = "First name must be between 3 and 30 characters.")
+    @NotNull(message = "First name cannot be null.")
     private String firstname;
 
-    @Column(nullable = false)
+    @Size(min = 3, max = 30, message
+            = "Last name must be between 3 and 30 characters.")
+    @NotNull(message = "Last name cannot be null.")
     private String lastname;
 
-    @Column(unique = true, nullable = false)
+    @Email(message = "Email should be valid.")
+    @NotNull(message = "Email cannot be null.")
     private String email;
 
-    @Column(nullable = false)
+    @Size(min = 10, max = 10,
+            message = "Phone number must have 10 characters.")
+    @NotNull(message = "Phone number cannot be null.")
     private String phone;
 
-    @Column(nullable = false)
+    @Size(min = 3, max = 150, message
+            = "Password must be between 3 and 50 characters.")
+    @NotNull(message = "Password cannot be null.")
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles;
 
-    public User() {
-        super();
-    }
+    public User() { }
 
     public String getFirstname() {
         return firstname;

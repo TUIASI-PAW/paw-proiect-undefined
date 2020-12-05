@@ -27,10 +27,11 @@ public class AuthenticationService {
 
     public String signin(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        return jwtTokenProvider.createToken(username, userRepository
-                                                            .findByEmail(username)
-                                                            .orElseThrow(()-> new UsernameNotFoundException("Requested user could not be found."))
-                                                            .getRoles());
+        final var user = userRepository
+                .findByEmail(username)
+                .orElseThrow(()-> new UsernameNotFoundException("Requested user could not be found."));
+
+        return jwtTokenProvider.createToken(username, user.getId(), user.getRoles());
 
     }
 
@@ -38,7 +39,7 @@ public class AuthenticationService {
         if (!userRepository.existsByEmail(user.getEmail())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            return jwtTokenProvider.createToken(user.getEmail(), user.getRoles());
+            return jwtTokenProvider.createToken(user.getEmail(), user.getId(), user.getRoles());
         } else {
             throw new UserEmailAlreadyExistsException("Email is already in use");
         }
