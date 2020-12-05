@@ -5,16 +5,16 @@ import com.proiect.entities.User;
 import com.proiect.services.authentication.AuthenticationService;
 import com.proiect.services.models.user.UserAuthModel;
 import com.proiect.services.models.user.UserSignupModel;
+import com.proiect.services.models.user.UserTokenModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
-import java.util.HashSet;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -30,8 +30,9 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public String login(@Validated @RequestBody UserAuthModel model) {
-        return authenticationService.signin(model.getEmail(),model.getPassword());
+    public UserTokenModel login(@Validated @RequestBody UserAuthModel model) {
+        var token = authenticationService.signin(model.getEmail(),model.getPassword());
+        return new UserTokenModel(token);
     }
 
     @PostMapping("/signup")
