@@ -6,11 +6,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Table(name="USERS")
-public class User{
+public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -42,6 +43,9 @@ public class User{
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    Set<UserAbonament> abonamente;
 
     public User() { }
 
@@ -99,5 +103,13 @@ public class User{
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<UserAbonament> getAbonamente() {
+        return abonamente;
+    }
+
+    public void setAbonamente(Set<UserAbonament> abonamente) {
+        this.abonamente = abonamente;
     }
 }
