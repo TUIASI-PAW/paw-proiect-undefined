@@ -1,6 +1,8 @@
-package com.proiect.security;
+package com.proiect.configurations;
 
 import com.proiect.entities.Role;
+import com.proiect.security.JwtTokenFilterConfigurer;
+import com.proiect.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
