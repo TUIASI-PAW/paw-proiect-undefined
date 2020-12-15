@@ -1,0 +1,13 @@
+/* CREATE DATABASE */
+CREATE DATABASE beFit;
+
+/* CREATE CRUD USER FOR DB */
+CREATE USER 'befRW'@'localhost' IDENTIFIED BY 'befRW';
+GRANT SELECT ON beFit.* TO 'befRW'@'localhost';
+GRANT INSERT ON beFit.* TO 'befRW'@'localhost';
+GRANT UPDATE ON beFit.* TO 'befRW'@'localhost';
+GRANT DELETE ON beFit.* TO 'befRW'@'localhost';
+
+/* CREATE ADMIN USER FOR DB */
+CREATE USER 'befadmin'@'localhost' IDENTIFIED BY 'befadmin';
+GRANT ALL PRIVILEGES ON beFit.* TO 'befadmin'@'localhost';
