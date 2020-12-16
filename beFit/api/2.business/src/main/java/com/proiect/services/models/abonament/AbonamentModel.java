@@ -1,20 +1,14 @@
-package com.proiect.entities;
+package com.proiect.services.models.abonament;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.Set;
 
-@Entity
-@Table(name="ABONAMENTE")
-public class Abonament {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+public class AbonamentModel {
 
     @Size(min = 5, max = 100, message
             = "Abonament title must contain between 5 and 100 characters.")
@@ -34,7 +28,7 @@ public class Abonament {
     private Date expirationDate;
 
     @Basic
-    @NotNull(message = "Added date cannot be null.")
+    @JsonIgnore
     private Date addedDate;
 
     @NotNull(message = "Price cannot be null.")
@@ -47,19 +41,7 @@ public class Abonament {
     @NotNull(message = "Description cannot be null.")
     private String description;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    Set<UserAbonament> users;
-
-    public Abonament() { }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public AbonamentModel() { }
 
     public String getTitle() {
         return title;
@@ -123,13 +105,5 @@ public class Abonament {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<UserAbonament> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserAbonament> users) {
-        this.users = users;
     }
 }
