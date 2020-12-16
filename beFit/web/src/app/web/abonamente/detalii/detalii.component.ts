@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AbonamentModel } from '../../../services/models/abonament/abonament.model';
 
 import * as data from '../../../../assets/static.data.json';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-detalii',
@@ -17,10 +18,12 @@ export class DetaliiComponent implements OnInit {
 
   constructor(
     private confirmationDialogService: ConfirmationDialogService,
-    private router: Router,
+    private readonly authenticationService: AuthenticationService,
+    private readonly router: Router
   ) {
+    if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
-    const reqId= this.router.url.split('/').slice(-1)[0];
+    const reqId = this.router.url.split('/').slice(-1)[0];
     console.log(reqId);
     this.details = data.detalii_abonament;
 

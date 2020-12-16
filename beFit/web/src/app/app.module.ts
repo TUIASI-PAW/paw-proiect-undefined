@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppLayoutComponent } from './web/shared/layout/app-layout/app-layout.component';
 import { AuthLayoutComponent } from './web/shared/layout/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './web/shared/layout/admin-layout/admin-layout.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AdminLayoutComponent } from './web/shared/layout/admin-layout/admin-lay
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

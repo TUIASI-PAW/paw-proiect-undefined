@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import * as data from "../../../../assets/static.data.json"
 
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,14 +16,17 @@ import { CategorieModel } from '../../../services/models/abonament/abonament.cat
   styleUrls: ['./creare.component.css']
 })
 export class CreareComponent implements OnInit {
-  public categorii: CategorieModel[];
+  public categorii!: CategorieModel[];
 
   public isValid: boolean = true;
   public url: any;
 
-  public formGroup: FormGroup;
+  public formGroup!: FormGroup;
 
-  constructor(private _ngZone: NgZone, private formBuilder: FormBuilder) {
+  constructor(
+    private readonly router: Router,
+    private _ngZone: NgZone, private formBuilder: FormBuilder
+  ) {
     this.categorii = data.categorii;
     this.formGroup = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
@@ -108,7 +112,7 @@ export class CreareComponent implements OnInit {
       }
     }
   }
-  removeImage():void{
+  removeImage(): void {
     this.url = undefined;
   }
 }

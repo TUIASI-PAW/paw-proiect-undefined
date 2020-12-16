@@ -1,19 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { UserAuthModel } from '../../../../services/models/user/user.auth.model';
 
 @Component({
   selector: 'app-autentificare',
   templateUrl: './autentificare.component.html',
-  styleUrls: ['./autentificare.component.css']
+  styleUrls: ['./autentificare.component.css'],
+  providers: [AuthenticationService]
 })
 export class AutentificareComponent implements OnInit {
-  
+
   public formGroup: FormGroup;
-  public isValid: boolean =true;
+  public isValid: boolean = true;
 
   constructor(
-    private readonly formBuilder: FormBuilder,) {
+    private readonly formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly authenticationService: AuthenticationService
+  ) {
+    if (this.authenticationService.userValue) this.router.navigate(['/']);
     this.formGroup = this.formBuilder.group({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -22,7 +31,27 @@ export class AutentificareComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  signin(): void {
+    if (this.formGroup.invalid) return;
 
+    const user: UserAuthModel = this.formGroup.getRawValue();
+    this.authenticationService.signin(user)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          if (this.authenticationService.getUserData().role == 'ROLE_ADMIN')
+            this.router.navigate(['admin']);
+          else {
+            const url = this.route.snapshot.queryParams['returnUrl'] || '/';
+            this.router.navigateByUrl(url);
+          }
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+
+  }
   getErrorMessage(formElement: String): String {
     switch (formElement) {
       case 'email': {
@@ -47,5 +76,5 @@ export class AutentificareComponent implements OnInit {
       }
     }
   }
-  
+
 }
