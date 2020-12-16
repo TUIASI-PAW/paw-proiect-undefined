@@ -34,7 +34,8 @@ export class AbonamenteComponent implements OnInit {
     private readonly authenticationService: AuthenticationService,
     private readonly router: Router
   ) {
-    if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
+    if (this.authenticationService.userValue)
+      if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
     for (let i = this.pageSize * (this.pageIndex); i < this.pageSize; i++) {
       if (i == data.lista_abonamente.length - 1)

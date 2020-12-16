@@ -68,9 +68,10 @@ export class HomeComponent implements OnInit {
   ];
   constructor(
     private readonly authenticationService: AuthenticationService,
-    private readonly router:Router
-    ) {
-    if(this.authenticationService.getUserData().role=='ROLE_ADMIN')this.router.navigate(['admin']);
+    private readonly router: Router
+  ) {
+    if (this.authenticationService.userValue)
+      if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
   }
 
   ngOnInit(): void {
