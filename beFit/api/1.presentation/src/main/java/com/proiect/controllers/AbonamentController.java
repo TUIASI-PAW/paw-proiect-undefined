@@ -3,6 +3,7 @@ package com.proiect.controllers;
 import com.proiect.entities.Abonament;
 import com.proiect.services.abonament.IAbonamentService;
 import com.proiect.services.models.abonament.AbonamentModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/api/abonament")
 public class AbonamentController {
 
+    @Autowired
     private final IAbonamentService abonamentService;
 
     public AbonamentController(IAbonamentService abonamentService) {
@@ -28,11 +30,6 @@ public class AbonamentController {
     @GetMapping("/{id}")
     public ResponseEntity<Abonament> findById(@PathVariable int id) {
         return new ResponseEntity<>(abonamentService.findById(id), HttpStatus.OK);
-    }
-
-    @GetMapping("/findByCategory/{category}")
-    public ResponseEntity<List<Abonament>> findByCategory(@PathVariable String category) {
-        return new ResponseEntity<>(abonamentService.findByCategory(category), HttpStatus.OK);
     }
 
     @PostMapping("/")

@@ -1,7 +1,6 @@
 package com.proiect.services.abonament;
 
 import com.proiect.entities.Abonament;
-import com.proiect.exceptions.AbonamentExceptions.AbonamentCategoryNotFoundException;
 import com.proiect.exceptions.AbonamentExceptions.AbonamentNotFoundException;
 import com.proiect.repositories.IAbonamentRepository;
 import com.proiect.services.models.abonament.AbonamentModel;
@@ -36,13 +35,6 @@ public class AbonamentService implements IAbonamentService {
         if(abonamentRepository.findById(id).isPresent())
             return abonamentRepository.findById(id).get();
         else throw new AbonamentNotFoundException("Abonament does not exists.");
-    }
-
-    @Override
-    public List<Abonament> findByCategory(String category) {
-        if(abonamentRepository.findByCategory(category).isEmpty())
-            throw new AbonamentCategoryNotFoundException("Category does not exists.");
-        return abonamentRepository.findByCategory(category);
     }
 
     @Override
