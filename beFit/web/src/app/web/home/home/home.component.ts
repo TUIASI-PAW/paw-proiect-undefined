@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 export interface Tile {
   imagesrc: string;
@@ -64,7 +66,12 @@ export class HomeComponent implements OnInit {
       color: 'whitesmoke',
     },
   ];
-  constructor() { }
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly router:Router
+    ) {
+    if(this.authenticationService.getUserData().role=='ROLE_ADMIN')this.router.navigate(['admin']);
+  }
 
   ngOnInit(): void {
 

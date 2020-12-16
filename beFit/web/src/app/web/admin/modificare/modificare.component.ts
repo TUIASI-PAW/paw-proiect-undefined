@@ -9,6 +9,7 @@ import * as data from "../../../../assets/static.data.json"
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model'
 
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
+import { Router } from '@angular/router';
 
 interface Categorie {
   value: string;
@@ -21,17 +22,22 @@ interface Categorie {
   styleUrls: ['./modificare.component.css']
 })
 export class ModificareComponent {
-  public categorii: CategorieModel[];
+  public categorii!: CategorieModel[];
 
   public isValid: boolean = true;
   public url: any;
 
-  public formGroup: FormGroup;
+  public formGroup!: FormGroup;
 
   constructor(
+    private readonly router: Router,
     private confirmationDialogService: ConfirmationDialogService,
     private _ngZone: NgZone,
     private formBuilder: FormBuilder) {
+    // if (this.userService.getUserData().role != 'ROLE_ADMIN') {
+    //   this.router.navigate(['abonamente']);
+    // }
+    // else {
     this.categorii = data.categorii;
     this.formGroup = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
@@ -48,6 +54,7 @@ export class ModificareComponent {
     this.formGroup.controls['valability'].setValue(data.detalii_abonament.valability);
     this.formGroup.controls['description'].setValue(data.detalii_abonament.description);
     this.formGroup.controls['price'].setValue(data.detalii_abonament.price);
+    // }
   }
 
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
@@ -132,7 +139,7 @@ export class ModificareComponent {
         console.log('Dismiss');
       });
   }
-  removeImage():void{
+  removeImage(): void {
     this.url = undefined;
   }
 }

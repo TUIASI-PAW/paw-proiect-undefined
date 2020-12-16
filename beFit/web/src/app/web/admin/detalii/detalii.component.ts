@@ -12,11 +12,12 @@ import * as data from '../../../../assets/static.data.json';
 })
 export class DetaliiComponent implements OnInit {
 
-  public details: AbonamentModel;
-  public redirectId: string;
+  public details!: AbonamentModel;
+  public redirectId!: string;
   constructor(
-    private router: Router,
+    private readonly router: Router,
   ) {
+
     this.redirectId = this.router.url.split('/').slice(-1)[0];
     this.details = data.detalii_abonament;
   }

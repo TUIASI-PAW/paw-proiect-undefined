@@ -22,6 +22,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
 export class AutentificareModule { }

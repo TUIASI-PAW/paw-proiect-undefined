@@ -12,23 +12,23 @@
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink]="'/inregistrare'">
-                    <mat-icon>create</mat-icon>
-                    <span>Înregistrare</span>
-                </button>
-                <button mat-menu-item [routerLink]="'/autentificare'">
+                <button mat-menu-item [routerLink]="'/autentificare'" *ngIf="!isLoggedIn">
                     <mat-icon>person</mat-icon>
                     <span>Autentificare</span>
                 </button>
-                <button mat-menu-item [routerLink]="'/profil'">
+                <button mat-menu-item [routerLink]="'/inregistrare'" *ngIf="!isLoggedIn">
+                    <mat-icon>create</mat-icon>
+                    <span>Înregistrare</span>
+                </button>
+                <button mat-menu-item [routerLink]="'/profil'" *ngIf="isLoggedIn">
                     <mat-icon>person</mat-icon>
                     <span>Profil</span>
                 </button>
-                <button mat-menu-item [routerLink]="'/profil/alimentare'">
+                <button mat-menu-item [routerLink]="'/profil/alimentare'" *ngIf="isLoggedIn">
                     <mat-icon>attach_money</mat-icon>
                     <span>Alimentare</span>
                 </button>
-                <button mat-menu-item>
+                <button *ngIf="isLoggedIn" mat-menu-item (click)="logout()">
                     <mat-icon>lock_open</mat-icon>
                     <span>Deconectare</span>
                 </button>

@@ -2,6 +2,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 import * as data from '../../../../assets/static.data.json';
+import { Router } from '@angular/router';
 
 export interface Abonament {
   id: number;
@@ -15,11 +16,15 @@ export interface Abonament {
 })
 export class AdminComponent implements OnInit {
 
-  formGroup: FormGroup;
-  abonamente: Abonament[];
+  public formGroup!: FormGroup;
+  public abonamente!: Abonament[];
 
-  constructor(private confirmationDialogService: ConfirmationDialogService,
-    private formBuilder: FormBuilder) {
+  constructor(
+    private readonly router: Router,
+    private confirmationDialogService: ConfirmationDialogService,
+    private formBuilder: FormBuilder
+  ) {
+
     this.formGroup = this.formBuilder.group({
       searchInput: new FormControl('')
     });
@@ -60,6 +65,7 @@ export class AdminComponent implements OnInit {
       });
   }
   ngOnInit(): void {
+
   }
 
 }

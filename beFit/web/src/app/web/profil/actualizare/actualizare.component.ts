@@ -3,6 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 import * as data from '../../../../assets/static.data.json';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-actualizare',
@@ -15,7 +17,11 @@ export class ActualizareComponent implements OnInit {
   public isValid: boolean = true;
 
   constructor(private confirmationDialogService: ConfirmationDialogService,
-    private readonly formBuilder: FormBuilder) {
+    private readonly formBuilder: FormBuilder,
+    private readonly authenticationService: AuthenticationService,
+    private readonly router: Router
+  ) {
+    if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
     this.formGroup = this.formBuilder.group({
       firstname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       lastname: new FormControl(null, [Validators.required, Validators.minLength(3)]),

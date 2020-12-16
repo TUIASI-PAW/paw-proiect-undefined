@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AppUser } from 'src/app/services/models/user/app.user';
 
 @Component({
   selector: 'app-app-layout',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppLayoutComponent implements OnInit {
 
-  constructor() { }
+  public user: AppUser;
+  public isLoggedIn: boolean = false;
 
-  ngOnInit(): void {
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly router: Router,
+  ) {
   }
 
+  logout(): void {
+    this.isLoggedIn = false;
+    this.authenticationService.logout();
+  }
+
+  ngOnInit(): void {
+    this.user = this.authenticationService.getUserData();
+    this.isLoggedIn = this.user != null;
+  }
 }

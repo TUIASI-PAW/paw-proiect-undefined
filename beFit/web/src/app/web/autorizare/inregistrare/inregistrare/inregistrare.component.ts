@@ -1,20 +1,31 @@
 import { Component } from '@angular/core';
 import { UserRegisterModel } from '../../../../services/models/user/user.register.model';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 
 @Component({
   selector: 'app-inregistrare',
   templateUrl: './inregistrare.component.html',
-  styleUrls: ['./inregistrare.component.css']
+  styleUrls: ['./inregistrare.component.css'],
+  providers: [AuthenticationService]
 })
 export class InregistrareComponent {
 
   public formGroup: FormGroup;
-  public isValid: boolean =true;
+  public isValid: boolean = true;
 
   constructor(
-    private readonly formBuilder: FormBuilder,) {
+    private readonly formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly authenticationService: AuthenticationService,
+    private readonly router: Router
+
+  ) {
+    if (this.authenticationService.userValue) this.router.navigate(['/']);
+
     this.formGroup = this.formBuilder.group({
       firstname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       lastname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -25,12 +36,22 @@ export class InregistrareComponent {
   }
   public register() {
     if (this.formGroup.valid) {
-      this.isValid=true;
+      this.isValid = true;
       const data: UserRegisterModel = this.formGroup.getRawValue();
-      console.log(data);
+      this.authenticationService.signup(data)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl('/');
+          },
+          error: err => {
+            console.log(err);
+          }
+        })
     }
-    else this.isValid=false;
+    else this.isValid = false;
   }
+
   getErrorMessage(formElement: String): String {
     switch (formElement) {
       case 'firstname': {
@@ -70,7 +91,7 @@ export class InregistrareComponent {
           return 'Câmpul este obligatoriu.';
         return '';
       }
-      case 'form':{
+      case 'form': {
         return 'Câmpurile sunt completate necorespunzător';
       }
       default: {

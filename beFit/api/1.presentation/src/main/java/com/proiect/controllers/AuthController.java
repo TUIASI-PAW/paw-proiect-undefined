@@ -8,6 +8,8 @@ import com.proiect.services.models.user.UserSignupModel;
 import com.proiect.services.models.user.UserTokenModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,15 +32,16 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public UserTokenModel login(@Validated @RequestBody UserAuthModel model) {
+    public ResponseEntity<UserTokenModel> login(@Validated @RequestBody UserAuthModel model) {
         var token = authenticationService.signin(model.getEmail(),model.getPassword());
-        return new UserTokenModel(token);
+        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.OK);
     }
 
     @PostMapping("/signup")
-    public String signup(@Validated @RequestBody UserSignupModel model) {
+    public ResponseEntity<UserTokenModel> signup(@Validated @RequestBody UserSignupModel model) {
         model.setRoles(Arrays.asList(Role.ROLE_CLIENT));
-        return authenticationService.signup(modelMapper.map(model, User.class));
+        var token =authenticationService.signup(modelMapper.map(model, User.class));
+        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.OK);
     }
 
 }
