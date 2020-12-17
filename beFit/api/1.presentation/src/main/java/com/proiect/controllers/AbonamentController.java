@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/abonament")
 public class AbonamentController {
 
@@ -23,6 +24,7 @@ public class AbonamentController {
     }
 
     @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Abonament>> listAll() {
         return new ResponseEntity<>(abonamentService.listAll(), HttpStatus.OK);
     }

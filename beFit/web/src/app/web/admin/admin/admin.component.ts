@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 import * as data from '../../../../assets/static.data.json';
 import { Router } from '@angular/router';
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
 
 export interface Abonament {
   id: number;
@@ -12,7 +13,8 @@ export interface Abonament {
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers: [AbonamentService]
 })
 export class AdminComponent implements OnInit {
 
@@ -21,13 +23,15 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private confirmationDialogService: ConfirmationDialogService,
-    private formBuilder: FormBuilder
+    private readonly confirmationDialogService: ConfirmationDialogService,
+    private readonly formBuilder: FormBuilder,
+    private readonly abonamentService: AbonamentService,
   ) {
 
     this.formGroup = this.formBuilder.group({
       searchInput: new FormControl('')
     });
+
     this.abonamente = data.abonamente_admin;
   }
 

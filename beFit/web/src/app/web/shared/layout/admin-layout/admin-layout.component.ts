@@ -20,7 +20,6 @@ export class AdminLayoutComponent implements OnInit {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
       this.isLoggedIn = this.user && this.user.token != null;
-      console.log("initialised");
     });
   }
 
@@ -32,7 +31,6 @@ export class AdminLayoutComponent implements OnInit {
     this.authenticationService.user.subscribe(user => {
       this.user = user;
       this.isLoggedIn = this.user && this.user.token != null;
-      console.log("initialised");
     });
   }
 }

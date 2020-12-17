@@ -66,3 +66,22 @@ button:focus{
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
 }
+
+@media only screen and (max-width: 900px) {
+
+    .contentContainer {
+        margin-left: 1%;
+        margin-right: 1%;
+        width: 98%;
+        padding: 10px;
+    }
+}
+@media only screen and (max-width: 1320px) {
+
+    .contentContainer {
+        margin-left: 4%;
+        margin-right: 4%;
+        width: 92%;
+        padding: 10px;
+    }
+}

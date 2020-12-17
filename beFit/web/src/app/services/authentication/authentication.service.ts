@@ -46,8 +46,6 @@ export class AuthenticationService {
         const { token } = data;
 
         const decodedToken = jwt_decode(token) as any;
-        console.log(decodedToken);
-
         const user: AppUser = {
           email: decodedToken.sub,
           id: decodedToken.user_id,
