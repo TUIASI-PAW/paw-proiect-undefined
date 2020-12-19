@@ -1,10 +1,9 @@
 package com.proiect.services.user;
 
 import com.proiect.entities.User;
-
-import java.util.Optional;
+import com.proiect.services.models.user.UserPatchModel;
 
 public interface IUserService {
-    Optional<User> findByEmail(String email);
-    Optional<User> findById(int id);
+    User findById(int id);
+    User update(int id, UserPatchModel model);
 }
