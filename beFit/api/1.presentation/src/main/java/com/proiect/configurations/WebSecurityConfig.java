@@ -50,10 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/abonament/**").permitAll()
+                .antMatchers("/api/abonament/filters/pagination/**").permitAll()
                 .antMatchers("/api/category/**").permitAll()
-                .antMatchers("/api/abonament/").permitAll()
                 .anyRequest().authenticated();
-
 
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }

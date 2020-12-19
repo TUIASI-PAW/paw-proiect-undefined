@@ -1,12 +1,11 @@
+import { AbonamentUserListModel } from './../../../services/models/abonament/abonament.user.list.model';
 import { Component, OnInit } from '@angular/core';
-
-import {AbonamentListModel} from '../../../services/models/abonament/abonament.user.list.model';
-import {UserDetailsModel} from '../../../services/models/user/user.details.model';
-
+import { UserDetailsModel } from '../../../services/models/user/user.details.model';
 
 import * as data from '../../../../assets/static.data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -15,7 +14,7 @@ import { Router } from '@angular/router';
 export class ProfilComponent implements OnInit {
 
   public displayedColumns: string[] = ['title', 'valability'];
-  public dataSource: AbonamentListModel[];
+  public dataSource: AbonamentUserListModel[];
   public userDetails: UserDetailsModel;
   constructor(
     private readonly authenticationService: AuthenticationService,

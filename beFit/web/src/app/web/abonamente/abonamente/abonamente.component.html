@@ -15,7 +15,7 @@
 
     <div class="abonamenteContainer">
 
-        <div *ngFor="let item of list">
+        <div *ngFor="let item of paginationModel.abonamentList">
 
             <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]">
                 <h3>{{item.title}}</h3>
@@ -37,10 +37,10 @@
 
     <div>
         <mat-paginator
-            [length]="length"
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
             [pageIndex]="pageIndex"
+            [length]="abonamenteCount"
             (page)="pageEvent = update($event)">
         </mat-paginator>
     </div>
