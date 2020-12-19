@@ -49,12 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**/**").permitAll()
 
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/user/**").authenticated()
-
-                .antMatchers("/api/category/**").permitAll()
+                .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/abonament/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/api/abonament/filters/pagination/**").permitAll()
+                .antMatchers("/api/category/**").permitAll()
 
+                .anyRequest().authenticated();
 
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }

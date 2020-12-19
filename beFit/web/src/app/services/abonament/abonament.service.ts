@@ -1,3 +1,6 @@
+import { PaginationModel } from './../models/pagination/pagination.model';
+import { AbonamentPaginatedModel } from './../models/abonament/abonament.paginated.model';
+import { AbonamentListModel } from './../models/abonament/abonament.list.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,7 +15,13 @@ export class AbonamentService {
   constructor(
     private readonly httpClient: HttpClient,
   ) { }
-  public getAll(): Observable<unknown> {
-    return this.httpClient.get(`${this.endpoint}/`);
+
+  public getAll(): Observable<AbonamentListModel[]> {
+    return this.httpClient.get<AbonamentListModel[]>(`${this.endpoint}/`);
   }
+
+  public getAllPaginated(data: AbonamentPaginatedModel): Observable<PaginationModel> {
+    return this.httpClient.post<PaginationModel>(`${this.endpoint}/filters/pagination`, data);
+  }
+
 }
