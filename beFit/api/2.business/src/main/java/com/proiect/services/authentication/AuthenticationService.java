@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
-public class AuthenticationService {
+public class AuthenticationService implements IAuthenticationService{
     @Autowired
     private IUserRepository userRepository;
 
@@ -25,6 +27,7 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Override
     public String signin(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         final var user = userRepository
@@ -35,6 +38,7 @@ public class AuthenticationService {
 
     }
 
+    @Override
     public String signup(User user) {
         if (!userRepository.existsByEmail(user.getEmail())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -44,5 +48,4 @@ public class AuthenticationService {
             throw new UserEmailAlreadyExistsException("Email is already in use");
         }
     }
-
 }

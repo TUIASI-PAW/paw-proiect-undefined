@@ -1,9 +1,6 @@
 package com.proiect.security;
 
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -67,6 +64,16 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
+    public ArrayList<Map<String,String>> getRole(String token)
+    {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("auth",ArrayList.class);
+    }
+
+    public Integer getId(String token)
+    {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("user_id",Integer.class);
+    }
+
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
@@ -79,8 +86,8 @@ public class JwtTokenProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (io.jsonwebtoken.JwtException | IllegalArgumentException e) {
-            throw new JwtException("Expired or invalid JWT token", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new JwtException("Expired or invalid JWT token", HttpStatus.FORBIDDEN);
         }
     }
 

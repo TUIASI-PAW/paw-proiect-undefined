@@ -40,6 +40,7 @@ public class Abonament {
     @NotNull(message = "Price cannot be null.")
     private int price;
 
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Size(min = 3, max = 2000, message
