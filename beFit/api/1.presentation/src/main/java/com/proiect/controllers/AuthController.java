@@ -31,16 +31,18 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<UserTokenModel> login(@Validated @RequestBody UserAuthModel model) {
         var token = authenticationService.signin(model.getEmail(),model.getPassword());
-        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.OK);
+        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserTokenModel> signup(@Validated @RequestBody UserSignupModel model) {
         model.setRoles(Arrays.asList(Role.ROLE_CLIENT));
         var token =authenticationService.signup(modelMapper.map(model, User.class));
-        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.OK);
+        return new ResponseEntity<>(new UserTokenModel(token), HttpStatus.CREATED);
     }
 
 }
