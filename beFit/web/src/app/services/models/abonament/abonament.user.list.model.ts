@@ -1,4 +1,4 @@
-export interface AbonamentListModel{
+export interface AbonamentUserListModel{
     id: number,
     title: String,
     valability: number,
