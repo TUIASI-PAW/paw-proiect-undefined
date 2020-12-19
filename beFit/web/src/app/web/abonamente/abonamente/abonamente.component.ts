@@ -1,16 +1,11 @@
+import { PaginationModel } from './../../../services/models/pagination/pagination.model';
+import { AbonamentPaginatedModel } from './../../../services/models/abonament/abonament.paginated.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-
 import { PageEvent } from '@angular/material/paginator';
-import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-import { AbonamentListModel } from '../../../services/models/abonament/abonament.list.model';
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model';
-
-import * as data from '../../../../assets/static.data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-
+import { AbonamentService } from './../../../services/abonament/abonament.service';
 
 
 @Component({
@@ -20,45 +15,59 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class AbonamenteComponent implements OnInit {
 
-  public list: AbonamentListModel[] = [];
+  public paginationModel: PaginationModel;
   public categorii: CategorieModel[];
-
+  
   public pageEvent!: PageEvent;
-  public length: number = data.lista_abonamente.length;
   public pageSize: number = 10;
   public pageIndex: number = 0;
-  public pageSizeOptions: number[] = [5, 10, 15, 25];
-
+  public pageSizeOptions: number[] = [5, 10, 15, 20, 25];
+  public abonamenteCount: number;
 
   constructor(
     private readonly authenticationService: AuthenticationService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly abonamentService: AbonamentService
   ) {
     if (this.authenticationService.userValue)
       if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
-    for (let i = this.pageSize * (this.pageIndex); i < this.pageSize; i++) {
-      if (i == data.lista_abonamente.length - 1)
-        break;
-      this.list.push(data.lista_abonamente[i]);
-    }
-
-    this.categorii = data.categorii;
+    this.categorii = [{id: 0, text: 'aerobica'}];
   }
+
   public update(event: PageEvent): PageEvent {
-    this.list = [];
-    let start = event.pageSize * (event.pageIndex);
+    let paginationData: AbonamentPaginatedModel = {
+      pageNo: event.pageIndex,
+      pageSize: event.pageSize,
+      sortBy: "id",
+      filter: null
+    };
+    console.log(paginationData);
 
-    for (let i = start; i < event.pageSize + start; i++) {
-      if (i == data.lista_abonamente.length)
-        break;
-      this.list.push(data.lista_abonamente[i]);
-    }
-
+    this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
+      this.paginationModel = response;
+      this.paginationModel.abonamentList.forEach(ab => {
+        ab.image = "data:image/jpeg;base64," + ab.image;
+      });
+    });
     return event;
   }
 
   ngOnInit(): void {
-  }
+    let paginationData: AbonamentPaginatedModel = {
+      pageNo: this.pageIndex,
+      pageSize: this.pageSize,
+      sortBy: "id",
+      filter: null
+    };
 
+    this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
+      this.paginationModel = response;
+      this.paginationModel.abonamentList.forEach(ab => {
+        ab.image = "data:image/jpeg;base64," + ab.image;
+      });
+      this.abonamenteCount = this.paginationModel.dbAbsCount;
+    });
+  }
+  
 }

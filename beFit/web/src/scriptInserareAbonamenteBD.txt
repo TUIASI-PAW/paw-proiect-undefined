@@ -1,0 +1,85 @@
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+0, 
+'2020-12-19', 
+'aerobica', 
+'Aerobica este o formă de exercițiu fizic care combină exercițiile aerobice ritmice cu rutinele de antrenament de întindere și forță cu scopul de a îmbunătăți toate elementele de fitness (flexibilitate, forță musculară și fitness cardio-vascular). De obicei, este însoțit de muzică și poate fi practicat într-un cadru de grup condus de un instructor (profesionist în fitness), deși poate fi realizat solo și fără însoțire muzicală. Cu scopul de a preveni îmbolnăvirea și de a promova condiția fizică, practicienii efectuează diverse rutine care cuprind o serie de exerciții diferite de dans.',
+'2021-02-01',
+null,
+100, 
+'Abonament Aerobică', 
+30
+);
+
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+1, 
+'2020-12-19', 
+'baschet', 
+'Baschetul este unul dintre cele mai răspândite sporturi de echipă din lume; se caracterizează prin finețea, precizia și fantezia exercițiilor tehnice și tactice, prin talia înaltă și calitățile fizice deosebite ale sportivilor, toate acestea implicate într-o luptă sportivă care pretinde spirit de echipă și de sacrificiu, inteligență și rezistență nervoasă.',
+'2021-02-01',
+null,
+100, 
+'Abonament Baschet', 
+30
+);
+
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+2, 
+'2020-12-19', 
+'biliard', 
+'Biliardul este o familie de jocuri ce sunt jucate pe o masă (de obicei verde și cu șase găuri numite buzunarele mesei), cu un băț, numit tac, folosit pentru a lovi bilele, ca acestea să se miște pe suprafața mesei. În anumite contexte, cuvântul "biliard" se referă cu siguranță la unul din jocuri, biliardul englezesc sau biliardul carambole.',
+'2021-02-01',
+null,
+100, 
+'Abonament Biliard', 
+30
+);
+
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+3, 
+'2020-12-19', 
+'bowling', 
+'Bowlingul este un sport în care jucătorii încearcă să obțină puncte rostogolind o bilă pe o suprafață plană (de obicei de lemn sau sintetică), fie într-un număr de jaloane, fie în alte bile-țintă.[1] Există mai multe varietăți de bowling, unul dintre cel mai recente și populare (mai ales în Statele Unite ale Americii) fiind cel cu 10 jaloane.',
+'2021-02-01',
+null,
+100, 
+'Abonament Bowling', 
+30
+);
+
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+4, 
+'2020-12-19', 
+'ciclism', 
+'Ciclismul este, în sensul larg al cuvântului, deplasarea pe sol folosind mijloace de transport puse în mișcare de mușchii omului, cu precădere bicicletele. Ca sport, ciclismul condus de Uniunea Ciclistă Internațională, cu sediul în Elveția. Este împărțit în mai multe genuri: ciclism pe șosea, pe teren accidentat (engleză mountain biking) etc.',
+'2021-02-01',
+null,
+100, 
+'Abonament Ciclism', 
+30
+);
+
+INSERT INTO befit.abonamente
+(id, addedDate, category, description, expirationDate, image, price, title, valability)
+VALUES(
+5, 
+'2020-12-19', 
+'curling', 
+'Curling (pronunțat în română /kắrling/ sau /kárling/, după pronunția din engleză /kərlɪŋ/ sau /kɜː(r)lɪŋ/)[1][2] este un joc sportiv pe echipe, practicat pe o suprafață de gheață. Concurenții a două echipe lansează pe rând pe gheață pietre speciale din granit în direcția țintei, numită „house” (casă). Jocul se trage din Scoția, din prima jumătate a secolului al XVI-lea, când se juca pe iazuri înghețate utilizând pietre simple.',
+'2021-02-01',
+null,
+100, 
+'Abonament Curling', 
+30
+);
+
+

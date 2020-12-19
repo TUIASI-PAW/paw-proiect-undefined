@@ -1,10 +1,8 @@
 package com.proiect.services.abonament;
 
-import com.proiect.entities.Abonament;
 import com.proiect.services.models.abonament.AbonamentFiltersModel;
-
-import java.util.List;
+import com.proiect.services.models.pagination.PaginationModel;
 
 public interface IAbonamentFiltersService {
-    List<Abonament> getAllAbs(AbonamentFiltersModel abonamentFiltersModel);
+    PaginationModel getAllAbs(AbonamentFiltersModel abonamentFiltersModel);
 }
