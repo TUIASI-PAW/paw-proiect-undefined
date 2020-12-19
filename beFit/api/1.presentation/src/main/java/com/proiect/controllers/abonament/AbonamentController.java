@@ -1,4 +1,4 @@
-package com.proiect.controllers;
+package com.proiect.controllers.abonament;
 
 import com.proiect.entities.Abonament;
 import com.proiect.services.abonament.IAbonamentService;
@@ -30,24 +30,27 @@ public class AbonamentController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Abonament> findById(@PathVariable int id) {
         return new ResponseEntity<>(abonamentService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Abonament> insert(@Validated @RequestBody AbonamentModel abonamentModel){
         return new ResponseEntity<>(abonamentService.insert(abonamentModel), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Abonament> update(@PathVariable int id, @Validated @RequestBody
             AbonamentModel abonamentModel) {
-        return new ResponseEntity<>(abonamentService.update(id, abonamentModel), HttpStatus.OK);
+        return new ResponseEntity<>(abonamentService.update(id, abonamentModel), HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(int id) {
+    public void delete(@PathVariable int id) {
         abonamentService.delete(id);
     }
 

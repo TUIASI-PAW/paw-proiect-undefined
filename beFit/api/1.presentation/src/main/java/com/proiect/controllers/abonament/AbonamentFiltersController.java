@@ -1,4 +1,4 @@
-package com.proiect.controllers;
+package com.proiect.controllers.abonament;
 
 import com.proiect.services.abonament.IAbonamentFiltersService;
 import com.proiect.services.models.abonament.AbonamentFiltersModel;
@@ -21,6 +21,7 @@ public class AbonamentFiltersController {
     }
 
     @PostMapping("/pagination")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PaginationModel> getAllAbs(@RequestBody AbonamentFiltersModel abonamentFiltersModel)
     {
         var page = abonamentFiltersService.getAllAbs(abonamentFiltersModel);
