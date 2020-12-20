@@ -25,7 +25,7 @@ export class CreareComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly _ngZone: NgZone, private formBuilder: FormBuilder,
-    private readonly categoryService: CategoryService
+    private readonly categoryService: CategoryService,
     private readonly abonamentService: AbonamentService
   ) {
     this.categoryService.getAll().subscribe(response => { this.categorii = response; })
@@ -66,7 +66,15 @@ export class CreareComponent implements OnInit {
   addAbonament(): void {
     if (this.formGroup.valid) {
       this.abonamentCreation = this.formGroup.getRawValue();
-      this.abonamentService.addAb(this.abonamentCreation).subscribe();
+      this.abonamentService.addAb(this.abonamentCreation).subscribe({
+        next: () => {
+            alert('Abonamentul a fost adăugat cu succes!');
+            this.router.navigate(['admin']);
+        },
+        error: err =>{
+          alert(err.error.message);
+        }
+      });
     }
     else {
       this.isValid = false;
