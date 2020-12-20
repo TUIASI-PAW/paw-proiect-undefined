@@ -1,14 +1,11 @@
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
+import { AbonamentCreateModel } from './../../../services/models/abonament/abonament.create.model';
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-
 import { take } from 'rxjs/operators';
-
-import * as data from "../../../../assets/static.data.json"
-
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model'
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-creare',
@@ -17,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CreareComponent implements OnInit {
   public categorii!: CategorieModel[];
+  public abonamentCreation!: AbonamentCreateModel;
 
   public isValid: boolean = true;
   public url: any;
@@ -25,7 +23,9 @@ export class CreareComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private _ngZone: NgZone, private formBuilder: FormBuilder
+    private _ngZone: NgZone,
+    private formBuilder: FormBuilder,
+    private abonamentService: AbonamentService
   ) {
     this.categorii = data.categorii;
     this.formGroup = this.formBuilder.group({
@@ -62,16 +62,17 @@ export class CreareComponent implements OnInit {
     }
   }
 
-  add(): void {
-    console.log("adsa");
+  addAbonament(): void {
     if (this.formGroup.valid) {
-      console.log(this.formGroup.getRawValue());
+      this.abonamentCreation = this.formGroup.getRawValue();
+      this.abonamentService.addAb(this.abonamentCreation).subscribe();
     }
     else {
       this.isValid = false;
-      console.log('false')
+      console.log('false');
     }
   }
+
   getErrorMessage(formElement: String): String {
     switch (formElement) {
       case 'title': {
@@ -112,7 +113,9 @@ export class CreareComponent implements OnInit {
       }
     }
   }
+
   removeImage(): void {
     this.url = undefined;
   }
+
 }
