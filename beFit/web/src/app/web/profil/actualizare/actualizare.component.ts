@@ -103,10 +103,10 @@ export class ActualizareComponent implements OnInit {
           return 'Pentru a continua, trebuie să introduci parola contului.';
         return '';
       }
-      case 'new_password': {
-        if (this.formGroup.controls.new_password.hasError('minlength'))
+      case 'newPassword': {
+        if (this.formGroup.controls.newPassword.hasError('minlength'))
           return 'Câmpul trebuie să conţină minim 5 caractere.';
-        if (this.formGroup.controls.new_password.hasError('required'))
+        if (this.formGroup.controls.newPassword.hasError('required'))
           return 'Câmpul este obligatoriu.';
         return '';
       }
