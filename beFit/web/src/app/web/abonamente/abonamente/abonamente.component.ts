@@ -19,9 +19,9 @@ export class AbonamenteComponent implements OnInit {
     abonamentList: [],
     dbAbsCount: -1
   }
-  
+
   public categorii: CategorieModel[];
-  
+
   public pageEvent!: PageEvent;
   public pageSize: number = 10;
   public pageIndex: number = 0;
@@ -36,7 +36,7 @@ export class AbonamenteComponent implements OnInit {
     if (this.authenticationService.userValue)
       if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
-    this.categorii = [{id: 0, text: 'aerobica'}];
+    this.categorii = [{ id: 0, text: 'aerobica' }];
 
     let paginationData: AbonamentPaginatedModel = {
       pageNo: this.pageIndex,
@@ -46,11 +46,13 @@ export class AbonamenteComponent implements OnInit {
     };
 
     this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
-      this.paginationModel = response;
-      this.paginationModel.abonamentList.forEach(ab => {
-        ab.image = "data:image/jpeg;base64," + ab.image;
-      });
-      this.abonamenteCount = this.paginationModel.dbAbsCount;
+      if (response.dbAbsCount != -1) {
+        this.paginationModel = response;
+        this.paginationModel.abonamentList.forEach(ab => {
+          ab.image = "data:image/jpeg;base64," + ab.image;
+        });
+        this.abonamenteCount = this.paginationModel.dbAbsCount;
+      }
     });
   }
 
@@ -74,5 +76,5 @@ export class AbonamenteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
 }
