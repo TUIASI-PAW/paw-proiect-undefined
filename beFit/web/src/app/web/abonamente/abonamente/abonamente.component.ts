@@ -6,20 +6,21 @@ import { PageEvent } from '@angular/material/paginator';
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { AbonamentService } from './../../../services/abonament/abonament.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 
 @Component({
   selector: 'app-abonamente',
   templateUrl: './abonamente.component.html',
-  styleUrls: ['./abonamente.component.css']
+  styleUrls: ['./abonamente.component.css'],
+  providers: [AuthenticationService, CategoryService, AbonamentService]
 })
 export class AbonamenteComponent implements OnInit {
 
-  public paginationModel: PaginationModel = {
-    abonamentList: [],
-    dbAbsCount: -1
-  }
+  public isLoadingData = false;
+  public isLoadingCategories = false;
 
+  public paginationModel: PaginationModel;
   public categorii: CategorieModel[];
 
   public pageEvent!: PageEvent;
@@ -31,12 +32,12 @@ export class AbonamenteComponent implements OnInit {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly router: Router,
-    private readonly abonamentService: AbonamentService
+    private readonly abonamentService: AbonamentService,
+    private readonly categoryService: CategoryService
   ) {
     if (this.authenticationService.userValue)
       if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
-    this.categorii = [{ id: 0, text: 'aerobica' }];
 
     let paginationData: AbonamentPaginatedModel = {
       pageNo: this.pageIndex,
@@ -45,15 +46,21 @@ export class AbonamenteComponent implements OnInit {
       filter: null
     };
 
+    this.isLoadingCategories=true;
+    this.categoryService.getAll().subscribe(c=>{
+      this.categorii=c;
+      this.isLoadingCategories=false;
+    });
+
+    this.isLoadingData=true;
     this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
-      if (response.dbAbsCount != -1) {
         this.paginationModel = response;
         this.paginationModel.abonamentList.forEach(ab => {
           ab.image = "data:image/jpeg;base64," + ab.image;
         });
         this.abonamenteCount = this.paginationModel.dbAbsCount;
-      }
-    });
+        this.isLoadingData=false;
+      });
   }
 
   public update(event: PageEvent): PageEvent {

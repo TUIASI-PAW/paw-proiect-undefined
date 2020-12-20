@@ -6,6 +6,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model'
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-creare',
@@ -23,11 +24,11 @@ export class CreareComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private _ngZone: NgZone,
-    private formBuilder: FormBuilder,
-    private abonamentService: AbonamentService
+    private readonly _ngZone: NgZone, private formBuilder: FormBuilder,
+    private readonly categoryService: CategoryService
+    private readonly abonamentService: AbonamentService
   ) {
-    this.categorii = data.categorii;
+    this.categoryService.getAll().subscribe(response => { this.categorii = response; })
     this.formGroup = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),

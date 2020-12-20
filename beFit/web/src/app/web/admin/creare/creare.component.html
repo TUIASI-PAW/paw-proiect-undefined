@@ -26,8 +26,8 @@
                 <mat-label>Categorie</mat-label>
 
                 <mat-select formControlName="category">
-                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.id">
-                        {{categorie.text}}
+                    <mat-option *ngFor="let categorie of categorii; let i =index" [value]="i">
+                        {{categorie.value}}
                     </mat-option>
                 </mat-select>
 
