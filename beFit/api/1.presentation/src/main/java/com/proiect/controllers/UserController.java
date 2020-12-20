@@ -4,9 +4,10 @@ import com.proiect.entities.Role;
 import com.proiect.entities.User;
 import com.proiect.exceptions.UserOperationNotAllowedException;
 import com.proiect.security.JwtTokenProvider;
-import com.proiect.services.authentication.IAuthenticationService;
+import com.proiect.services.models.user.UserDetailsModel;
 import com.proiect.services.models.user.UserPatchModel;
 import com.proiect.services.user.IUserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +21,25 @@ public class UserController {
     private final IUserService userService;
     @Autowired
     private final JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private final ModelMapper modelMapper;
 
-    public UserController(IUserService userService, JwtTokenProvider jwtTokenProvider) {
+    public UserController(IUserService userService, JwtTokenProvider jwtTokenProvider, ModelMapper modelMapper) {
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> getUser(@PathVariable int id, @RequestHeader(value = "Authorization") String Authorization) {
+    public ResponseEntity<UserDetailsModel> getUser(@PathVariable int id, @RequestHeader(value = "Authorization") String Authorization) {
 
         var role = jwtTokenProvider.getRole(Authorization.substring(7)).get(0);
 
         //Admin access
         if (role.get("authority").equals(Role.ROLE_ADMIN.getAuthority())) {
             var user = userService.findById(id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.OK);
         }
 
         //Client access
@@ -45,13 +49,13 @@ public class UserController {
             if(id!=userId) throw new UserOperationNotAllowedException("You can't do that.");
 
             var user = userService.findById(id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.OK);
         }
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<User> update(@PathVariable int id,
+    public ResponseEntity<UserDetailsModel> update(@PathVariable int id,
                                       @Validated @RequestBody UserPatchModel userPatchModel,
                                       @RequestHeader(value = "Authorization") String Authorization){
 
@@ -59,6 +63,6 @@ public class UserController {
         if(id!=userId) throw new UserOperationNotAllowedException("You can't do that.");
 
         var user = this.userService.update(id, userPatchModel);
-        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.ACCEPTED);
     }
 }

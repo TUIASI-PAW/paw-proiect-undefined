@@ -5,11 +5,13 @@ import { ConfirmationDialogService } from '../../shared/components/dialog/dialog
 import * as data from '../../../../assets/static.data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-actualizare',
   templateUrl: './actualizare.component.html',
-  styleUrls: ['./actualizare.component.css']
+  styleUrls: ['./actualizare.component.css'],
+  providers: [UserService]
 })
 export class ActualizareComponent implements OnInit {
 
@@ -19,7 +21,9 @@ export class ActualizareComponent implements OnInit {
   constructor(private confirmationDialogService: ConfirmationDialogService,
     private readonly formBuilder: FormBuilder,
     private readonly authenticationService: AuthenticationService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly userService: UserService,
+
   ) {
     if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
     this.formGroup = this.formBuilder.group({
@@ -31,11 +35,13 @@ export class ActualizareComponent implements OnInit {
       password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       new_password: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
-    // init fields
-    this.formGroup.controls.lastname.setValue(data.user_dummy.lastname);
-    this.formGroup.controls.firstname.setValue(data.user_dummy.firstname);
-    this.formGroup.controls.email.setValue(data.user_dummy.email);
-    this.formGroup.controls.phone.setValue(data.user_dummy.phone);
+    this.userService.get().subscribe(response=>{
+      this.formGroup.controls.lastname.setValue(response.lastname);
+      this.formGroup.controls.firstname.setValue(response.firstname);
+      this.formGroup.controls.email.setValue(response.email);
+      this.formGroup.controls.phone.setValue(response.phone);
+    });
+
   }
 
   public updateProfil() {

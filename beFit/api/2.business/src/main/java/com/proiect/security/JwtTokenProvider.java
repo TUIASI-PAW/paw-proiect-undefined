@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.proiect.entities.Role;
 import com.proiect.exceptions.JwtException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -86,7 +87,7 @@ public class JwtTokenProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException | ExpiredJwtException e) {
             throw new JwtException("Expired or invalid JWT token", HttpStatus.FORBIDDEN);
         }
     }

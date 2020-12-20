@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -34,7 +36,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             httpServletResponse.sendError(ex.getHttpStatus().value(), ex.getMessage());
             return;
         }
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 

@@ -1,6 +1,5 @@
 package com.proiect.configurations;
 
-import com.proiect.entities.Role;
 import com.proiect.security.JwtTokenFilterConfigurer;
 import com.proiect.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +81,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
 
 }

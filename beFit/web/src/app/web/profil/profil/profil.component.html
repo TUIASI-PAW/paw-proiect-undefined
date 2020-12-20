@@ -1,7 +1,6 @@
 <section class="contentContainer">
     <div class="containerProfil">
-
-        <article>
+        <article *ngIf="!isLoading">
             <h3 class="headingDetalii">Datele tale de utilizator</h3>
             <div class="containerUtilizator">
                 <p>Nume: {{userDetails.firstname}}</p>
@@ -14,10 +13,10 @@
             </div>
 
         </article>
-        <article>
+        <article *ngIf="!isLoading">
             <h3 class="headingDetalii">Abonamentele tale:</h3>
             <div class="containerAbonamente">
-                <mat-table [dataSource]="dataSource">
+                <mat-table [dataSource]="userDetails.abonamente">
 
                     <ng-container matColumnDef="title">
                         <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>

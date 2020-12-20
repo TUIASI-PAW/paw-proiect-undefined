@@ -24,6 +24,7 @@
     padding:0px;
 }
 .auth-form-container>a{
+    align-self:center;
     color: #ffa000;
 }
 
