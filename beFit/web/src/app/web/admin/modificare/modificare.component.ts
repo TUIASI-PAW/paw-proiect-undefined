@@ -10,16 +10,15 @@ import { CategorieModel } from '../../../services/models/abonament/abonament.cat
 
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 import { Router } from '@angular/router';
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 
-interface Categorie {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-modificare',
   templateUrl: './modificare.component.html',
-  styleUrls: ['./modificare.component.css']
+  styleUrls: ['./modificare.component.css'],
+  providers: [AbonamentService, CategoryService]
 })
 export class ModificareComponent {
   public categorii!: CategorieModel[];
@@ -31,14 +30,15 @@ export class ModificareComponent {
 
   constructor(
     private readonly router: Router,
-    private confirmationDialogService: ConfirmationDialogService,
-    private _ngZone: NgZone,
-    private formBuilder: FormBuilder) {
+    private readonly confirmationDialogService: ConfirmationDialogService,
+    private readonly _ngZone: NgZone,
+    private readonly formBuilder: FormBuilder,
+    private readonly categoryService: CategoryService) {
     // if (this.userService.getUserData().role != 'ROLE_ADMIN') {
     //   this.router.navigate(['abonamente']);
     // }
     // else {
-    this.categorii = data.categorii;
+    this.categoryService.getAll().subscribe(response => { this.categorii = response; })
     this.formGroup = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),

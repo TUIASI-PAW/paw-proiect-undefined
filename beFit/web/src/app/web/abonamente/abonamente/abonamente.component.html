@@ -1,19 +1,19 @@
 <div class="contentContainer">
 
-    <div class="filtreContainer">
+    <div *ngIf="!isLoadingCategories" class="filtreContainer">
 
         <mat-form-field>
             <mat-label>Alege categoria</mat-label>
             <mat-select>
-                <mat-option *ngFor="let categorie of categorii" [value]="categorie.id">
-                    {{categorie.text}}
+                <mat-option *ngFor="let categorie of categorii; let i = index" [value]="i">
+                    {{categorie.value}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
     </div>
 
-    <div class="abonamenteContainer">
+    <div class="abonamenteContainer" *ngIf="!isLoadingData">
 
         <div *ngFor="let item of paginationModel.abonamentList">
 
