@@ -2,7 +2,6 @@ import { UserUpdateModel } from './../../../services/models/user/user.update.mod
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
-import * as data from '../../../../assets/static.data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
@@ -17,6 +16,7 @@ export class ActualizareComponent implements OnInit {
 
   formGroup: FormGroup;
   public isValid: boolean = true;
+  public apiMsg: String = null;
 
   constructor(private confirmationDialogService: ConfirmationDialogService,
     private readonly formBuilder: FormBuilder,
@@ -31,9 +31,9 @@ export class ActualizareComponent implements OnInit {
       lastname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required, Validators.minLength(10),
-      Validators.maxLength(10)]),
+                                                         Validators.maxLength(10)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      new_password: new FormControl(null, [Validators.required, Validators.minLength(5)])
+      newPassword: new FormControl(null, [Validators.minLength(5)])
     });
     this.userService.get().subscribe(response=>{
       this.formGroup.controls.lastname.setValue(response.lastname);
@@ -48,7 +48,18 @@ export class ActualizareComponent implements OnInit {
     if (this.formGroup.valid) {
       this.isValid = true;
       const data: UserUpdateModel = this.formGroup.getRawValue();
-      console.log(data);
+      this.userService.update(data)
+        .subscribe({
+          next: () => {
+              this.authenticationService.logout();
+          },
+          error: err =>{
+            if(err.status == 400 )
+              this.apiMsg= "Parola introdusă este greşită.";
+            else if(err.status == 409 )
+              this.apiMsg="Email-ul introdus corespunde altui utilizator."
+          }
+        })
     }
     else this.isValid = false;
   }
@@ -89,7 +100,7 @@ export class ActualizareComponent implements OnInit {
         if (this.formGroup.controls.password.hasError('minlength'))
           return 'Câmpul trebuie să conţină minim 5 caractere.';
         if (this.formGroup.controls.password.hasError('required'))
-          return 'Câmpul este obligatoriu.';
+          return 'Pentru a continua, trebuie să introduci parola contului.';
         return '';
       }
       case 'new_password': {
@@ -109,11 +120,10 @@ export class ActualizareComponent implements OnInit {
   }
 
   public openDialog() {
-    this.confirmationDialogService.confirm('', 'Eşti sigur că vrei să salvezi modificările făcute?')
+    this.confirmationDialogService.confirm('', 'Executarea cu succes a acestei acţiuni te va deconecta, eşti sigur că vrei să continui?')
       .then((confirmed) => {
-        console.log('Button:', confirmed);
         if (confirmed)
-          this.updateProfil()
+          this.updateProfil();
       })
       .catch(() => {
         console.log('Dismiss');

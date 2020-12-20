@@ -1,5 +1,6 @@
 .auth-form-container{
     background-color: white;
+    padding-bottom: 30px;
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 3%;
@@ -13,18 +14,18 @@
             0 22.3px 17.9px rgba(0, 0, 0, 0.072),
             0 41.8px 33.4px rgba(0, 0, 0, 0.086),
             0 100px 80px rgba(0, 0, 0, 0.12);
+    text-align: center;
 }
 
 .formular{
     margin: 90px;
-    margin-bottom: 60px;
+    margin-bottom: 0px;
 }
 .input-formular{
     width: 100%;
     padding:0px;
 }
 .auth-form-container>a{
-    align-self:center;
     color: #ffa000;
 }
 

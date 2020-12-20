@@ -7,6 +7,7 @@ public class UserDetailsModel {
     private String lastname;
     private String email;
     private String phone;
+    private double balance;
     Set<UserAbonament> abonamente;
 
     public UserDetailsModel() {
@@ -50,5 +51,13 @@ public class UserDetailsModel {
 
     public void setAbonamente(Set<UserAbonament> abonamente) {
         this.abonamente = abonamente;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

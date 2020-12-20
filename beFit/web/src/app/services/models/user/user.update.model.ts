@@ -4,5 +4,5 @@ export interface UserUpdateModel{
     email:string,
     phone:string,
     password:string,
-    new_password:string
+    newPassword:string
 }

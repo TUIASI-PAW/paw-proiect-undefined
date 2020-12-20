@@ -3,6 +3,7 @@ package com.proiect.entities;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class User {
             = "Password must be between 3 and 50 characters.")
     @NotNull(message = "Password cannot be null.")
     private String password;
+
+    @Column(columnDefinition = "FLOAT DEFAULT 0.0")
+    private double balance;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles;
@@ -111,5 +115,13 @@ public class User {
 
     public void setAbonamente(Set<UserAbonament> abonamente) {
         this.abonamente = abonamente;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

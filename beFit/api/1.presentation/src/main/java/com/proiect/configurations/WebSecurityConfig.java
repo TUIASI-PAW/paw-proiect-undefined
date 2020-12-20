@@ -31,7 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
+                registry.addMapping("/api/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET","POST","PUT", "PATCH","DELETE","OPTIONS")
+                        .allowCredentials(false).maxAge(3600);
             }
         };
     }
@@ -47,10 +50,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/h2-console/**/**").permitAll()
 
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/abonament/**").permitAll()
-                .antMatchers("/api/abonament/filters/pagination/**").permitAll()
+                //AbonamentController Routes
+                .antMatchers(HttpMethod.GET,"/api/abonament/").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/abonament/").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/abonament/{id:[0-9]+}").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/abonament/{id:[0-9]+}").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/api/abonament/{id:[0-9]+}").permitAll()
+
+                //AbonamentFiltersController Routes
+                .antMatchers("/api/abonament/filters/pagination").permitAll()
+
+                //UserController Routes
+                .antMatchers(HttpMethod.GET,"/api/user/{id:[0-9]+}").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}/balance").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/api/user/{id:[0-9]+}/balance").permitAll()
+
+                //AuthController Routes
+                .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
+
+                //CategoryController Routes
                 .antMatchers("/api/category/**").permitAll()
 
                 .anyRequest().authenticated();

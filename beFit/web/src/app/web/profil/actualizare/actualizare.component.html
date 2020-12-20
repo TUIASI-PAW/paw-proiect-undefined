@@ -57,18 +57,21 @@
         </p>
         <p>
             <mat-form-field appearance="standard" class="input-formular">
-                <mat-label *ngIf="!formGroup.controls.new_password.invalid">
+                <mat-label *ngIf="!formGroup.controls.newPassword.invalid">
                     <mat-icon class="validInput">done</mat-icon>
                 </mat-label>
                 <mat-label>Parola nouă</mat-label>
-                <input formControlName="new_password" matInput type="password">
+                <input formControlName="newPassword" matInput type="password">
                 <mat-icon matSuffix>lock</mat-icon>
-                <mat-error *ngIf="formGroup.controls.new_password.invalid">{{getErrorMessage("new_password")}}
+                <mat-error *ngIf="formGroup.controls.newPassword.invalid">{{getErrorMessage("newPassword")}}
                 </mat-error>
             </mat-form-field>
         </p>
         <p class="finalErrorMessageStyle">
             <mat-error *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
+        </p>
+        <p class="finalErrorMessageStyle">
+            <mat-error *ngIf="apiMsg">{{apiMsg}}</mat-error>
         </p>
         <div class="btnContainer">
             <button type="button" mat-stroked-button class="buttonBF btnStyle" (click)="openDialog()">Actualizare

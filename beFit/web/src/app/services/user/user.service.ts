@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { AppUser } from '../models/user/app.user';
 import { UserDetailsModel } from '../models/user/user.details.model';
+import { UserUpdateModel } from '../models/user/user.update.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,13 @@ export class UserService {
 
   public get(): Observable<UserDetailsModel>{
     return this.httpClient.get<UserDetailsModel>(`${this.endpoint}/${this.user.id}`);
+  }
+  public addBalance(): Observable<unknown>
+  {
+    return this.httpClient.patch(`${this.endpoint}/${this.user.id}/balance`,{});
+  }
+  public update(model:UserUpdateModel):Observable<UserDetailsModel>
+  {
+    return this.httpClient.patch<UserDetailsModel>(`${this.endpoint}/${this.user.id}`,model);
   }
 }

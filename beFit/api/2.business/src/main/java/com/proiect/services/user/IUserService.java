@@ -6,4 +6,6 @@ import com.proiect.services.models.user.UserPatchModel;
 public interface IUserService {
     User findById(int id);
     User update(int id, UserPatchModel model);
+
+    void addBalance(int id);
 }
