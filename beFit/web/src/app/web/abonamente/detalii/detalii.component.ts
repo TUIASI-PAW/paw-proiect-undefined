@@ -4,29 +4,36 @@ import { Router } from '@angular/router';
 
 import { AbonamentModel } from '../../../services/models/abonament/abonament.model';
 
-import * as data from '../../../../assets/static.data.json';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
 
 @Component({
   selector: 'app-detalii',
   templateUrl: './detalii.component.html',
-  styleUrls: ['./detalii.component.css']
+  styleUrls: ['./detalii.component.css'],
+  providers: [AuthenticationService, AbonamentService]
 })
 export class DetaliiComponent implements OnInit {
 
   public details: AbonamentModel;
-
+  public isLoading=false;
+  
   constructor(
     private confirmationDialogService: ConfirmationDialogService,
     private readonly authenticationService: AuthenticationService,
-    private readonly router: Router
+    private readonly abonamentService:AbonamentService,
+    private readonly router: Router,
   ) {
     if (this.authenticationService.userValue)
       if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
-    const reqId = this.router.url.split('/').slice(-1)[0];
-    console.log(reqId);
-    this.details = data.detalii_abonament;
+    const id = this.router.url.split('/').slice(-1)[0];
+    this.isLoading=true;
+    this.abonamentService.get(id).subscribe(response=>{
+      console.log(response);
+      this.details=response;
+      this.isLoading=false;
+    })
 
   }
 
