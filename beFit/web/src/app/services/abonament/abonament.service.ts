@@ -1,3 +1,5 @@
+import { AbonamentUpdateModel } from './../models/abonament/abonament.update.model';
+import { AbonamentModel } from './../models/abonament/abonament.model';
 import { AbonamentCreateModel } from './../models/abonament/abonament.create.model';
 import { AbonamentLiteModel } from './../models/abonament/abonament.lite.model';
 import { PaginationModel } from './../models/pagination/pagination.model';
@@ -17,6 +19,10 @@ export class AbonamentService {
     private readonly httpClient: HttpClient,
   ) { }
 
+  public getById(abonamentId: number): Observable<AbonamentModel> {
+    return this.httpClient.get<AbonamentModel>(`${this.endpoint}/${abonamentId}`);
+  }
+
   public getAll(): Observable<AbonamentLiteModel[]> {
     return this.httpClient.get<AbonamentLiteModel[]>(`${this.endpoint}/`);
   }
@@ -31,6 +37,10 @@ export class AbonamentService {
 
   public addAb(data: AbonamentCreateModel): Observable<unknown> {
     return this.httpClient.post(`${this.endpoint}/`, data);
+  }
+
+  public updateAb(abonamentId: number, data: AbonamentUpdateModel): Observable<unknown> {
+    return this.httpClient.put(`${this.endpoint}/${abonamentId}`, data)
   }
 
 }
