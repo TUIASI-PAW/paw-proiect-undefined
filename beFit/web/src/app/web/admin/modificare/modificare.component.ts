@@ -1,13 +1,10 @@
+import { AbonamentUpdateModel } from './../../../services/models/abonament/abonament.update.model';
+import { AbonamentModel } from './../../../services/models/abonament/abonament.model';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-
 import { take } from 'rxjs/operators';
-
-import * as data from "../../../../assets/static.data.json"
-
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model'
-
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
 import { Router } from '@angular/router';
 import { AbonamentService } from 'src/app/services/abonament/abonament.service';
@@ -22,23 +19,22 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class ModificareComponent {
   public categorii!: CategorieModel[];
-
+  public abonamentModel!: AbonamentModel;
+  public abonamentUpdateModel!: AbonamentUpdateModel;
   public isValid: boolean = true;
   public url: any;
-
   public formGroup!: FormGroup;
+  public matSelectCategory: string;
+  public isLoading = false;
 
   constructor(
     private readonly router: Router,
     private readonly confirmationDialogService: ConfirmationDialogService,
     private readonly _ngZone: NgZone,
     private readonly formBuilder: FormBuilder,
-    private readonly categoryService: CategoryService) {
-    // if (this.userService.getUserData().role != 'ROLE_ADMIN') {
-    //   this.router.navigate(['abonamente']);
-    // }
-    // else {
-    this.categoryService.getAll().subscribe(response => { this.categorii = response; })
+    private readonly categoryService: CategoryService,
+    private readonly abonamentService: AbonamentService) {
+
     this.formGroup = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),
@@ -47,14 +43,30 @@ export class ModificareComponent {
       description: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required, Validators.pattern(`^[0-9]+[0-9]*$`)]),
     });
-    this.formGroup.controls['title'].setValue(data.detalii_abonament.title);
-    this.formGroup.controls['category'].setValue(data.detalii_abonament.category);
-    let date = new Date(data.detalii_abonament.expirationDate);
-    this.formGroup.controls['expirationDate'].setValue(date);
-    this.formGroup.controls['valability'].setValue(data.detalii_abonament.valability);
-    this.formGroup.controls['description'].setValue(data.detalii_abonament.description);
-    this.formGroup.controls['price'].setValue(data.detalii_abonament.price);
-    // }
+
+    let routeIdString = this.router.url.split('/')[3];
+    let routeIdNumber: number = +routeIdString;
+
+    this.isLoading = true;
+    this.categoryService.getAll().subscribe(response => {
+      this.categorii = response;
+
+      // get current ab from db using service getByID(id from route)
+      this.abonamentService.getById(routeIdNumber).subscribe(result => {
+        this.abonamentModel = result;
+
+        // filling form data with current ab details
+        this.formGroup.controls['title'].setValue(this.abonamentModel.title);
+        this.formGroup.controls['category'].setValue(this.abonamentModel.category);
+        let date = new Date(this.abonamentModel.expirationDate);
+        this.formGroup.controls['expirationDate'].setValue(date);
+        this.formGroup.controls['valability'].setValue(this.abonamentModel.valability);
+        this.formGroup.controls['description'].setValue(this.abonamentModel.description);
+        this.formGroup.controls['price'].setValue(this.abonamentModel.price);
+
+        this.isLoading = false;
+      })
+    });
   }
 
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
@@ -73,16 +85,6 @@ export class ModificareComponent {
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target?.result?.toString();
       }
-    }
-  }
-
-  add(): void {
-    if (this.formGroup.valid) {
-      console.log(this.formGroup.getRawValue());
-    }
-    else {
-      this.isValid = false;
-      console.log('false')
     }
   }
 
@@ -132,14 +134,34 @@ export class ModificareComponent {
       .then((confirmed) => {
         console.log('Button:', confirmed);
         if (confirmed) {
-          console.log(this.formGroup.getRawValue());
+          
+          let routeIdString = this.router.url.split('/')[3];
+          let routeIdNumber: number = +routeIdString;
+
+          this.abonamentUpdateModel = this.formGroup.getRawValue();
+
+          this.abonamentService.updateAb(routeIdNumber, this.abonamentUpdateModel).subscribe({
+            next: () => {
+              alert('Abonamentul a fost modificat cu succes!');
+              this.router.navigate(['admin']);
+            },
+            error: err => {
+              alert(err.error.message);
+            }
+          });
         }
       })
       .catch(() => {
         console.log('Dismiss');
       });
   }
+
   removeImage(): void {
     this.url = undefined;
   }
+
+  ngOnInit() {
+
+  }
+
 }

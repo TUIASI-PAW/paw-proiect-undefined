@@ -1,4 +1,4 @@
-<section class="auth-form-container">
+<section class="auth-form-container" *ngIf="!isLoading">
     <form class="formular" [formGroup]="formGroup">
         <p>
             <mat-form-field appearance="standard" class="input-formular">
@@ -26,7 +26,7 @@
                 <mat-label>Categorie</mat-label>
 
                 <mat-select formControlName="category">
-                    <mat-option *ngFor="let categorie of categorii; let i =index" [value]="i">
+                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.value">
                         {{categorie.value}}
                     </mat-option>
                 </mat-select>
@@ -35,6 +35,7 @@
 
             </mat-form-field>
         </p>
+
 
         <p>
             <mat-form-field class="datePickerContainer">
@@ -113,7 +114,7 @@
         <mat-error class="formErr" *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
         
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF" (click)="openDialog()">Creează abonament</button>
+            <button type="button" mat-stroked-button class="buttonBF" (click)="openDialog()">Modifică abonament</button>
         </div> <br>
     
     </form>

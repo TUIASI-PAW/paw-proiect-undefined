@@ -2,12 +2,12 @@
 
     <form class="searchform" [formGroup]="formGroup">
         <mat-form-field class="searchbox">
-            <input matInput placeholder="Caută" formControlName="searchInput" (input)="updateAbonamente($event)">
+            <input matInput placeholder="Caută" formControlName="searchInput" (input)="updateAbonamenteWhenSearch($event)">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </form>
 
-    <div class="containerabonamente">
+    <div class="containerabonamente" *ngIf="!isLoading">
         <mat-accordion multi>
             <mat-expansion-panel *ngFor="let abonament of abonamente">
 

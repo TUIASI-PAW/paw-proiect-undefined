@@ -1,7 +1,7 @@
+import { AbonamentLiteModel } from './../../../services/models/abonament/abonament.lite.model';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from '../../shared/components/dialog/dialog.service';
-import * as data from '../../../../assets/static.data.json';
 import { Router } from '@angular/router';
 import { AbonamentService } from 'src/app/services/abonament/abonament.service';
 
@@ -19,7 +19,9 @@ export interface Abonament {
 export class AdminComponent implements OnInit {
 
   public formGroup!: FormGroup;
-  public abonamente!: Abonament[];
+  public abonamente!: AbonamentLiteModel[];
+  public abonamenteCopy!: AbonamentLiteModel[];
+  public isLoading = false;
 
   constructor(
     private readonly router: Router,
@@ -32,23 +34,41 @@ export class AdminComponent implements OnInit {
       searchInput: new FormControl('')
     });
 
-    this.abonamente = data.abonamente_admin;
+    this.getAllAbs();
   }
 
-  public updateAbonamente(event: Event) {
+  public getAllAbs() {
+    this.isLoading = true;
+    this.abonamentService.getAll().subscribe(response => {
+      this.abonamente = response;
+      this.isLoading = false;
+    });
+  }
+
+  public deleteAbonament(id: number) {
+    this.abonamentService.deleteAb(id).subscribe(() => {
+      this.abonamente.forEach((ab, index) => {
+        if (ab.id == id) {
+          this.abonamente.splice(index, 1);
+        }
+      });
+    });
+  }
+
+  public updateAbonamenteWhenSearch(event: Event) {
     let { searchInput } = this.formGroup.getRawValue();
 
     if (searchInput != '') {
-      this.abonamente = [];
+      this.abonamenteCopy = [];
 
-      for (let i = 0; i < data.abonamente_admin.length; i++) {
-        if (data.abonamente_admin[i].title == searchInput) {
-          this.abonamente.push(data.abonamente_admin[i]);
+      for (let i = 0; i < this.abonamente.length; i++) {
+        if (this.abonamente[i].title == searchInput) {
+          this.abonamenteCopy.push(this.abonamente[i]);
         }
       }
     }
     else {
-      this.abonamente = data.abonamente_admin;
+      this.abonamenteCopy = this.abonamente;
     }
   }
 
@@ -57,19 +77,15 @@ export class AdminComponent implements OnInit {
       .then((confirmed) => {
         console.log('Button:', confirmed);
         if (confirmed) {
-          for (let i = 0; i < this.abonamente.length; i++) {
-            if (this.abonamente[i].id == id) {
-              this.abonamente.splice(i, 1);
-            }
-          }
+          this.deleteAbonament(id);
         }
       })
       .catch(() => {
         console.log('Dismiss');
       });
   }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
   }
 
 }
