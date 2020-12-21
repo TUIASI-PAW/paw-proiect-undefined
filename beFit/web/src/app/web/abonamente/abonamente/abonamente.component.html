@@ -1,23 +1,26 @@
 <div class="contentContainer">
 
-    <div *ngIf="!isLoadingCategories" class="filtreContainer">
+    <span class ="topFilters">
+        <span *ngIf="!isLoadingCategories" class="filtreContainer">
 
-        <mat-form-field>
-            <mat-label>Alege categoria</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let categorie of categorii; let i = index" [value]="i">
-                    {{categorie.value}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-    </div>
-
+            <mat-form-field>
+                <mat-label>Alege categoria</mat-label>
+                <mat-select [(value)]="selectedCategory" (selectionChange)="updateByCategory()">
+                    <mat-option *ngFor="let categorie of categorii" [value]="categorie.value">
+                        {{categorie.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </span>
+        <span *ngIf="selectedCategory">
+            <button mat-button class="btnRemoveFilters" (click) ="removeFilters()">Şterge filtre</button>
+        </span>
+    </span>
     <div class="abonamenteContainer" *ngIf="!isLoadingData">
 
         <div *ngFor="let item of paginationModel.abonamentList">
 
-            <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]">
+            <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]" #paginator>
                 <h3>{{item.title}}</h3>
                 <img [src]="item.image" class="imgBF">
                 <div class="abInfoStyle">
@@ -36,12 +39,8 @@
     </div>
 
     <div>
-        <mat-paginator
-            [pageSize]="pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [pageIndex]="pageIndex"
-            [length]="abonamenteCount"
-            (page)="pageEvent = update($event)">
+        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"
+            [length]="abonamenteCount" (page)="pageEvent = update($event)">
         </mat-paginator>
     </div>
 

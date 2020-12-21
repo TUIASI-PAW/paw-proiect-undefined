@@ -25,18 +25,15 @@ public class AbonamentFiltersService implements IAbonamentFiltersService {
     public PaginationModel getAllAbs(AbonamentFiltersModel abonamentFiltersModel) {
         Pageable paging = PageRequest.of(abonamentFiltersModel.getPageNo(), abonamentFiltersModel.getPageSize(), Sort.by(abonamentFiltersModel.getSortBy()).ascending());
         Page<Abonament> pagedResult;
-
-        if(abonamentFiltersModel.getFilter() == null) {
+        long count = -1;
+        if (abonamentFiltersModel.getFilter() == null) {
             pagedResult = abonamentRepository.findAll(paging);
+            count = abonamentRepository.count();
         } else {
             pagedResult = abonamentRepository.findByCategory(abonamentFiltersModel.getFilter(), paging);
+            count = abonamentRepository.countByCategory(abonamentFiltersModel.getFilter());
         }
-
-        if(pagedResult.hasContent()) {
-            return new PaginationModel(pagedResult.getContent(), abonamentRepository.count());
-        } else {
-            return new PaginationModel(null, -1);
-        }
+        return new PaginationModel(pagedResult.getContent(), count);
     }
 
 }

@@ -1,12 +1,13 @@
 import { PaginationModel } from './../../../services/models/pagination/pagination.model';
 import { AbonamentPaginatedModel } from './../../../services/models/abonament/abonament.paginated.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router'
 import { PageEvent } from '@angular/material/paginator';
 import { CategorieModel } from '../../../services/models/abonament/abonament.categorie.model';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { AbonamentService } from './../../../services/abonament/abonament.service';
 import { CategoryService } from 'src/app/services/category/category.service';
+
 
 
 @Component({
@@ -28,6 +29,9 @@ export class AbonamenteComponent implements OnInit {
   public pageIndex: number = 0;
   public pageSizeOptions: number[] = [5, 10, 15, 20, 25];
   public abonamenteCount: number;
+  public selectedCategory:string= null;
+
+
 
   constructor(
     private readonly authenticationService: AuthenticationService,
@@ -64,22 +68,36 @@ export class AbonamenteComponent implements OnInit {
   }
 
   public update(event: PageEvent): PageEvent {
+
     let paginationData: AbonamentPaginatedModel = {
       pageNo: event.pageIndex,
       pageSize: event.pageSize,
-      sortBy: "id",
-      filter: null
+      sortBy: "title",
+      filter: this.selectedCategory
     };
-    console.log(paginationData);
 
     this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
       this.paginationModel = response;
+      this.abonamenteCount= response.dbAbsCount;
       this.paginationModel.abonamentList.forEach(ab => {
         ab.image = "data:image/jpeg;base64," + ab.image;
       });
     });
     return event;
   }
+
+  public updateByCategory(){
+    let pe = new PageEvent();
+    pe.pageIndex=0;
+    pe.pageSize=this.pageSize;
+    this.pageEvent= this.update(pe);
+  }
+
+  public removeFilters():void
+  {
+    this.selectedCategory=null;
+    this.updateByCategory();
+  } 
 
   ngOnInit(): void {
   }

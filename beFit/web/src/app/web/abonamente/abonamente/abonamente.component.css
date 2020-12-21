@@ -76,3 +76,7 @@
 .valabilityStyle>.bottomIcon{
     margin-bottom: 1px;
 }
+.btnRemoveFilters{
+    background-color: transparent !important;
+    border: 0 transparent !important;
+}
