@@ -34,4 +34,7 @@ export class UserService {
   {
     return this.httpClient.patch<UserDetailsModel>(`${this.endpoint}/${this.user.id}`,model);
   }
+  public buy(abId:string):Observable<unknown>{
+    return this.httpClient.post<UserDetailsModel>(`${this.endpoint}/${this.user.id}/abonament/${abId}`,{});
+  }
 }

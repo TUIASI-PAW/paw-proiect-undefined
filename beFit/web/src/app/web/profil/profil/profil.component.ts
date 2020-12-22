@@ -26,7 +26,7 @@ export class ProfilComponent implements OnInit {
 
     this.isLoading=true;
     this.userService.get().subscribe(response=>{
-      this.userDetails= response;
+      this.userDetails = response;
       this.isLoading=false;
     });
   }

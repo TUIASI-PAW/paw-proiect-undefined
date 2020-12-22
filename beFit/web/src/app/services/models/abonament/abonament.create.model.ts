@@ -1,9 +1,9 @@
 export interface AbonamentCreateModel{
-    title: String,
-    category: String,
+    title: string,
+    category: string,
     expirationDate: Date,
     valability: number,
-    desription: String,
+    desription: string,
     price: number,
-    image: String,
+    image: string,
 }

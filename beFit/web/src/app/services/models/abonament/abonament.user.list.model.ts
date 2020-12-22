@@ -1,5 +1,5 @@
 export interface AbonamentUserListModel{
     id: number,
-    title: String,
+    title: string,
     valability: number,
 }

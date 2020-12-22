@@ -1,9 +1,12 @@
 package com.proiect.services.user;
 
 import com.proiect.entities.User;
+import com.proiect.entities.UserAbonament;
+import com.proiect.entities.UserAbonamentSK;
 import com.proiect.exceptions.UserExceptions.UserEmailAlreadyExistsException;
 import com.proiect.exceptions.UserExceptions.UserNotFoundException;
 import com.proiect.repositories.IUserRepository;
+import com.proiect.services.abonament.IAbonamentService;
 import com.proiect.services.models.user.UserPatchModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,10 +21,13 @@ public class UserService implements IUserService {
     @Autowired
     private final IUserRepository userRepository;
     @Autowired
+    private final IAbonamentService abonamentService;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(IUserRepository userRepository, IAbonamentService abonamentService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.abonamentService = abonamentService;
         this.passwordEncoder = passwordEncoder;
     }
 
