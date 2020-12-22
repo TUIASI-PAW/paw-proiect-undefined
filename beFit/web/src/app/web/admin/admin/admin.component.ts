@@ -51,6 +51,7 @@ export class AdminComponent implements OnInit {
       this.abonamente.forEach((ab, index) => {
         if (ab.id == id) {
           this.abonamente.splice(index, 1);
+          this.abonamenteCopy = this.abonamente;
         }
       });
     });
