@@ -1,6 +1,8 @@
 package com.proiect.eHandlers;
 
+import com.proiect.exceptions.UserExceptions.UserAlreadyOwnProductException;
 import com.proiect.exceptions.UserExceptions.UserEmailAlreadyExistsException;
+import com.proiect.exceptions.UserExceptions.UserInsufficientFoundsException;
 import com.proiect.exceptions.UserExceptions.UserNotFoundException;
 import com.proiect.exceptions.UserOperationNotAllowedException;
 import org.springframework.core.Ordered;
@@ -40,5 +42,19 @@ public class HandleUserExceptions {
     public ResponseEntity<ErrorResponseMessage> handleUserOperationNotAllowedException(UserOperationNotAllowedException ex) {
         return new ResponseEntity<>(new ErrorResponseMessage(ex.getMessage()),
                 HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UserInsufficientFoundsException.class)
+    @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
+    public ResponseEntity<ErrorResponseMessage> handleUserInsufficientFoundsException(UserInsufficientFoundsException ex) {
+        return new ResponseEntity<>(new ErrorResponseMessage(ex.getMessage()),
+                HttpStatus.PAYMENT_REQUIRED);
+    }
+
+    @ExceptionHandler(UserAlreadyOwnProductException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponseMessage> handleUserAlreadyOwnProductException(UserAlreadyOwnProductException ex) {
+        return new ResponseEntity<>(new ErrorResponseMessage(ex.getMessage()),
+                HttpStatus.CONFLICT);
     }
 }

@@ -24,6 +24,16 @@ public class UserAbonament {
 
     public UserAbonament() { }
 
+    public UserAbonament(User user, Abonament abonament, int valability) {
+        this.id = new UserAbonamentSK();
+        this.id.setUserId(user.getId());
+        this.id.setAbonamentId(abonament.getId());
+
+        this.user = user;
+        this.abonament = abonament;
+        this.valability = valability;
+    }
+
     public UserAbonamentSK getId() {
         return id;
     }
