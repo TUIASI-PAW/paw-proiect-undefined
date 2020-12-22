@@ -1,7 +1,6 @@
 package com.proiect.controllers;
 
 import com.proiect.entities.Role;
-import com.proiect.entities.User;
 import com.proiect.exceptions.UserOperationNotAllowedException;
 import com.proiect.security.JwtTokenProvider;
 import com.proiect.services.models.user.UserDetailsModel;

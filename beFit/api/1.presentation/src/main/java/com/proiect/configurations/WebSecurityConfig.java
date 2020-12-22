@@ -1,5 +1,6 @@
 package com.proiect.configurations;
 
+import com.proiect.entities.Role;
 import com.proiect.security.JwtTokenFilterConfigurer;
 import com.proiect.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,28 +52,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**/**").permitAll()
 
                 //AbonamentController Routes
-                .antMatchers(HttpMethod.GET,"/api/abonament/").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/abonament/").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/abonament/").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.POST,"/api/abonament/").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .antMatchers(HttpMethod.GET,"/api/abonament/{id:[0-9]+}").permitAll()
-                .antMatchers(HttpMethod.PUT,"/api/abonament/{id:[0-9]+}").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/api/abonament/{id:[0-9]+}").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/abonament/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.DELETE,"/api/abonament/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
 
                 //AbonamentFiltersController Routes
-                .antMatchers("/api/abonament/filters/pagination").permitAll()
+                .antMatchers("/api/abonament/filters/pagination").hasAuthority(Role.ROLE_CLIENT.getAuthority())
 
                 //UserController Routes
-                .antMatchers(HttpMethod.GET,"/api/user/{id:[0-9]+}").permitAll()
-                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}").permitAll()
-                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}/balance").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/user/{id:[0-9]+}").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}/balance").hasAuthority(Role.ROLE_CLIENT.getAuthority())
                 .antMatchers(HttpMethod.OPTIONS,"/api/user/{id:[0-9]+}/balance").permitAll()
+
+                //UserAbonamentController Routes
+                .antMatchers(HttpMethod.PATCH,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").hasAuthority(Role.ROLE_CLIENT.getAuthority())
+                .antMatchers(HttpMethod.DELETE,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").denyAll()
 
                 //AuthController Routes
                 .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
 
                 //CategoryController Routes
-                .antMatchers("/api/category/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/category/").permitAll()
 
-                .anyRequest().authenticated();
+                .anyRequest().denyAll();
 
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }
