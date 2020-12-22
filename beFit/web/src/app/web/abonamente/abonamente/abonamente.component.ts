@@ -50,21 +50,21 @@ export class AbonamenteComponent implements OnInit {
       filter: null
     };
 
-    this.isLoadingCategories=true;
-    this.categoryService.getAll().subscribe(c=>{
-      this.categorii=c;
-      this.isLoadingCategories=false;
+    this.isLoadingCategories = true;
+    this.categoryService.getAll().subscribe(c => {
+      this.categorii = c;
+      this.isLoadingCategories = false;
     });
 
-    this.isLoadingData=true;
+    this.isLoadingData = true;
     this.abonamentService.getAllPaginated(paginationData).subscribe(response => {
-        this.paginationModel = response;
-        this.paginationModel.abonamentList.forEach(ab => {
-          ab.image = "data:image/jpeg;base64," + ab.image;
-        });
-        this.abonamenteCount = this.paginationModel.dbAbsCount;
-        this.isLoadingData=false;
+      this.paginationModel = response;
+      this.paginationModel.abonamentList.forEach(ab => {
+        ab.image = "data:image/jpeg;base64," + ab.image;
       });
+      this.abonamenteCount = this.paginationModel.dbAbsCount;
+      this.isLoadingData = false;
+    });
   }
 
   public update(event: PageEvent): PageEvent {

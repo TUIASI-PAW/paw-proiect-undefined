@@ -5,13 +5,16 @@ import com.proiect.entities.Role;
 import com.proiect.exceptions.UserOperationNotAllowedException;
 import com.proiect.security.JwtTokenProvider;
 import com.proiect.services.abonament.IAbonamentService;
+import com.proiect.services.models.abonament.AbonamentLiteModel;
 import com.proiect.services.models.abonament.AbonamentModel;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -23,16 +26,23 @@ public class AbonamentController {
     private final IAbonamentService abonamentService;
     @Autowired
     private final JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private final ModelMapper modelMapper;
 
-    public AbonamentController(IAbonamentService abonamentService, JwtTokenProvider jwtTokenProvider) {
+    public AbonamentController(IAbonamentService abonamentService, JwtTokenProvider jwtTokenProvider, ModelMapper modelMapper) {
         this.abonamentService = abonamentService;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Abonament>> listAll() {
-        return new ResponseEntity<>(abonamentService.listAll(), HttpStatus.OK);
+    public ResponseEntity<List<AbonamentLiteModel>> listAll(@RequestHeader(value = "Authorization") String Authorization) {
+        var mappedAbs = new LinkedList<AbonamentLiteModel>();
+        for (var abonament:abonamentService.listAll()) {
+                mappedAbs.push(modelMapper.map(abonament, AbonamentLiteModel.class));
+            }
+        return new ResponseEntity<>(mappedAbs, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

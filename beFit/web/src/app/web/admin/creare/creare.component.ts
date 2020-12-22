@@ -1,3 +1,5 @@
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
+import { AbonamentCreateModel } from './../../../services/models/abonament/abonament.create.model';
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -6,7 +8,6 @@ import { CategorieModel } from '../../../services/models/abonament/abonament.cat
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category/category.service';
 
-
 @Component({
   selector: 'app-creare',
   templateUrl: './creare.component.html',
@@ -14,6 +15,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class CreareComponent implements OnInit {
   public categorii!: CategorieModel[];
+  public abonamentCreation!: AbonamentCreateModel;
 
   public isValid: boolean = true;
   public url: any;
@@ -23,7 +25,8 @@ export class CreareComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly _ngZone: NgZone, private formBuilder: FormBuilder,
-    private readonly categoryService: CategoryService
+    private readonly categoryService: CategoryService,
+    private readonly abonamentService: AbonamentService
   ) {
     this.categoryService.getAll().subscribe(response => { this.categorii = response; })
     this.formGroup = this.formBuilder.group({
@@ -60,16 +63,25 @@ export class CreareComponent implements OnInit {
     }
   }
 
-  add(): void {
-    console.log("adsa");
+  addAbonament(): void {
     if (this.formGroup.valid) {
-      console.log(this.formGroup.getRawValue());
+      this.abonamentCreation = this.formGroup.getRawValue();
+      this.abonamentService.addAb(this.abonamentCreation).subscribe({
+        next: () => {
+            alert('Abonamentul a fost adăugat cu succes!');
+            this.router.navigate(['admin']);
+        },
+        error: err =>{
+          alert(err.error.message);
+        }
+      });
     }
     else {
       this.isValid = false;
-      console.log('false')
+      console.log('false');
     }
   }
+
   getErrorMessage(formElement: String): String {
     switch (formElement) {
       case 'title': {
@@ -110,7 +122,9 @@ export class CreareComponent implements OnInit {
       }
     }
   }
+
   removeImage(): void {
     this.url = undefined;
   }
+
 }
