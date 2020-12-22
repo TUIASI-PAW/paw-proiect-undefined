@@ -1,4 +1,4 @@
-INSERT INTO befit.category (value) VALUES('aerobica');
+INSERT INTO befit.category (value) VALUES('aerobic');
 INSERT INTO befit.category (value) VALUES('baschet');
 INSERT INTO befit.category (value) VALUES('biliard');
 INSERT INTO befit.category (value) VALUES('bowling');
@@ -16,5 +16,5 @@ INSERT INTO befit.category (value) VALUES('karate');
 INSERT INTO befit.category (value) VALUES('motociclism');
 INSERT INTO befit.category (value) VALUES('paintball');
 INSERT INTO befit.category (value) VALUES('tenis');
-INSERT INTO befit.category (value) VALUES('tenis-de-masa');
+INSERT INTO befit.category (value) VALUES('tenis-de-masă');
 INSERT INTO befit.category (value) VALUES('volei');

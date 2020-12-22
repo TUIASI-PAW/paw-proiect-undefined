@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AbonamentModel } from '../models/abonament/abonament.model';
 
 @Injectable({
   providedIn: 'root'

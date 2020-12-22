@@ -33,6 +33,7 @@
 .gridImage{
     height: 100%;
     width: 100%;
+    align-items: center;
 }
 .gridImage:hover{
     opacity: 0.93;
