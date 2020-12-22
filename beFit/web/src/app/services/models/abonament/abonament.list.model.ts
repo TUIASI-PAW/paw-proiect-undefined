@@ -1,7 +1,7 @@
 export interface AbonamentListModel{
     id: number,
-    title: String,
+    title: string,
     valability: number,
     price: number,
-    image: String,
+    image: string,
 }

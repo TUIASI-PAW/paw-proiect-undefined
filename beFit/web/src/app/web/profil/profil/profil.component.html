@@ -22,7 +22,7 @@
                     <ng-container matColumnDef="title">
                         <mat-header-cell *matHeaderCellDef> Nume </mat-header-cell>
                         <mat-cell class="cellTitle" *matCellDef="let item"
-                            [routerLink]="['/abonamente/detalii_abonament',item.id]"> {{item.title}} </mat-cell>
+                            [routerLink]="['/abonamente/detalii_abonament',item.abonament.id]"> {{item.abonament.title}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="valability">

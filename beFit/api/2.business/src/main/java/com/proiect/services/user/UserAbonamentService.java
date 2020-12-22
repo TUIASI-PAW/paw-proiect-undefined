@@ -33,7 +33,7 @@ public class UserAbonamentService implements IUserAbonamentService{
             var ua = new UserAbonament(user, ab, ab.getValability());
             repository.save(ua);
         }
-        else throw new UserInsufficientFoundsException("Your can't activate this. Your balance is not sufficient.");
+        else throw new UserInsufficientFoundsException("You can't activate this. Your balance is not sufficient.");
 
     }
 

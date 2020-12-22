@@ -68,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS,"/api/user/{id:[0-9]+}/balance").permitAll()
 
                 //UserAbonamentController Routes
-                .antMatchers(HttpMethod.PATCH,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").hasAuthority(Role.ROLE_CLIENT.getAuthority())
+                .antMatchers(HttpMethod.POST,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").hasAuthority(Role.ROLE_CLIENT.getAuthority())
                 .antMatchers(HttpMethod.DELETE,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").denyAll()
 
                 //AuthController Routes

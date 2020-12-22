@@ -1,4 +1,4 @@
-package com.proiect.controllers;
+package com.proiect.controllers.user;
 
 import com.proiect.exceptions.UserOperationNotAllowedException;
 import com.proiect.security.JwtTokenProvider;
@@ -21,7 +21,7 @@ public class UserAbonamentController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @PatchMapping("/{userId}/abonament/{abId}")
+    @PostMapping("/{userId}/abonament/{abId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity addAbonament(@PathVariable int userId, @PathVariable int abId,
                                        @RequestHeader(value = "Authorization") String Authorization){

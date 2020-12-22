@@ -1,4 +1,4 @@
-package com.proiect.controllers;
+package com.proiect.controllers.user;
 
 import com.proiect.entities.Role;
 import com.proiect.exceptions.UserOperationNotAllowedException;
