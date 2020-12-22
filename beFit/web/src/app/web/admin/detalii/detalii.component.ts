@@ -1,3 +1,4 @@
+import { AbonamentService } from 'src/app/services/abonament/abonament.service';
 import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbonamentModel } from '../../../services/models/abonament/abonament.model';
@@ -11,12 +12,20 @@ export class DetaliiComponent implements OnInit {
 
   public details!: AbonamentModel;
   public redirectId!: string;
+  public redirectIdNumber: number;
+
   constructor(
     private readonly router: Router,
+    private readonly abonamentService: AbonamentService,
   ) {
 
     this.redirectId = this.router.url.split('/').slice(-1)[0];
-    //this.details = data.detalii_abonament;
+    this.redirectIdNumber = +this.redirectId;
+
+    this.abonamentService.getById(this.redirectIdNumber).subscribe(response => {
+      this.details = response;
+      this.details.image = "data:image/jpeg;base64," + this.details.image;
+    })
   }
 
   ngOnInit(): void {

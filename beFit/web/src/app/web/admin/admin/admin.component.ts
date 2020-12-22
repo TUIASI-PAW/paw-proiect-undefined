@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
     this.isLoading = true;
     this.abonamentService.getAll().subscribe(response => {
       this.abonamente = response;
+      this.abonamenteCopy = this.abonamente;
       this.isLoading = false;
     });
   }
