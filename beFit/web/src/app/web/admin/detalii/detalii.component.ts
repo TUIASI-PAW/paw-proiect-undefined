@@ -13,6 +13,7 @@ export class DetaliiComponent implements OnInit {
   public details!: AbonamentModel;
   public redirectId!: string;
   public redirectIdNumber: number;
+  public isLoading = false;
 
   constructor(
     private readonly router: Router,
@@ -22,9 +23,11 @@ export class DetaliiComponent implements OnInit {
     this.redirectId = this.router.url.split('/').slice(-1)[0];
     this.redirectIdNumber = +this.redirectId;
 
+    this.isLoading = true;
     this.abonamentService.getById(this.redirectIdNumber).subscribe(response => {
       this.details = response;
       this.details.image = "data:image/jpeg;base64," + this.details.image;
+      this.isLoading = false;
     })
   }
 
