@@ -3,12 +3,12 @@ INSERT INTO befit.abonamente
 VALUES(
 0, 
 '2020-12-19', 
-'aerobica', 
+'aerobic', 
 'Aerobica este o formă de exercițiu fizic care combină exercițiile aerobice ritmice cu rutinele de antrenament de întindere și forță cu scopul de a îmbunătăți toate elementele de fitness (flexibilitate, forță musculară și fitness cardio-vascular). De obicei, este însoțit de muzică și poate fi practicat într-un cadru de grup condus de un instructor (profesionist în fitness), deși poate fi realizat solo și fără însoțire muzicală. Cu scopul de a preveni îmbolnăvirea și de a promova condiția fizică, practicienii efectuează diverse rutine care cuprind o serie de exerciții diferite de dans.',
 '2021-02-01',
 null,
 100, 
-'Abonament Aerobică', 
+'Abonament Aerobic', 
 30
 );
 
@@ -255,7 +255,7 @@ INSERT INTO befit.abonamente
 VALUES(
 18, 
 '2020-12-19', 
-'tenis-de-masa', 
+'tenis-de-masă', 
 'Tenisul de masă sau ping-pong este un sport în care doi sau patru jucători lovesc o minge ușoară de la unii la alții cu ajutorul unor palete. Jocul are loc pe o masă separată în două de un fileu. Un jucător trebuie să lase mingea jucată spre el să cadă o singură dată pe partea sa de masă și trebuie să o trimită înapoi pe partea de masă a adversarului.',
 '2021-02-01',
 null,

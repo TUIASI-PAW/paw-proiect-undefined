@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="homeDetailsContainer">
-        <mat-grid-list cols="3" rowHeight="2:2">
+        <mat-grid-list cols="3">
             <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
                 [style.background]="tile.color">
                 <img *ngIf="tile.imagesrc != ''" src={{tile.imagesrc}} class="gridImage">
