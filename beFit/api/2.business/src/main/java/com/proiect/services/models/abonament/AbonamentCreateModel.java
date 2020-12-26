@@ -6,10 +6,8 @@ import javax.persistence.Basic;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
-import java.util.Calendar;
 
-public class AbonamentModel {
-
+public class AbonamentCreateModel {
     @Size(min = 5, max = 100, message
             = "Titlul trebuie să aibă lungimea între 5 şi 100 de caractere.")
     @NotNull(message = "Titlul nu poate fi null.")
@@ -34,14 +32,13 @@ public class AbonamentModel {
     @NotNull(message = "Preţul nu poate fi nul.")
     private int price;
 
-    private byte[] image;
-
     @Size(min = 3, max = 2000, message
             = "Descrierea trebuie să aibă lungimea între 3 şi 2000 de caractere.")
     @NotNull(message = "Descrierea nu poate fi nulă.")
     private String description;
 
-    public AbonamentModel() { }
+    public AbonamentCreateModel() {
+    }
 
     public String getTitle() {
         return title;
@@ -80,7 +77,7 @@ public class AbonamentModel {
     }
 
     public void setAddedDate(Date addedDate) {
-        this.addedDate = new Date(Calendar.getInstance().getTime().getTime());
+        this.addedDate = addedDate;
     }
 
     public int getPrice() {
@@ -89,14 +86,6 @@ public class AbonamentModel {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public String getDescription() {

@@ -17,6 +17,8 @@ export class ActualizareComponent implements OnInit {
   formGroup: FormGroup;
   public isValid: boolean = true;
   public apiMsg: String = null;
+  public isWaitingForApiResponse = false;
+
 
   constructor(private confirmationDialogService: ConfirmationDialogService,
     private readonly formBuilder: FormBuilder,
@@ -45,19 +47,28 @@ export class ActualizareComponent implements OnInit {
   }
 
   public updateProfil() {
+    if(this.formGroup.controls['newPassword'].value=='')
+      this.formGroup.controls.newPassword.setValue(null);
     if (this.formGroup.valid) {
+      this.apiMsg=null;
       this.isValid = true;
+
       const data: UserUpdateModel = this.formGroup.getRawValue();
+      this.isWaitingForApiResponse=true;
+
       this.userService.update(data)
         .subscribe({
           next: () => {
-              this.authenticationService.logout();
+            this.isWaitingForApiResponse=false;
+            this.authenticationService.logout();
           },
           error: err =>{
+            this.isWaitingForApiResponse=false;
             if(err.status == 400 )
               this.apiMsg= "Parola introdusă este greşită.";
             else if(err.status == 409 )
               this.apiMsg="Email-ul introdus corespunde altui utilizator."
+            else this.apiMsg= err.error.message;
           }
         })
     }
@@ -125,8 +136,8 @@ export class ActualizareComponent implements OnInit {
         if (confirmed)
           this.updateProfil();
       })
-      .catch(() => {
-        console.log('Dismiss');
+      .catch((err) => {
+        console.log(err);
       });
   }
   ngOnInit(): void {

@@ -5,5 +5,4 @@ export interface AbonamentCreateModel{
     valability: number,
     desription: string,
     price: number,
-    image: string,
 }

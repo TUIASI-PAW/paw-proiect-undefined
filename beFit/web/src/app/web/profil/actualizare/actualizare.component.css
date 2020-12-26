@@ -40,11 +40,6 @@
     margin-bottom: 5%;
 }
 
-.finalErrorMessageStyle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .validInput{
     color: #ffc12e;

@@ -15,6 +15,7 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog'
 import { ConfirmationDialogService } from '../shared/components/dialog/dialog.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatIconModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers:[
     ConfirmationDialogService,

@@ -88,7 +88,7 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException | ExpiredJwtException e) {
-            throw new JwtException("Expired or invalid JWT token", HttpStatus.FORBIDDEN);
+            throw new JwtException("Token expirat sau invalid.", HttpStatus.FORBIDDEN);
         }
     }
 

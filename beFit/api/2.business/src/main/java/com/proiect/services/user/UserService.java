@@ -1,8 +1,6 @@
 package com.proiect.services.user;
 
 import com.proiect.entities.User;
-import com.proiect.entities.UserAbonament;
-import com.proiect.entities.UserAbonamentSK;
 import com.proiect.exceptions.UserExceptions.UserEmailAlreadyExistsException;
 import com.proiect.exceptions.UserExceptions.UserNotFoundException;
 import com.proiect.repositories.IUserRepository;
@@ -33,19 +31,19 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(int id) {
-        return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Requested user does not exist."));
+        return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Utilizatorul nu există."));
     }
 
     @Override
     public User update(int id, UserPatchModel model) {
-        var user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Requested user does not exist."));
+        var user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Utilizatorul nu există."));
 
         if(!passwordEncoder.matches(model.getPassword(),user.getPassword()))
-            throw new BadCredentialsException("Credentials don't match.");
+            throw new BadCredentialsException("Email sau parolă greşite.");
 
         var dbo= userRepository.findByEmail(model.getEmail());
         if(dbo.isPresent())
-            if(dbo.get().getId()!=id) throw new UserEmailAlreadyExistsException("This email already exists.");
+            if(dbo.get().getId()!=id) throw new UserEmailAlreadyExistsException("Email-ul este deja în uz.");
 
         if(model.getFirstname()!=null)
             user.setFirstname(model.getFirstname());
@@ -66,7 +64,7 @@ public class UserService implements IUserService {
     }
     @Override
     public void addBalance(int id){
-        var user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Requested user does not exist."));
+        var user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Utilizatorul nu există."));
         BigDecimal newBalance= new BigDecimal(Math.random() * 50).setScale(3, RoundingMode.HALF_EVEN);
         user.setBalance(user.getBalance()+ newBalance.setScale(3).doubleValue());
         var newUser = userRepository.save(user);

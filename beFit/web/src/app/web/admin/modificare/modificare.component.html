@@ -112,9 +112,14 @@
         </div>
 
         <mat-error class="formErr" *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
+
+        <p class="finalErrorMessageStyle">
+            <mat-error *ngIf="apiMsg">{{apiMsg}}</mat-error>
+        </p>
         
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF" (click)="openDialog()">Modifică abonament</button>
+            <mat-spinner *ngIf="isWaitingForApiResponse" diameter="30"></mat-spinner>
+            <button *ngIf="!isWaitingForApiResponse" type="button" mat-stroked-button class="buttonBF" (click)="openDialog()">Modifică abonament</button>
         </div> <br>
     
     </form>

@@ -20,7 +20,7 @@
 
         <div *ngFor="let item of paginationModel.abonamentList">
 
-            <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]" #paginator>
+            <mat-card class="abonament" [routerLink]="['/abonamente/detalii_abonament',item.id]">
                 <h3>{{item.title}}</h3>
                 <img [src]="item.image" class="imgBF">
                 <div class="abInfoStyle">

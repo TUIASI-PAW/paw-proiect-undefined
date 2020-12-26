@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE,"/api/abonament/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
 
                 //AbonamentFiltersController Routes
-                .antMatchers("/api/abonament/filters/pagination").hasAuthority(Role.ROLE_CLIENT.getAuthority())
+                .antMatchers("/api/abonament/filters/pagination").permitAll()
 
                 //UserController Routes
                 .antMatchers(HttpMethod.GET,"/api/user/{id:[0-9]+}").authenticated()
@@ -77,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //CategoryController Routes
                 .antMatchers(HttpMethod.GET,"/api/category/").permitAll()
 
-                .anyRequest().denyAll();
+                .anyRequest().authenticated();
 
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }

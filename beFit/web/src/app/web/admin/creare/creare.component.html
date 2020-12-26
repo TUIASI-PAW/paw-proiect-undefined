@@ -49,7 +49,8 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
 
-                <mat-error *ngIf="formGroup.controls.expirationDate.invalid">{{getErrorMessage("expirationDate")}}</mat-error>
+                <mat-error *ngIf="formGroup.controls.expirationDate.invalid">{{getErrorMessage("expirationDate")}}
+                </mat-error>
 
             </mat-form-field>
         </p>
@@ -102,19 +103,26 @@
         </p>
 
         <div class="imgInputContainer">
-            <button title="Adaugă o imagine abonamentului." mat-fab type="button" (click)="fileInput.click()" class="photoBtn">
+            <button title="Adaugă o imagine abonamentului." mat-fab type="button" (click)="fileInput.click()"
+                class="photoBtn">
                 <mat-icon matSuffix>add_a_photo</mat-icon>
                 <input #fileInput type="file" (change)="onSelectFile($event)" style="display:none;" />
             </button> <br><br>
             <img [src]="url" width=100%> <br />
-            <button *ngIf="url" type="button" mat-raised-button color="warn" (click) ="removeImage()">Şterge poza</button>
+            <button *ngIf="url" type="button" mat-raised-button color="warn" (click)="removeImage()">Şterge
+                poza</button>
         </div>
 
         <mat-error class="formErr" *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
-        
+        <p class="finalErrorMessageStyle">
+            <mat-error *ngIf="apiMsg">{{apiMsg}}</mat-error>
+        </p>
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF" (click)="addAbonament()">Creează abonament</button>
+            <mat-spinner *ngIf="isWaitingForApiResponse" diameter="30"></mat-spinner>
+            <button *ngIf="!isWaitingForApiResponse" type="button" mat-stroked-button class="buttonBF"
+                (click)="addAbonament()">Creează abonament</button> <br/>
         </div> <br>
-    
+
+
     </form>
 </section>

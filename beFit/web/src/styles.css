@@ -85,3 +85,11 @@ button:focus{
         padding: 10px;
     }
 }
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ffc12e;
+}
+.finalErrorMessageStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

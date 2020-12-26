@@ -18,8 +18,11 @@ export class DetaliiComponent implements OnInit {
 
   public details: AbonamentModel;
   public isLoading=false;
+  public isAuth = false;
+
   private id:string;
   
+
   constructor(
     private readonly confirmationDialogService: ConfirmationDialogService,
     private readonly authenticationService: AuthenticationService,
@@ -30,10 +33,12 @@ export class DetaliiComponent implements OnInit {
     if (this.authenticationService.userValue)
       if (this.authenticationService.getUserData().role == 'ROLE_ADMIN') this.router.navigate(['admin']);
 
+    this.isAuth = this.authenticationService.getUserData() != null;
     this.id = this.router.url.split('/').slice(-1)[0];
     this.isLoading=true;
     this.abonamentService.get(this.id).subscribe(response=>{
       this.details=response;
+      this.details.image = "data:image/jpeg;base64," + this.details.image;
       this.isLoading=false;
     })
 
@@ -47,13 +52,7 @@ export class DetaliiComponent implements OnInit {
             next: ()=>{
                 alert('Felicitări, ai activat acest abonament!');
             },
-            error: err=>{
-              if(err.error.message == `You can't activate this. Your balance is not sufficient.`)
-                alert(`Balans insuficient.`);
-              else if(err.error.message == `You already have that.`)
-              alert('Acest abonament este deja deţinut.');
-              else alert(err.error.message);
-            }
+            error: err=>{alert(err.error.message);}
           });
         }
         else {

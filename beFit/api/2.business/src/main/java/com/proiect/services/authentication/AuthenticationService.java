@@ -32,7 +32,7 @@ public class AuthenticationService implements IAuthenticationService{
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         final var user = userRepository
                 .findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("Requested user could not be found."));
+                .orElseThrow(()-> new UsernameNotFoundException("Utilizatorul cerut nu s-a găsit."));
 
         return jwtTokenProvider.createToken(username, user.getId(), user.getRoles());
 
@@ -45,7 +45,7 @@ public class AuthenticationService implements IAuthenticationService{
             userRepository.save(user);
             return jwtTokenProvider.createToken(user.getEmail(), user.getId(), user.getRoles());
         } else {
-            throw new UserEmailAlreadyExistsException("Email is already in use");
+            throw new UserEmailAlreadyExistsException("Email-ul este deja în uz.");
         }
     }
 }

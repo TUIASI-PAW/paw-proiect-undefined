@@ -8,6 +8,7 @@ import { CategorieModel } from '../../../services/models/abonament/abonament.cat
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category/category.service';
 
+
 @Component({
   selector: 'app-creare',
   templateUrl: './creare.component.html',
@@ -15,12 +16,16 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class CreareComponent implements OnInit {
   public categorii!: CategorieModel[];
-  public abonamentCreation!: AbonamentCreateModel;
 
   public isValid: boolean = true;
   public url: any;
+  public file: File;
 
   public formGroup!: FormGroup;
+
+  public isWaitingForApiResponse = false;
+  public apiMsg:string = null;
+
 
   constructor(
     private readonly router: Router,
@@ -42,7 +47,6 @@ export class CreareComponent implements OnInit {
 
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
     this._ngZone.onStable.pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
@@ -53,33 +57,36 @@ export class CreareComponent implements OnInit {
 
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
+
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.readAsDataURL(event.target.files[0]);
+      this.file = event.target.files[0];
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
+      reader.onload = (event) => {
         this.url = event.target?.result?.toString();
       }
+
     }
   }
 
   addAbonament(): void {
     if (this.formGroup.valid) {
-      this.abonamentCreation = this.formGroup.getRawValue();
-      this.abonamentService.addAb(this.abonamentCreation).subscribe({
+      this.apiMsg=null;
+      let submittedData: AbonamentCreateModel = this.formGroup.getRawValue();
+      this.isWaitingForApiResponse = true;
+      this.abonamentService.addAb(submittedData, this.file).subscribe({
         next: () => {
-            alert('Abonamentul a fost adăugat cu succes!');
-            this.router.navigate(['admin']);
+          this.isWaitingForApiResponse = false;
+          this.router.navigate(['admin']);
         },
-        error: err =>{
-          alert(err.error.message);
+        error: err => {
+          this.isWaitingForApiResponse = false;
+          this.apiMsg = err.error.message;
         }
       });
     }
-    else {
-      this.isValid = false;
-      console.log('false');
-    }
+    else this.isValid = false;
   }
 
   getErrorMessage(formElement: String): String {

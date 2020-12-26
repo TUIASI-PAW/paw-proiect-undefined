@@ -16,6 +16,9 @@ export class AutentificareComponent implements OnInit {
   public formGroup: FormGroup;
   public isValid: boolean = true;
 
+  public isWaitingForApiResponse = false;
+  public apiMsg:string = null;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
@@ -32,22 +35,29 @@ export class AutentificareComponent implements OnInit {
   ngOnInit(): void {
   }
   signin(): void {
+    this.apiMsg=null;
     if (this.formGroup.invalid) return;
 
     const user: UserAuthModel = this.formGroup.getRawValue();
+    this.isWaitingForApiResponse=true;
     this.authenticationService.signin(user)
       .pipe(first())
       .subscribe({
         next: () => {
-          if (this.authenticationService.getUserData().role == 'ROLE_ADMIN')
+          if (this.authenticationService.getUserData().role == 'ROLE_ADMIN'){
             this.router.navigate(['admin']);
+          }
           else {
+            this.isWaitingForApiResponse=false;
             const url = this.route.snapshot.queryParams['returnUrl'] || '/';
             this.router.navigateByUrl(url);
           }
         },
         error: err => {
-          console.log(err);
+          this.isWaitingForApiResponse=false;
+          if(err.error.message == 'Bad credentials')
+            this.apiMsg='Email-ul sau parola sunt greşite.'
+          else this.apiMsg=err.error.message;
         }
       })
 

@@ -72,9 +72,10 @@
         </p>
         <p class="finalErrorMessageStyle">
             <mat-error *ngIf="apiMsg">{{apiMsg}}</mat-error>
+            <mat-spinner *ngIf="isWaitingForApiResponse" diameter="30"></mat-spinner>
         </p>
         <div class="btnContainer">
-            <button type="button" mat-stroked-button class="buttonBF btnStyle" (click)="openDialog()">Actualizare
+            <button *ngIf="!isWaitingForApiResponse" type="button" mat-stroked-button class="buttonBF btnStyle" (click)="openDialog()">Actualizare
                 date</button>
         </div>
     </form>

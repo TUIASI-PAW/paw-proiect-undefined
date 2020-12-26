@@ -17,6 +17,9 @@ export class InregistrareComponent {
   public formGroup: FormGroup;
   public isValid: boolean = true;
 
+  public isWaitingForApiResponse = false;
+  public apiMsg:string = null;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
@@ -36,16 +39,20 @@ export class InregistrareComponent {
   }
   public register() {
     if (this.formGroup.valid) {
+      this.apiMsg=null;
       this.isValid = true;
       const data: UserRegisterModel = this.formGroup.getRawValue();
+      this.isWaitingForApiResponse=true;
       this.authenticationService.signup(data)
         .pipe(first())
         .subscribe({
           next: () => {
+            this.isWaitingForApiResponse=false;
             this.router.navigateByUrl('/');
           },
           error: err => {
-            console.log(err);
+            this.isWaitingForApiResponse=false;
+            this.apiMsg= err.error.message;
           }
         })
     }

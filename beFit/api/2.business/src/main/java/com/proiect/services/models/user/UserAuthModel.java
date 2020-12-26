@@ -5,13 +5,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserAuthModel {
-    @Email(message = "Email should be valid.")
-    @NotNull(message = "Email cannot be null.")
+    @Email(message = "Email-ul nu este valid.")
+    @NotNull(message = "Email-ul nu poate fi nul.")
     private String email;
 
-    @Size(min = 3, max = 150, message
-            = "Password must be between 3 and 50 characters.")
-    @NotNull(message = "Password cannot be null.")
+    @Size(min = 5, max = 150, message
+            = "Parola trebuie să aibă lungimea între 5 şi 150 de caractere.")
+    @NotNull(message = "Parola nu poate fi nulă.")
     private String password;
 
     public UserAuthModel() {

@@ -16,7 +16,7 @@
             </p> <br>
 
             <div class="btnContainer">
-                <button mat-stroked-button class="buttonBF btnStyle" (click) ="openDialog()">Cumpără</button>
+                <button *ngIf="isAuth" mat-stroked-button class="buttonBF btnStyle" (click) ="openDialog()">Cumpără</button>
             </div>
         </article>
     </div>

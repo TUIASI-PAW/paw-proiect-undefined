@@ -27,14 +27,14 @@ public class AbonamentService implements IAbonamentService {
     public List<Abonament> listAll() {
         if(abonamentRepository.count() > 0)
             return (List<Abonament>) abonamentRepository.findAll();
-        else throw new AbonamentNotFoundException("No record found.");
+        else throw new AbonamentNotFoundException("Nu s-a găsit nimic.");
     }
 
     @Override
     public Abonament findById(int id) {
         if(abonamentRepository.findById(id).isPresent())
             return abonamentRepository.findById(id).get();
-        else throw new AbonamentNotFoundException("Abonament does not exists.");
+        else throw new AbonamentNotFoundException("Abonamentul nu există.");
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AbonamentService implements IAbonamentService {
             return abonament;
         }
         else {
-            throw new AbonamentNotFoundException("Abonament Id not found.");
+            throw new AbonamentNotFoundException("Abonamentul nu există.");
         }
     }
 
@@ -70,7 +70,7 @@ public class AbonamentService implements IAbonamentService {
             abonamentRepository.deleteById(id);
         }
         else {
-            throw new AbonamentNotFoundException("Abonament Id not found.");
+            throw new AbonamentNotFoundException("Abonament nu există.");
         }
     }
 

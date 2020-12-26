@@ -59,31 +59,19 @@ export class AdminComponent implements OnInit {
 
   public updateAbonamenteWhenSearch(event: Event) {
     let { searchInput } = this.formGroup.getRawValue();
-
     if (searchInput != '') {
       this.abonamenteCopy = [];
-
-      for (let i = 0; i < this.abonamente.length; i++) {
-        if (this.abonamente[i].title == searchInput) {
-          this.abonamenteCopy.push(this.abonamente[i]);
-        }
-      }
+      this.abonamente.forEach((item) => {
+        if (item.title.includes(searchInput)) this.abonamenteCopy.push(item);
+      });
     }
-    else {
-      this.abonamenteCopy = this.abonamente;
-    }
+    else this.abonamenteCopy = this.abonamente;
   }
 
   public openDialog(title: string, id: number) {
     this.confirmationDialogService.confirm('', `Ştergi abonamentul: ${title}?`)
-      .then((confirmed) => {
-        console.log('Button:', confirmed);
-        if (confirmed) {
-          this.deleteAbonament(id);
-        }
-      })
+      .then((confirmed) => { this.deleteAbonament(id); })
       .catch(() => {
-        console.log('Dismiss');
       });
   }
 

@@ -26,14 +26,14 @@ public class UserAbonamentService implements IUserAbonamentService{
     public void add(int userId, int abId) {
         var user = this.userService.findById(userId);
         var ab = this.abonamentService.findById(abId);
-        if(repository.existsByUserIdAndAbonamentId(userId, abId)) throw new UserAlreadyOwnProductException("You already have that.");
+        if(repository.existsByUserIdAndAbonamentId(userId, abId)) throw new UserAlreadyOwnProductException("Ai activat deja acest abonament.");
         if(user.getBalance()>=ab.getPrice())
         {
             user.setBalance(user.getBalance()-ab.getPrice());
             var ua = new UserAbonament(user, ab, ab.getValability());
             repository.save(ua);
         }
-        else throw new UserInsufficientFoundsException("You can't activate this. Your balance is not sufficient.");
+        else throw new UserInsufficientFoundsException("Nu poţi face asta, balans insuficient.");
 
     }
 

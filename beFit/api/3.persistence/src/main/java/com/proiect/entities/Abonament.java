@@ -17,35 +17,35 @@ public class Abonament {
     private int id;
 
     @Size(min = 5, max = 100, message
-            = "Abonament title must contain between 5 and 100 characters.")
-    @NotNull(message = "Abonament title cannot be null.")
+            = "Titlul trebuie să aibă lungimea între 5 şi 100 de caractere.")
+    @NotNull(message = "Titlul nu poate fi null.")
     private String title;
 
     @Size(min = 3, max = 50, message
-            = "Category must contain between 3 and 50 characters.")
-    @NotNull(message = "Category cannot be null.")
+            = "Categoria trebuie să aibă lungimea între 3 şi 50 de caractere.")
+    @NotNull(message = "Categoria nu poate fi nulă.")
     private String category;
 
-    @NotNull(message = "Valability cannot be null.")
+    @NotNull(message = "Valabilitatea nu poate fi nulă.")
     private int valability;
 
     @Basic
-    @NotNull(message = "Expiration date cannot be null.")
+    @NotNull(message = "Data expirării nu poate fi nulă.")
     private Date expirationDate;
 
     @Basic
-    @NotNull(message = "Added date cannot be null.")
+    @NotNull(message = "")
     private Date addedDate;
 
-    @NotNull(message = "Price cannot be null.")
+    @NotNull(message = "Preţul nu poate fi nul.")
     private int price;
 
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Size(min = 3, max = 2000, message
-            = "Description must contain between 3 and 2000 characters.")
-    @NotNull(message = "Description cannot be null.")
+            = "Descrierea trebuie să aibă lungimea între 3 şi 2000 de caractere.")
+    @NotNull(message = "Descrierea nu poate fi nulă.")
     private String description;
 
     @OneToMany(mappedBy = "user")

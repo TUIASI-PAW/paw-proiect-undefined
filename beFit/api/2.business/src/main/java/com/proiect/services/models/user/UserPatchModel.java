@@ -1,33 +1,31 @@
 package com.proiect.services.models.user;
 
-import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserPatchModel {
     @Size(min = 3, max = 30, message
-            = "First name must be between 3 and 30 characters.")
+            = "Prenumele trebuie să aibă lungimea între 3 şi 30 de caractere")
     private String firstname;
 
     @Size(min = 3, max = 30, message
-            = "Last name must be between 3 and 30 characters.")
+            = "Numele trebuie să aibă lungimea între 3 şi 30 de caractere")
     private String lastname;
 
-    @Email(message = "Email should be valid.")
+    @Email(message = "Email-ul nu este valid.")
     private String email;
 
-    @Size(min = 10, max = 10, message
-            = "Phone number must have 10 characters.")
+    @Size(min = 10, max = 10,
+            message = "Numărul de telefon trebuie să conţină 10 caractere.")
     private String phone;
 
-    @Size(min = 3, max = 150, message
-            = "Password must be between 3 and 50 characters.")
+    @Size(min = 5, max = 150, message
+            = "Parola trebuie să aibă lungimea între 5 şi 150 de caractere.")
     private String password;
 
-    @Size(min = 3, max = 150, message
-            = "Password must be between 3 and 50 characters.")
+    @Size(min = 5, max = 150, message
+            = "Parola trebuie să aibă lungimea între 5 şi 150 de caractere.")
     private String newPassword;
 
     public UserPatchModel() {

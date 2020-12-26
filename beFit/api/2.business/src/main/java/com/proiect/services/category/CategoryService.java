@@ -26,20 +26,20 @@ public class CategoryService implements ICategoryService{
     public Category insert(Category category) {
 
         var dbo = categoryRepository.findByValue(category.getValue());
-        if(dbo.isPresent()) throw new CategoryAlreadyExistsException("Submitted category value already exists.");
+        if(dbo.isPresent()) throw new CategoryAlreadyExistsException("Categoria introdusă deja există.");
 
         return categoryRepository.save(category);
     }
 
     @Override
     public void delete(String value) {
-        var category = categoryRepository.findByValue(value).orElseThrow(() -> new CategoryNotExistsException("Requested category does not exist."));
+        var category = categoryRepository.findByValue(value).orElseThrow(() -> new CategoryNotExistsException("Categoria cerută nu există."));
         categoryRepository.delete(category);
     }
 
     @Override
     public Category findByValue(String value) {
-        return categoryRepository.findByValue(value).orElseThrow(() -> new CategoryNotExistsException("Requested category does not exist."));
+        return categoryRepository.findByValue(value).orElseThrow(() -> new CategoryNotExistsException("Categoria cerută nu există."));
     }
 
     @Override

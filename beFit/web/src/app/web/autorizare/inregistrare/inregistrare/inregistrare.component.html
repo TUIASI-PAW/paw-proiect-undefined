@@ -73,8 +73,13 @@
         </p>
 
         <mat-error *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>
+        
+        <p class="finalErrorMessageStyle">
+            <mat-error *ngIf="apiMsg">{{apiMsg}}</mat-error>
+            <mat-spinner *ngIf="isWaitingForApiResponse" diameter="30"></mat-spinner>
+        </p>
 
-        <button type="button" mat-stroked-button class="buttonBF" (click)="register()">Înregistrare</button>
+        <button *ngIf="!isWaitingForApiResponse" type="button" mat-stroked-button class="buttonBF" (click)="register()">Înregistrare</button>
     </form>
     <a [routerLink]="'/autentificare'">Sau autentifică-te</a>
     <br />

@@ -1,10 +1,9 @@
-import { AbonamentUpdateModel } from './../models/abonament/abonament.update.model';
 import { AbonamentModel } from './../models/abonament/abonament.model';
 import { AbonamentCreateModel } from './../models/abonament/abonament.create.model';
 import { AbonamentLiteModel } from './../models/abonament/abonament.lite.model';
 import { PaginationModel } from './../models/pagination/pagination.model';
 import { AbonamentPaginatedModel } from './../models/abonament/abonament.paginated.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -39,12 +38,30 @@ export class AbonamentService {
     return this.httpClient.delete(`${this.endpoint}/${abonamentId}`);
   }
 
-  public addAb(data: AbonamentCreateModel): Observable<unknown> {
-    return this.httpClient.post(`${this.endpoint}/`, data);
+  public addAb(data: AbonamentCreateModel, image:File): Observable<unknown> {
+
+    var blobData = new Blob([JSON.stringify(data)],{
+      type:'application/json'
+    });
+
+    let formData = new FormData();
+    formData.append('image', image);
+    formData.append('model', blobData);
+
+    return this.httpClient.post(`${this.endpoint}/`, formData);
   }
 
-  public updateAb(abonamentId: number, data: AbonamentUpdateModel): Observable<unknown> {
-    return this.httpClient.put(`${this.endpoint}/${abonamentId}`, data)
+  public updateAb(abonamentId: number, data: AbonamentCreateModel, image: File): Observable<unknown> {
+    
+    var blobData = new Blob([JSON.stringify(data)],{
+      type:'application/json'
+    });
+
+    let formData = new FormData();
+    formData.append('image', image);
+    formData.append('model', blobData);
+
+    return this.httpClient.put(`${this.endpoint}/${abonamentId}`, formData)
   }
 
 }

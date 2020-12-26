@@ -10,27 +10,27 @@ import java.util.List;
 
 public class UserSignupModel {
     @Size(min = 3, max = 30, message
-            = "First name must be between 3 and 30 characters.")
-    @NotNull(message = "First name cannot be null.")
+            = "Prenumele trebuie să aibă lungimea între 3 şi 30 de caractere")
+    @NotNull(message = "Prenumele nu poate fi nul.")
     private String firstname;
 
     @Size(min = 3, max = 30, message
-            = "Last name must be between 3 and 30 characters.")
-    @NotNull(message = "Last name cannot be null.")
+            = "Numele trebuie să aibă lungimea între 3 şi 30 de caractere")
+    @NotNull(message = "Numele nu poate fi nul.")
     private String lastname;
 
-    @Email(message = "Email should be valid.")
-    @NotNull(message = "Email cannot be null.")
+    @Email(message = "Email-ul nu este valid.")
+    @NotNull(message = "Email-ul nu poate fi nul.")
     private String email;
 
-    @Size(min = 10, max = 10, message
-            = "Phone number must have 10 characters.")
-    @NotNull(message = "Phone number cannot be null.")
+    @Size(min = 10, max = 10,
+            message = "Numărul de telefon trebuie să conţină 10 caractere.")
+    @NotNull(message = "Numărul de telefon nu poate fi nul.")
     private String phone;
 
-    @Size(min = 3, max = 150, message
-            = "Password must be between 3 and 50 characters.")
-    @NotNull(message = "Password cannot be null.")
+    @Size(min = 5, max = 150, message
+            = "Parola trebuie să aibă lungimea între 5 şi 150 de caractere.")
+    @NotNull(message = "Parola nu poate fi nulă.")
     private String password;
 
     @JsonIgnore

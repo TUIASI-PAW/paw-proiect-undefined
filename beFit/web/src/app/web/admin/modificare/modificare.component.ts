@@ -1,4 +1,3 @@
-import { AbonamentUpdateModel } from './../../../services/models/abonament/abonament.update.model';
 import { AbonamentModel } from './../../../services/models/abonament/abonament.model';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -9,6 +8,7 @@ import { ConfirmationDialogService } from '../../shared/components/dialog/dialog
 import { Router } from '@angular/router';
 import { AbonamentService } from 'src/app/services/abonament/abonament.service';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { AbonamentCreateModel } from 'src/app/services/models/abonament/abonament.create.model';
 
 
 @Component({
@@ -18,14 +18,19 @@ import { CategoryService } from 'src/app/services/category/category.service';
   providers: [AbonamentService, CategoryService]
 })
 export class ModificareComponent {
+
   public categorii!: CategorieModel[];
-  public abonamentModel!: AbonamentModel;
-  public abonamentUpdateModel!: AbonamentUpdateModel;
+
   public isValid: boolean = true;
+  public isLoading = false;
   public url: any;
+  public file: File = null;
+
   public formGroup!: FormGroup;
   public matSelectCategory: string;
-  public isLoading = false;
+
+  public isWaitingForApiResponse = false;
+  public apiMsg: string = null;
 
   constructor(
     private readonly router: Router,
@@ -51,19 +56,17 @@ export class ModificareComponent {
     this.categoryService.getAll().subscribe(response => {
       this.categorii = response;
 
-      // get current ab from db using service getByID(id from route)
       this.abonamentService.getById(routeIdNumber).subscribe(result => {
-        this.abonamentModel = result;
-
-        // filling form data with current ab details
-        this.formGroup.controls['title'].setValue(this.abonamentModel.title);
-        this.formGroup.controls['category'].setValue(this.abonamentModel.category);
-        let date = new Date(this.abonamentModel.expirationDate);
+        let abonamentModel: AbonamentModel = result;
+        this.formGroup.controls['title'].setValue(abonamentModel.title);
+        this.formGroup.controls['category'].setValue(abonamentModel.category);
+        let date = new Date(abonamentModel.expirationDate);
         this.formGroup.controls['expirationDate'].setValue(date);
-        this.formGroup.controls['valability'].setValue(this.abonamentModel.valability);
-        this.formGroup.controls['description'].setValue(this.abonamentModel.description);
-        this.formGroup.controls['price'].setValue(this.abonamentModel.price);
-
+        this.formGroup.controls['valability'].setValue(abonamentModel.valability);
+        this.formGroup.controls['description'].setValue(abonamentModel.description);
+        this.formGroup.controls['price'].setValue(abonamentModel.price);
+        let { image } = result;
+        this.url = "data:image/jpeg;base64," + image;
         this.isLoading = false;
       })
     });
@@ -71,7 +74,6 @@ export class ModificareComponent {
 
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
     this._ngZone.onStable.pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
@@ -80,9 +82,10 @@ export class ModificareComponent {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.readAsDataURL(event.target.files[0]);
+      this.file = event.target.files[0];
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
+      reader.onload = (event) => {
         this.url = event.target?.result?.toString();
       }
     }
@@ -132,32 +135,32 @@ export class ModificareComponent {
   public openDialog() {
     this.confirmationDialogService.confirm('', `Eşti sigur că vrei să modifici acest abonament?`)
       .then((confirmed) => {
-        console.log('Button:', confirmed);
         if (confirmed) {
-          
+          this.apiMsg=null;
           let routeIdString = this.router.url.split('/')[3];
           let routeIdNumber: number = +routeIdString;
 
-          this.abonamentUpdateModel = this.formGroup.getRawValue();
+          let data: AbonamentCreateModel = this.formGroup.getRawValue();
 
-          this.abonamentService.updateAb(routeIdNumber, this.abonamentUpdateModel).subscribe({
+          this.isWaitingForApiResponse = true;
+          this.abonamentService.updateAb(routeIdNumber, data, this.file).subscribe({
             next: () => {
-              alert('Abonamentul a fost modificat cu succes!');
+              this.isWaitingForApiResponse = false;
               this.router.navigate(['admin']);
             },
             error: err => {
-              alert(err.error.message);
+              this.isWaitingForApiResponse = false;
+              this.apiMsg = err.error.message;
             }
           });
         }
       })
-      .catch(() => {
-        console.log('Dismiss');
-      });
+      .catch((err) => {});
   }
 
   removeImage(): void {
     this.url = undefined;
+    this.file = null;
   }
 
   ngOnInit() {
