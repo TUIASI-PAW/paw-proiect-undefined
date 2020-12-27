@@ -56,7 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/abonament/").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .antMatchers(HttpMethod.GET,"/api/abonament/{id:[0-9]+}").permitAll()
                 .antMatchers(HttpMethod.PUT,"/api/abonament/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
-                .antMatchers(HttpMethod.DELETE,"/api/abonament/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.PATCH,"/api/abonament/{id:[0-9]+}/activate").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.PATCH,"/api/abonament/{id:[0-9]+}/deactivate").hasAuthority(Role.ROLE_ADMIN.getAuthority())
 
                 //AbonamentFiltersController Routes
                 .antMatchers("/api/abonament/filters/pagination").permitAll()
@@ -65,7 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/api/user/{id:[0-9]+}").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/api/user/{id:[0-9]+}/balance").hasAuthority(Role.ROLE_CLIENT.getAuthority())
+                .antMatchers(HttpMethod.DELETE,"/api/user/{id:[0-9]+}").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .antMatchers(HttpMethod.OPTIONS,"/api/user/{id:[0-9]+}/balance").permitAll()
+
 
                 //UserAbonamentController Routes
                 .antMatchers(HttpMethod.POST,"/api/user/{userId:[0-9]+}/abonament/{abId:[0-9]+}").hasAuthority(Role.ROLE_CLIENT.getAuthority())

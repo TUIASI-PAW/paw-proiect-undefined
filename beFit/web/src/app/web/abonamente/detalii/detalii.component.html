@@ -16,7 +16,8 @@
             </p> <br>
 
             <div class="btnContainer">
-                <button *ngIf="isAuth" mat-stroked-button class="buttonBF btnStyle" (click) ="openDialog()">Cumpără</button>
+                <button *ngIf="isAuth && details.active" mat-stroked-button class="buttonBF btnStyle" (click) ="openDialog()">Cumpără</button>
+                <p style="color:red" *ngIf="!details.active">Acest abonament este inactiv.</p>
             </div>
         </article>
     </div>

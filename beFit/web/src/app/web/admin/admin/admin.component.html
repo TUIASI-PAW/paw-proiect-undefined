@@ -2,7 +2,8 @@
 
     <form class="searchform" [formGroup]="formGroup">
         <mat-form-field class="searchbox">
-            <input matInput placeholder="Caută" formControlName="searchInput" (input)="updateAbonamenteWhenSearch($event)">
+            <input matInput placeholder="Caută" formControlName="searchInput"
+                (input)="updateAbonamenteWhenSearch($event)">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </form>
@@ -12,7 +13,10 @@
             <mat-expansion-panel *ngFor="let abonament of abonamenteCopy">
 
                 <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title *ngIf="abonament.active">
+                        {{abonament.title}}
+                    </mat-panel-title>
+                    <mat-panel-title *ngIf="!abonament.active" class="notActive">
                         {{abonament.title}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -23,8 +27,10 @@
                 <button class="adminbtn" mat-raised-button color="accent"
                     [routerLink]="'/admin/modificare_abonament/'+abonament.id">
                     Modifică</button>
-                <button class="adminbtn" mat-raised-button color="warn"
-                    (click)="openDialog(abonament.title, abonament.id)">Şterge</button>
+                <button *ngIf="abonament.active" class="adminbtn" mat-raised-button color="warn"
+                    (click)="openDialogDeactivate(abonament.title, abonament.id)">Dezactivează</button>
+                <button *ngIf="!abonament.active" class="adminbtn" mat-raised-button class="buttonActivate"
+                    (click)="openDialogActivate(abonament.title, abonament.id)">Activează</button>
 
             </mat-expansion-panel>
         </mat-accordion>

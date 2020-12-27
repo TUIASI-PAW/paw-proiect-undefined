@@ -108,7 +108,9 @@
                 <input #fileInput type="file" (change)="onSelectFile($event)" style="display:none;" />
             </button> <br><br>
             <img [src]="url" width=100%> <br />
-            <button *ngIf="url" type="button" mat-raised-button color="warn" (click) ="removeImage()">Şterge poza</button>
+            <button *ngIf="url!=null && isFileUpload" type="button" mat-raised-button color="warn" (click) ="reinitializeImage()">Poza iniţială</button>
+            <button *ngIf="url!=null && !isFileUpload" type="button" mat-raised-button color="warn" (click) ="removeImage()">Ascunde poza</button>
+
         </div>
 
         <mat-error class="formErr" *ngIf="!isValid">{{getErrorMessage("form")}}</mat-error>

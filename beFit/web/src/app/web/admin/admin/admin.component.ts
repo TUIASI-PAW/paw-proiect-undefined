@@ -46,15 +46,14 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  public deleteAbonament(id: number) {
-    this.abonamentService.deleteAb(id).subscribe(() => {
+  public changeActive(activeVal: boolean, id: number) {
+    this.abonamentService.changeActive(activeVal, id).subscribe(() => {
       this.abonamente.forEach((ab, index) => {
-        if (ab.id == id) {
-          this.abonamente.splice(index, 1);
-          this.abonamenteCopy = this.abonamente;
-        }
-      });
+        if (ab.id == id) this.abonamente[index].active = activeVal;});
+      this.abonamenteCopy.forEach((ab, index) => {
+        if (ab.id == id) this.abonamenteCopy[index].active = activeVal;});
     });
+
   }
 
   public updateAbonamenteWhenSearch(event: Event) {
@@ -68,9 +67,16 @@ export class AdminComponent implements OnInit {
     else this.abonamenteCopy = this.abonamente;
   }
 
-  public openDialog(title: string, id: number) {
-    this.confirmationDialogService.confirm('', `Ştergi abonamentul: ${title}?`)
-      .then((confirmed) => { this.deleteAbonament(id); })
+  public openDialogDeactivate(title: string, id: number) {
+    this.confirmationDialogService.confirm('', `Dezactivezi abonamentul: ${title}?`)
+      .then((confirmed) => { if (confirmed) this.changeActive(false, id); })
+      .catch(() => {
+      });
+  }
+
+  public openDialogActivate(title: string, id: number) {
+    this.confirmationDialogService.confirm('', `Activezi abonamentul: ${title}?`)
+      .then((confirmed) => { if (confirmed) this.changeActive(true, id); })
       .catch(() => {
       });
   }

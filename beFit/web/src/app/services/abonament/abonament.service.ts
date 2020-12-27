@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AbonamentService {
-  
+
   public endpoint = `${environment.apiUrl}/abonament`;
 
   constructor(
@@ -34,14 +34,10 @@ export class AbonamentService {
     return this.httpClient.get<AbonamentModel>(`${this.endpoint}/${id}`);
   }
 
-  public deleteAb(abonamentId: number): Observable<unknown> {
-    return this.httpClient.delete(`${this.endpoint}/${abonamentId}`);
-  }
+  public addAb(data: AbonamentCreateModel, image: File): Observable<unknown> {
 
-  public addAb(data: AbonamentCreateModel, image:File): Observable<unknown> {
-
-    var blobData = new Blob([JSON.stringify(data)],{
-      type:'application/json'
+    var blobData = new Blob([JSON.stringify(data)], {
+      type: 'application/json'
     });
 
     let formData = new FormData();
@@ -52,9 +48,9 @@ export class AbonamentService {
   }
 
   public updateAb(abonamentId: number, data: AbonamentCreateModel, image: File): Observable<unknown> {
-    
-    var blobData = new Blob([JSON.stringify(data)],{
-      type:'application/json'
+
+    var blobData = new Blob([JSON.stringify(data)], {
+      type: 'application/json'
     });
 
     let formData = new FormData();
@@ -63,5 +59,8 @@ export class AbonamentService {
 
     return this.httpClient.put(`${this.endpoint}/${abonamentId}`, formData)
   }
-
+  public changeActive(activeVal: boolean, abonamentId: number): Observable<unknown> {
+    if (activeVal) return this.httpClient.patch(`${this.endpoint}/${abonamentId}/activate`,{});
+    else return this.httpClient.patch(`${this.endpoint}/${abonamentId}/deactivate`,{});
+  }
 }

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAbonamentRepository extends CrudRepository<Abonament, Integer>, PagingAndSortingRepository<Abonament, Integer> {
-    Page<Abonament> findByCategory(String category, Pageable pageable);
-    Long countByCategory(String category);
+    Page<Abonament> findByCategoryAndIsActive(String category, Boolean isActive, Pageable pageable);
+    Long countByCategoryAndIsActive(String category, Boolean isActive);
+    Page<Abonament> findAllByIsActive(Boolean isActive, Pageable pageable);
+    Long countByIsActive(Boolean isActive);
+    Iterable<Abonament> findAllByIsActive(Boolean isActive);
+    Iterable<Abonament> findAllByOrderByIsActive();
 }

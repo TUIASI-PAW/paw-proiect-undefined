@@ -41,6 +41,8 @@ public class AbonamentModel {
     @NotNull(message = "Descrierea nu poate fi nulă.")
     private String description;
 
+    private Boolean isActive=true;
+
     public AbonamentModel() { }
 
     public String getTitle() {
@@ -105,5 +107,14 @@ public class AbonamentModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        if(active!=null)
+            isActive = active;
     }
 }

@@ -1,37 +1,52 @@
 package com.proiect.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.Calendar;
 
 @Entity
 public class UserAbonament {
     @EmbeddedId
+    @Nullable
     private UserAbonamentSK id;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 
-    @ManyToOne
+    @Basic
+    private Date expirationDate;
+    private String title;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("abonamentId")
-    @JoinColumn(name = "abonament_id")
+    @JoinColumn(name = "abonament_id", nullable = true)
+    @Nullable
     private Abonament abonament;
 
-    private int valability;
 
     public UserAbonament() { }
 
-    public UserAbonament(User user, Abonament abonament, int valability) {
+    public UserAbonament(User user, Abonament abonament, String title) {
         this.id = new UserAbonamentSK();
         this.id.setUserId(user.getId());
-        this.id.setAbonamentId(abonament.getId());
 
+        var calendar = java.util.Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        calendar.add(Calendar.DATE, abonament.getValability());
+
+        this.id.setAbonamentId(abonament.getId());
         this.user = user;
         this.abonament = abonament;
-        this.valability = valability;
+        this.title = title;
+        this.expirationDate=new Date(calendar.getTimeInMillis());
+
     }
 
     public UserAbonamentSK getId() {
@@ -58,11 +73,19 @@ public class UserAbonament {
         this.abonament = abonament;
     }
 
-    public int getValability() {
-        return valability;
+    public String getTitle() {
+        return title;
     }
 
-    public void setValability(int valability) {
-        this.valability = valability;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

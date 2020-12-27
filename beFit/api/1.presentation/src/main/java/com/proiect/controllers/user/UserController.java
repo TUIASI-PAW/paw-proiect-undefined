@@ -45,7 +45,7 @@ public class UserController {
         else
         {
             var userId = jwtTokenProvider.getId(Authorization.substring(7));
-            if(id!=userId) throw new UserOperationNotAllowedException("You can't do that.");
+            if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
 
             var user = userService.findById(id);
             return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.OK);
@@ -59,7 +59,7 @@ public class UserController {
                                       @RequestHeader(value = "Authorization") String Authorization){
 
         var userId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(id!=userId) throw new UserOperationNotAllowedException("You can't do that.");
+        if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
 
         var user = this.userService.update(id, userPatchModel);
         return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.ACCEPTED);
@@ -71,8 +71,13 @@ public class UserController {
                            @RequestHeader(value = "Authorization") String Authorization){
 
         var userId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(id!=userId) throw new UserOperationNotAllowedException("You can't do that.");
+        if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
         userService.addBalance(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable int id){
+        userService.delete(id);
     }
 }

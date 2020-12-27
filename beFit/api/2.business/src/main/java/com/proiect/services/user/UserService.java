@@ -29,6 +29,12 @@ public class UserService implements IUserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    @Override
+    public Iterable<User> findAll() {
+        return userRepository.findAll();
+    }
+
     @Override
     public User findById(int id) {
         return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Utilizatorul nu există."));
@@ -68,5 +74,10 @@ public class UserService implements IUserService {
         BigDecimal newBalance= new BigDecimal(Math.random() * 50).setScale(3, RoundingMode.HALF_EVEN);
         user.setBalance(user.getBalance()+ newBalance.setScale(3).doubleValue());
         var newUser = userRepository.save(user);
+    }
+
+    @Override
+    public void delete(int id) {
+        userRepository.delete(findById(id));
     }
 }

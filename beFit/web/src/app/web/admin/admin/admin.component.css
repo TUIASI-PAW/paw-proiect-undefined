@@ -5,6 +5,13 @@
 .containerabonamente{
     width: 75%;
 }
+.notActive{
+    color:gray;
+}
+.buttonActivate{
+    border-color:#3fff2e !important;
+    background-color: #3fff2e;
+}
 @media only screen and (max-width:600px)
 {
     .containerabonamente{

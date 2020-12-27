@@ -1,5 +1,8 @@
-export interface AbonamentUserListModel{
-    id: number,
+export interface AbonamentUserListModel {
+    id: {
+        userId: number,
+        abonamentId: number,
+    },
     title: string,
-    valability: number,
+    expirationDate: Date,
 }

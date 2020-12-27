@@ -26,7 +26,7 @@ public class UserAbonamentController {
     public ResponseEntity addAbonament(@PathVariable int userId, @PathVariable int abId,
                                        @RequestHeader(value = "Authorization") String Authorization){
         var tokenUserId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("You can't do that.");
+        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
         userAbonamentService.add(userId,abId);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
@@ -36,7 +36,7 @@ public class UserAbonamentController {
     public ResponseEntity removeAbonament(@PathVariable int userId, @PathVariable int abId,
                                        @RequestHeader(value = "Authorization") String Authorization){
         var tokenUserId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("You can't do that.");
+        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
         userAbonamentService.remove(userId,abId);
         return new ResponseEntity(HttpStatus.OK);
     }

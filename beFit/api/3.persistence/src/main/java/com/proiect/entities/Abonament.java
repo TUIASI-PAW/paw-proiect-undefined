@@ -48,7 +48,14 @@ public class Abonament {
     @NotNull(message = "Descrierea nu poate fi nulă.")
     private String description;
 
-    @OneToMany(mappedBy = "user")
+    @Column(columnDefinition = "boolean default true")
+    private boolean isActive;
+    @Basic
+    private Date deletionDate;
+
+    @OneToMany(mappedBy = "abonament",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JsonIgnore
     Set<UserAbonament> users;
 
@@ -132,5 +139,21 @@ public class Abonament {
 
     public void setUsers(Set<UserAbonament> users) {
         this.users = users;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Date getDeletionDate() {
+        return deletionDate;
+    }
+
+    public void setDeletionDate(Date deletionDate) {
+        this.deletionDate = deletionDate;
     }
 }

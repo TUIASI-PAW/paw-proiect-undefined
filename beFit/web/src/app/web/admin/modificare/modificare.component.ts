@@ -23,8 +23,11 @@ export class ModificareComponent {
 
   public isValid: boolean = true;
   public isLoading = false;
+
   public url: any;
+  private tempUrl:any;
   public file: File = null;
+  public isFileUpload=false;
 
   public formGroup!: FormGroup;
   public matSelectCategory: string;
@@ -67,6 +70,7 @@ export class ModificareComponent {
         this.formGroup.controls['price'].setValue(abonamentModel.price);
         let { image } = result;
         this.url = "data:image/jpeg;base64," + image;
+        this.tempUrl=this.url;
         this.isLoading = false;
       })
     });
@@ -80,6 +84,7 @@ export class ModificareComponent {
 
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
+      this.isFileUpload=true;
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]);
@@ -159,8 +164,14 @@ export class ModificareComponent {
   }
 
   removeImage(): void {
-    this.url = undefined;
+    this.url = null;
     this.file = null;
+  }
+
+  reinitializeImage():void{
+    this.url=this.tempUrl;
+    this.isFileUpload=false;
+    this.file=null;
   }
 
   ngOnInit() {

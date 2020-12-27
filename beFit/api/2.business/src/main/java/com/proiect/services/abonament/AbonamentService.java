@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -26,7 +28,7 @@ public class AbonamentService implements IAbonamentService {
     @Override
     public List<Abonament> listAll() {
         if(abonamentRepository.count() > 0)
-            return (List<Abonament>) abonamentRepository.findAll();
+            return (List<Abonament>) abonamentRepository.findAllByOrderByIsActive();
         else throw new AbonamentNotFoundException("Nu s-a găsit nimic.");
     }
 
@@ -53,7 +55,8 @@ public class AbonamentService implements IAbonamentService {
             abonament.setValability(abonamentModel.getValability());
             abonament.setExpirationDate(abonamentModel.getExpirationDate());
             abonament.setPrice(abonamentModel.getPrice());
-            abonament.setImage(abonamentModel.getImage());
+            if(abonamentModel.getImage()!=null)
+                abonament.setImage(abonamentModel.getImage());
             abonament.setDescription(abonamentModel.getDescription());
 
             abonamentRepository.save(abonament);
@@ -66,12 +69,33 @@ public class AbonamentService implements IAbonamentService {
 
     @Override
     public void delete(int id) {
-        if(abonamentRepository.findById(id).isPresent()) {
-            abonamentRepository.deleteById(id);
-        }
-        else {
-            throw new AbonamentNotFoundException("Abonament nu există.");
-        }
+        var ab = findById(id);
+        abonamentRepository.delete(ab);
     }
 
+    @Override
+    public void activate(int id) {
+        var ab = findById(id);
+        ab.setActive(true);
+        ab.setDeletionDate(null);
+        abonamentRepository.save(ab);
+    }
+
+    @Override
+    public void deactivate(int id) {
+        var ab = findById(id);
+        ab.setActive(false);
+
+        var calendar = java.util.Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        calendar.add(Calendar.DATE, ab.getValability()+1);
+
+        ab.setDeletionDate(new Date(calendar.getTimeInMillis()));
+        abonamentRepository.save(ab);
+    }
+
+    @Override
+    public Iterable<Abonament> findAllByIsActive(Boolean isActive){
+        return abonamentRepository.findAllByIsActive(isActive);
+    }
 }

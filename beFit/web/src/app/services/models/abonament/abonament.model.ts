@@ -8,4 +8,5 @@ export interface AbonamentModel{
     description: string,
     price: number,
     image: string,
+    active:boolean
 }

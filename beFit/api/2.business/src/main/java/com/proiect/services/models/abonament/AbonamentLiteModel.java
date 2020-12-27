@@ -3,6 +3,7 @@ package com.proiect.services.models.abonament;
 public class AbonamentLiteModel {
     private int id;
     private String title;
+    private Boolean isActive;
 
     public AbonamentLiteModel() {
     }
@@ -21,5 +22,13 @@ public class AbonamentLiteModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
