@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IAbonamentRepository extends CrudRepository<Abonament, Integer>, PagingAndSortingRepository<Abonament, Integer> {
     Page<Abonament> findByCategoryAndIsActive(String category, Boolean isActive, Pageable pageable);
@@ -15,4 +17,5 @@ public interface IAbonamentRepository extends CrudRepository<Abonament, Integer>
     Long countByIsActive(Boolean isActive);
     Iterable<Abonament> findAllByIsActive(Boolean isActive);
     Iterable<Abonament> findAllByOrderByIsActive();
+    Optional<Abonament> findByTitle(String title);
 }

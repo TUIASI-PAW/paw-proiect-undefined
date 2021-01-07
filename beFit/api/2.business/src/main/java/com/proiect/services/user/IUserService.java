@@ -4,6 +4,7 @@ import com.proiect.services.models.user.UserPatchModel;
 
 public interface IUserService {
     Iterable<User> findAll();
+
     User findById(int id);
 
     User update(int id, UserPatchModel model);

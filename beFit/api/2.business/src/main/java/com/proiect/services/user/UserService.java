@@ -17,18 +17,11 @@ import java.math.RoundingMode;
 @Service
 public class UserService implements IUserService {
     @Autowired
-    private final IUserRepository userRepository;
+    private IUserRepository userRepository;
     @Autowired
-    private final IAbonamentService abonamentService;
+    private IAbonamentService abonamentService;
     @Autowired
-    private final PasswordEncoder passwordEncoder;
-
-    public UserService(IUserRepository userRepository, IAbonamentService abonamentService, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.abonamentService = abonamentService;
-        this.passwordEncoder = passwordEncoder;
-    }
-
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Iterable<User> findAll() {
@@ -68,6 +61,7 @@ public class UserService implements IUserService {
 
         return userRepository.save(user);
     }
+
     @Override
     public void addBalance(int id){
         var user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("Utilizatorul nu există."));
