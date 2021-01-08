@@ -11,10 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
-public class AuthenticationService implements IAuthenticationService{
+public class AuthenticationService implements IAuthenticationService {
     @Autowired
     private IUserRepository userRepository;
 
@@ -32,7 +30,7 @@ public class AuthenticationService implements IAuthenticationService{
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         final var user = userRepository
                 .findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("Utilizatorul cerut nu s-a găsit."));
+                .orElseThrow(() -> new UsernameNotFoundException("Utilizatorul cerut nu s-a găsit."));
 
         return jwtTokenProvider.createToken(username, user.getId(), user.getRoles());
 

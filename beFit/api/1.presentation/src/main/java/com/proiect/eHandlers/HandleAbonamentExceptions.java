@@ -1,6 +1,5 @@
 package com.proiect.eHandlers;
 
-import com.proiect.exceptions.CategoryExceptions.CategoryAlreadyExistsException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ public class HandleAbonamentExceptions {
     @ExceptionHandler(MissingServletRequestPartException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponseMessage> handleMissingServletRequestPartException(MissingServletRequestPartException ex) {
-        if(ex.getMessage().equals("Required request part 'image' is not present"))
+        if (ex.getMessage().equals("Required request part 'image' is not present"))
             return new ResponseEntity<>(new ErrorResponseMessage("Imaginea este obligatorie."), HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(new ErrorResponseMessage(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }

@@ -27,10 +27,10 @@ public class AbonamentFiltersService implements IAbonamentFiltersService {
         Page<Abonament> pagedResult;
         long count = -1;
         if (abonamentFiltersModel.getFilter() == null) {
-            pagedResult = abonamentRepository.findAllByIsActive(true,paging);
+            pagedResult = abonamentRepository.findAllByIsActive(true, paging);
             count = abonamentRepository.countByIsActive(true);
         } else {
-            pagedResult = abonamentRepository.findByCategoryAndIsActive(abonamentFiltersModel.getFilter(),true ,paging);
+            pagedResult = abonamentRepository.findByCategoryAndIsActive(abonamentFiltersModel.getFilter(), true, paging);
             count = abonamentRepository.countByCategoryAndIsActive(abonamentFiltersModel.getFilter(), true);
         }
         return new PaginationModel(pagedResult.getContent(), count);

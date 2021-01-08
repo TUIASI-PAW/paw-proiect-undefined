@@ -6,9 +6,9 @@ import java.sql.Date;
 import java.util.Calendar;
 
 public class TestAbonamenteProvider {
-    public static AbonamentModel getAbonamentModel(){
+    public static AbonamentModel getAbonamentModel() {
         var c = Calendar.getInstance();
-        c.set(22,10,10);
+        c.set(22, 10, 10);
         var abonament = new AbonamentModel();
         abonament.setValability(30);
         abonament.setCategory("test");

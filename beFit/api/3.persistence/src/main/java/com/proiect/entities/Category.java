@@ -5,11 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CATEGORY")
+@Table(name = "CATEGORY")
 public class Category {
     @Id
     private String value;
-    public Category(){}
+
+    public Category() {
+    }
 
     public String getValue() {
         return value;

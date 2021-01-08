@@ -23,14 +23,14 @@ public class AbonamentService implements IAbonamentService {
 
     @Override
     public List<Abonament> listAll() {
-        if(abonamentRepository.count() > 0)
+        if (abonamentRepository.count() > 0)
             return (List<Abonament>) abonamentRepository.findAllByOrderByIsActive();
         else throw new AbonamentNotFoundException("Nu s-a găsit niciun abonament.");
     }
 
     @Override
     public Abonament findById(int id) {
-        if(abonamentRepository.findById(id).isPresent())
+        if (abonamentRepository.findById(id).isPresent())
             return abonamentRepository.findById(id).get();
         else throw new AbonamentNotFoundException("Abonamentul nu există.");
     }
@@ -44,7 +44,7 @@ public class AbonamentService implements IAbonamentService {
     @Override
     @Transactional
     public Abonament update(int id, AbonamentModel abonamentModel) {
-        if(abonamentRepository.findById(id).isPresent()) {
+        if (abonamentRepository.findById(id).isPresent()) {
             Abonament abonament = abonamentRepository.findById(id).get();
 
             abonament.setTitle(abonamentModel.getTitle());
@@ -52,13 +52,12 @@ public class AbonamentService implements IAbonamentService {
             abonament.setValability(abonamentModel.getValability());
             abonament.setExpirationDate(abonamentModel.getExpirationDate());
             abonament.setPrice(abonamentModel.getPrice());
-            if(abonamentModel.getImage()!=null)
+            if (abonamentModel.getImage() != null)
                 abonament.setImage(abonamentModel.getImage());
             abonament.setDescription(abonamentModel.getDescription());
 
             return abonamentRepository.save(abonament);
-        }
-        else {
+        } else {
             throw new AbonamentNotFoundException("Abonamentul nu există.");
         }
     }
@@ -87,14 +86,14 @@ public class AbonamentService implements IAbonamentService {
 
         var calendar = java.util.Calendar.getInstance();
         calendar.setTime(new java.util.Date());
-        calendar.add(Calendar.DATE, ab.getValability()+1);
+        calendar.add(Calendar.DATE, ab.getValability() + 1);
 
         ab.setDeletionDate(new Date(calendar.getTimeInMillis()));
         abonamentRepository.save(ab);
     }
 
     @Override
-    public Iterable<Abonament> findAllByIsActive(Boolean isActive){
+    public Iterable<Abonament> findAllByIsActive(Boolean isActive) {
         return abonamentRepository.findAllByIsActive(isActive);
     }
 }

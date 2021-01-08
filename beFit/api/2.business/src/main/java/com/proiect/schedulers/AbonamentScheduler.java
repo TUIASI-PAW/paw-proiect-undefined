@@ -31,20 +31,20 @@ public class AbonamentScheduler {
     }
 
     @Async
-    @Scheduled(fixedRate = 1000*60*60)//once per hour
-    public void processUserAbonamentExpirationDate(){
-        for(var user: userService.findAll())
-            if(!user.getAbonamente().isEmpty())
-                for(var uab:user.getAbonamente())
-                    if(uab.getExpirationDate().compareTo(new java.util.Date())<0)
+    @Scheduled(fixedRate = 1000 * 60 * 60)//once per hour
+    public void processUserAbonamentExpirationDate() {
+        for (var user : userService.findAll())
+            if (!user.getAbonamente().isEmpty())
+                for (var uab : user.getAbonamente())
+                    if (uab.getExpirationDate().compareTo(new java.util.Date()) < 0)
                         userAbonamentService.remove(uab.getId().getUserId(), uab.getId().getAbonamentId());
     }
 
     @Async
-    @Scheduled(fixedRate = 1000*60*60*24)// once at 24hrs
-    public void processAbonamentExpirationDate(){
-        for(var ab: abonamentService.findAllByIsActive(false))
-            if(ab.getDeletionDate().compareTo(new java.util.Date())<0)
+    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)// once at 24hrs
+    public void processAbonamentExpirationDate() {
+        for (var ab : abonamentService.findAllByIsActive(false))
+            if (ab.getDeletionDate().compareTo(new java.util.Date()) < 0)
                 abonamentService.delete(ab.getId());
     }
 }

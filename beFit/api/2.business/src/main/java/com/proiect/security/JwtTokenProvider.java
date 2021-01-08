@@ -1,14 +1,11 @@
 package com.proiect.security;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-
 import com.proiect.entities.Role;
 import com.proiect.exceptions.JwtException;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -18,9 +15,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -29,7 +27,7 @@ public class JwtTokenProvider {
     private String secretKey;
 
     @Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 3600000;
+    private final long validityInMilliseconds = 3600000;
 
     @Autowired
     private AppUserDetails appUserDetails;
@@ -65,14 +63,12 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public ArrayList<Map<String,String>> getRole(String token)
-    {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("auth",ArrayList.class);
+    public ArrayList<Map<String, String>> getRole(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("auth", ArrayList.class);
     }
 
-    public Integer getId(String token)
-    {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("user_id",Integer.class);
+    public Integer getId(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("user_id", Integer.class);
     }
 
     public String resolveToken(HttpServletRequest req) {

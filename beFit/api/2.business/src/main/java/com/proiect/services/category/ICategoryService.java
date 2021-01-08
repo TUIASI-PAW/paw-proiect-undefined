@@ -1,7 +1,6 @@
 package com.proiect.services.category;
 
 import com.proiect.entities.Category;
-import com.proiect.services.models.abonament.AbonamentModel;
 
 
 public interface ICategoryService {

@@ -23,6 +23,7 @@ public class HandleUserExceptions {
         return new ResponseEntity<>(new ErrorResponseMessage(ex.getMessage()),
                 HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponseMessage> handleBadCredentialsException(BadCredentialsException ex) {

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryService implements ICategoryService{
+public class CategoryService implements ICategoryService {
 
     @Autowired
     private final ICategoryRepository categoryRepository;
@@ -26,7 +26,7 @@ public class CategoryService implements ICategoryService{
     public Category insert(Category category) {
 
         var dbo = categoryRepository.findByValue(category.getValue());
-        if(dbo.isPresent()) throw new CategoryAlreadyExistsException("Categoria introdusă deja există.");
+        if (dbo.isPresent()) throw new CategoryAlreadyExistsException("Categoria introdusă deja există.");
 
         return categoryRepository.save(category);
     }

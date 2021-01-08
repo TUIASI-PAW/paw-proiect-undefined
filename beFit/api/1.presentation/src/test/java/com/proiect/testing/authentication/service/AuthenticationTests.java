@@ -10,8 +10,11 @@ import org.junit.jupiter.api.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.transaction.TransactionSystemException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = Boot.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -28,47 +31,43 @@ public class AuthenticationTests {
     private IUserRepository userRepository;
 
     @BeforeAll
-    public void deleteExistingUser(){
+    public void deleteExistingUser() {
         var user = userRepository.findByEmail(TestUsersProvider.SignUpModelWithCorrectFields().getEmail());
-        if(user.isPresent())
+        if (user.isPresent())
             userRepository.delete(user.get());
     }
 
     @Test
     @Order(1)
-    public void sign_up_test(){
-        var model  = TestUsersProvider.SignUpModelWithCorrectFields();
+    public void sign_up_test() {
+        var model = TestUsersProvider.SignUpModelWithCorrectFields();
         var user = modelMapper.map(model, User.class);
 
-        var token =authenticationService.signup(user);
+        var token = authenticationService.signup(user);
         assertNotEquals(token, "");
         assertNotNull(token);
     }
 
     @Test
     @Order(2)
-    public void sign_in_test(){
-        var model  = TestUsersProvider.SignUpModelWithCorrectFields();
-        var token =authenticationService.signin(model.getEmail(),model.getPassword());
+    public void sign_in_test() {
+        var model = TestUsersProvider.SignUpModelWithCorrectFields();
+        var token = authenticationService.signin(model.getEmail(), model.getPassword());
         assertNotEquals(token, "");
         assertNotNull(token);
     }
 
     @Test
     @Order(3)
-    public void fail_sign_up_test(){
-        var model  = TestUsersProvider.SignUpModelWithIncorrectFields();
-        var token =authenticationService.signup(modelMapper.map(model, User.class));
-        assertNotEquals(token, "");
-        assertNotNull(token);
+    public void fail_sign_up_test() {
+        var model = TestUsersProvider.SignUpModelWithIncorrectFields();
+        Assertions.assertThrows(TransactionSystemException.class, () -> authenticationService.signup(modelMapper.map(model, User.class)));
     }
 
     @Test
     @Order(4)
-    public void fail_sign_in_test(){
-        var model  = TestUsersProvider.SignUpModelWithIncorrectFields();
-        var token =authenticationService.signin(model.getEmail(),model.getPassword());
-        assertNotEquals(token, "");
-        assertNotNull(token);
+    public void fail_sign_in_test() {
+        var model = TestUsersProvider.SignUpModelWithIncorrectFields();
+        Assertions.assertThrows(BadCredentialsException.class, () -> authenticationService.signin(model.getEmail(), model.getPassword()));
     }
 }

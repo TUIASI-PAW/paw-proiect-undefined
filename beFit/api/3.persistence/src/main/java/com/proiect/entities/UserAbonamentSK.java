@@ -1,6 +1,7 @@
 package com.proiect.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,7 +13,8 @@ public class UserAbonamentSK implements Serializable {
     @Column(name = "abonament_id")
     int abonamentId;
 
-    public UserAbonamentSK() { }
+    public UserAbonamentSK() {
+    }
 
     public int getUserId() {
         return userId;

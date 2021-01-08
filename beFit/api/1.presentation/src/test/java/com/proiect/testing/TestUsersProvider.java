@@ -7,7 +7,7 @@ import com.proiect.services.models.user.UserSignupModel;
 import java.util.Arrays;
 
 public class TestUsersProvider {
-    public static UserPatchModel getDefaultTestUser(){
+    public static UserPatchModel getDefaultTestUser() {
         var user = new UserPatchModel();
         user.setPhone("1231231231");
         user.setPassword("user_test");
@@ -18,6 +18,7 @@ public class TestUsersProvider {
 
         return user;
     }
+
     public static UserSignupModel SignUpModelWithCorrectFields() {
         var user = new UserSignupModel();
         user.setPhone("1000000000");
@@ -30,7 +31,8 @@ public class TestUsersProvider {
 
         return user;
     }
-    public static UserSignupModel SignUpModelWithIncorrectFields(){
+
+    public static UserSignupModel SignUpModelWithIncorrectFields() {
         var user = new UserSignupModel();
         user.setPhone("1");
         user.setPassword("user_test");
@@ -41,18 +43,19 @@ public class TestUsersProvider {
 
         return user;
     }
-    public static UserPatchModel UserPatchModelWithCorrectFields(){
+
+    public static UserPatchModel UserPatchModelWithCorrectFields() {
         var user = new UserPatchModel();
         user.setPhone("9999999999");
         user.setPassword("user_test");
         user.setNewPassword("user_test");
         user.setLastname("Updated");
         user.setFirstname("User");
-        user.setEmail("updated_user@test.org");
 
         return user;
     }
-    public static UserPatchModel UserPatchModelWithIncorrectFields(){
+
+    public static UserPatchModel UserPatchModelWithIncorrectFields() {
         var user = new UserPatchModel();
         user.setPhone("1");
         user.setPassword("user_test");

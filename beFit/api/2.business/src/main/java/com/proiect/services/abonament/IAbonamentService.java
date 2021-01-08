@@ -7,11 +7,17 @@ import java.util.List;
 
 public interface IAbonamentService {
     List<Abonament> listAll();
+
     Abonament findById(int id);
+
     Abonament insert(AbonamentModel abonamentModel);
+
     Abonament update(int id, AbonamentModel abonamentModel);
+
     void delete(int id);
+
     void activate(int id);
+
     void deactivate(int id);
 
     Iterable<Abonament> findAllByIsActive(Boolean isActive);

@@ -7,14 +7,15 @@ import java.util.List;
 
 public class UserResponseModel {
 
+    @ApiModelProperty(position = 3)
+    List<Role> roles;
     @ApiModelProperty(position = 0)
     private Integer id;
     @ApiModelProperty(position = 2)
     private String email;
-    @ApiModelProperty(position = 3)
-    List<Role> roles;
 
-    public UserResponseModel(){}
+    public UserResponseModel() {
+    }
 
     public Integer getId() {
         return id;

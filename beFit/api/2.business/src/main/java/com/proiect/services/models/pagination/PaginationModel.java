@@ -13,7 +13,8 @@ public class PaginationModel {
         this.dbAbsCount = dbAbsCount;
     }
 
-    public PaginationModel() { }
+    public PaginationModel() {
+    }
 
     public List<Abonament> getAbonamentList() {
         return abonamentList;

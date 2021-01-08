@@ -2,12 +2,13 @@ package com.proiect.services.models.abonament;
 
 public class AbonamentFiltersModel {
 
-    private int pageNo ;
+    private int pageNo;
     private int pageSize;
     private String sortBy;
     private String filter;
 
-    public AbonamentFiltersModel() { }
+    public AbonamentFiltersModel() {
+    }
 
     public int getPageNo() {
         return pageNo;

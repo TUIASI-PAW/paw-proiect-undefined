@@ -10,56 +10,47 @@ import java.util.Calendar;
 import java.util.Set;
 
 @Entity
-@Table(name="ABONAMENTE")
+@Table(name = "ABONAMENTE")
 public class Abonament {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
-
-    @Size(min = 5, max = 100, message
-            = "Titlul trebuie să aibă lungimea între 5 şi 100 de caractere.")
-    @NotNull(message = "Titlul nu poate fi null.")
-    private String title;
-
-    @Size(min = 3, max = 50, message
-            = "Categoria trebuie să aibă lungimea între 3 şi 50 de caractere.")
-    @NotNull(message = "Categoria nu poate fi nulă.")
-    private String category;
-
-    @NotNull(message = "Valabilitatea nu poate fi nulă.")
-    private int valability;
-
-    @Basic
-    @NotNull(message = "Data expirării nu poate fi nulă.")
-    private Date expirationDate;
-
-    @Basic
-    @NotNull(message = "")
-    private Date addedDate;
-
-    @NotNull(message = "Preţul nu poate fi nul.")
-    private int price;
-
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] image;
-
-    @Size(min = 3, max = 2000, message
-            = "Descrierea trebuie să aibă lungimea între 3 şi 2000 de caractere.")
-    @NotNull(message = "Descrierea nu poate fi nulă.")
-    private String description;
-
-    @Column(columnDefinition = "boolean default true")
-    private boolean isActive;
-    @Basic
-    private Date deletionDate;
-
     @OneToMany(mappedBy = "abonament",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonIgnore
     Set<UserAbonament> users;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Size(min = 5, max = 100, message
+            = "Titlul trebuie să aibă lungimea între 5 şi 100 de caractere.")
+    @NotNull(message = "Titlul nu poate fi null.")
+    private String title;
+    @Size(min = 3, max = 50, message
+            = "Categoria trebuie să aibă lungimea între 3 şi 50 de caractere.")
+    @NotNull(message = "Categoria nu poate fi nulă.")
+    private String category;
+    @NotNull(message = "Valabilitatea nu poate fi nulă.")
+    private int valability;
+    @Basic
+    @NotNull(message = "Data expirării nu poate fi nulă.")
+    private Date expirationDate;
+    @Basic
+    @NotNull(message = "")
+    private Date addedDate;
+    @NotNull(message = "Preţul nu poate fi nul.")
+    private int price;
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+    @Size(min = 3, max = 2000, message
+            = "Descrierea trebuie să aibă lungimea între 3 şi 2000 de caractere.")
+    @NotNull(message = "Descrierea nu poate fi nulă.")
+    private String description;
+    @Column(columnDefinition = "boolean default true")
+    private boolean isActive;
+    @Basic
+    private Date deletionDate;
 
-    public Abonament() { }
+    public Abonament() {
+    }
 
     public int getId() {
         return id;

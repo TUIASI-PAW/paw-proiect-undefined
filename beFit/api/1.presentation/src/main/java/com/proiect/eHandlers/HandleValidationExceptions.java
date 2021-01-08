@@ -19,11 +19,11 @@ public class HandleValidationExceptions {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<List<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) throws JsonProcessingException {
-        var errors =new ArrayList<String>();
+        var errors = new ArrayList<String>();
 
         for (var fe : ex.getBindingResult().getFieldErrors())
-            errors.add(fe.getField()+ ": "+fe.getDefaultMessage());
+            errors.add(fe.getField() + ": " + fe.getDefaultMessage());
 
-        return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

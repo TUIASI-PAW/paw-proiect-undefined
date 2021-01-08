@@ -24,20 +24,20 @@ public class UserAbonamentController {
     @PostMapping("/{userId}/abonament/{abId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity addAbonament(@PathVariable int userId, @PathVariable int abId,
-                                       @RequestHeader(value = "Authorization") String Authorization){
+                                       @RequestHeader(value = "Authorization") String Authorization) {
         var tokenUserId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
-        userAbonamentService.add(userId,abId);
+        if (userId != tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
+        userAbonamentService.add(userId, abId);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{userId}/abonament/{abId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity removeAbonament(@PathVariable int userId, @PathVariable int abId,
-                                       @RequestHeader(value = "Authorization") String Authorization){
+                                          @RequestHeader(value = "Authorization") String Authorization) {
         var tokenUserId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(userId!=tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
-        userAbonamentService.remove(userId,abId);
+        if (userId != tokenUserId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
+        userAbonamentService.remove(userId, abId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

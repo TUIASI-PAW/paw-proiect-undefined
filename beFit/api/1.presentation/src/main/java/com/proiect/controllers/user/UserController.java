@@ -42,10 +42,9 @@ public class UserController {
         }
 
         //Client access
-        else
-        {
+        else {
             var userId = jwtTokenProvider.getId(Authorization.substring(7));
-            if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
+            if (id != userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
 
             var user = userService.findById(id);
             return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.OK);
@@ -55,11 +54,11 @@ public class UserController {
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<UserDetailsModel> update(@PathVariable int id,
-                                      @Validated @RequestBody UserPatchModel userPatchModel,
-                                      @RequestHeader(value = "Authorization") String Authorization){
+                                                   @Validated @RequestBody UserPatchModel userPatchModel,
+                                                   @RequestHeader(value = "Authorization") String Authorization) {
 
         var userId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
+        if (id != userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
 
         var user = this.userService.update(id, userPatchModel);
         return new ResponseEntity<>(modelMapper.map(user, UserDetailsModel.class), HttpStatus.ACCEPTED);
@@ -68,16 +67,17 @@ public class UserController {
     @PatchMapping("/{id}/balance")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity addBalance(@PathVariable int id,
-                           @RequestHeader(value = "Authorization") String Authorization){
+                                     @RequestHeader(value = "Authorization") String Authorization) {
 
         var userId = jwtTokenProvider.getId(Authorization.substring(7));
-        if(id!=userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
+        if (id != userId) throw new UserOperationNotAllowedException("Nu poţi face asta.");
         userService.addBalance(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable int id){
+    public void delete(@PathVariable int id) {
         userService.delete(id);
     }
 }

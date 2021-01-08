@@ -31,7 +31,8 @@ public class UserAbonament {
     private Abonament abonament;
 
 
-    public UserAbonament() { }
+    public UserAbonament() {
+    }
 
     public UserAbonament(User user, Abonament abonament, String title) {
         this.id = new UserAbonamentSK();
@@ -45,7 +46,7 @@ public class UserAbonament {
         this.user = user;
         this.abonament = abonament;
         this.title = title;
-        this.expirationDate=new Date(calendar.getTimeInMillis());
+        this.expirationDate = new Date(calendar.getTimeInMillis());
 
     }
 

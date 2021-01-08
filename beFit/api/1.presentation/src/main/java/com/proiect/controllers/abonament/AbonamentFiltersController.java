@@ -22,8 +22,7 @@ public class AbonamentFiltersController {
 
     @PostMapping("/pagination")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<PaginationModel> getAllAbs(@RequestBody AbonamentFiltersModel abonamentFiltersModel)
-    {
+    public ResponseEntity<PaginationModel> getAllAbs(@RequestBody AbonamentFiltersModel abonamentFiltersModel) {
         var page = abonamentFiltersService.getAllAbs(abonamentFiltersModel);
         return new ResponseEntity<PaginationModel>(page, HttpStatus.OK);
     }

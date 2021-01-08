@@ -1,14 +1,16 @@
 package com.proiect.services.models.user;
+
 import com.proiect.entities.UserAbonament;
+
 import java.util.Set;
 
 public class UserDetailsModel {
+    Set<UserAbonament> abonamente;
     private String firstname;
     private String lastname;
     private String email;
     private String phone;
     private double balance;
-    Set<UserAbonament> abonamente;
 
     public UserDetailsModel() {
     }

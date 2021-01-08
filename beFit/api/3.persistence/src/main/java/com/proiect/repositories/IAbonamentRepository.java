@@ -12,10 +12,16 @@ import java.util.Optional;
 @Repository
 public interface IAbonamentRepository extends CrudRepository<Abonament, Integer>, PagingAndSortingRepository<Abonament, Integer> {
     Page<Abonament> findByCategoryAndIsActive(String category, Boolean isActive, Pageable pageable);
+
     Long countByCategoryAndIsActive(String category, Boolean isActive);
+
     Page<Abonament> findAllByIsActive(Boolean isActive, Pageable pageable);
+
     Long countByIsActive(Boolean isActive);
+
     Iterable<Abonament> findAllByIsActive(Boolean isActive);
+
     Iterable<Abonament> findAllByOrderByIsActive();
+
     Optional<Abonament> findByTitle(String title);
 }

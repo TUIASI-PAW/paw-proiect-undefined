@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +41,7 @@ public class AbonamentController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<AbonamentLiteModel>> listAll(@RequestHeader(value = "Authorization") String Authorization) {
         var mappedAbs = new LinkedList<AbonamentLiteModel>();
-        for (var abonament:abonamentService.listAll()) {
+        for (var abonament : abonamentService.listAll()) {
             mappedAbs.push(modelMapper.map(abonament, AbonamentLiteModel.class));
         }
         return new ResponseEntity<>(mappedAbs, HttpStatus.OK);
@@ -54,10 +53,10 @@ public class AbonamentController {
         return new ResponseEntity<>(abonamentService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping(value="/")
+    @PostMapping(value = "/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Abonament> insert(@Validated @RequestPart("model") AbonamentCreateModel model,
-                                            @RequestPart(value = "image") MultipartFile image){
+                                            @RequestPart(value = "image") MultipartFile image) {
         var abonament = modelMapper.map(model, AbonamentModel.class);
 
         try {
@@ -71,12 +70,12 @@ public class AbonamentController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Abonament> update(@PathVariable int id,
-                                            @Validated @RequestPart(value = "model", required = false)  AbonamentCreateModel model,
-                                            @RequestPart(value = "image", required = false) Optional<MultipartFile> image){
+                                            @Validated @RequestPart(value = "model", required = false) AbonamentCreateModel model,
+                                            @RequestPart(value = "image", required = false) Optional<MultipartFile> image) {
 
         var abonament = modelMapper.map(model, AbonamentModel.class);
 
-        if(!image.isEmpty()) {
+        if (!image.isEmpty()) {
             try {
                 abonament.setImage(image.get().getBytes());
             } catch (IOException e) {
@@ -89,13 +88,13 @@ public class AbonamentController {
 
     @PatchMapping("/{id}/activate")
     @ResponseStatus(HttpStatus.OK)
-    public void activate(@PathVariable int id){
+    public void activate(@PathVariable int id) {
         abonamentService.activate(id);
     }
 
     @PatchMapping("/{id}/deactivate")
     @ResponseStatus(HttpStatus.OK)
-    public void deactivate(@PathVariable int id){
+    public void deactivate(@PathVariable int id) {
         abonamentService.deactivate(id);
     }
 
